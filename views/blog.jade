@@ -1,0 +1,18 @@
+extends layout
+
+block header
+  meta(name="description", content="My blog. I like to write about math, code, robotics and other cool stuff")
+  title Adam's Blog
+
+block content
+  .page-title Blog
+  .page-description.
+    A collection of my writings and project updates.
+    I like to write about cool technologies I see and work on.
+  each post, i in posts
+    .post
+      a.title.sexy-link(href= '/blog/' + post.link)= post.title
+      .date= post.formatted_date
+      p.description= post.description
+      .links
+        a.inline-link(href= '/blog/' + post.link) Read Article

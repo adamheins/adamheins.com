@@ -1,0 +1,39 @@
+extends layout
+
+block header
+  meta(name="description", content="Learn a bit more about the person behind the website.")
+  title About Adam
+
+block scripts
+  link(rel="stylesheet", href="/stylesheets/about.css")
+
+block content
+  .page-header
+    .page-title About Me
+    .page-description Find out more about the person behind the website.
+  .post-body
+    img(src="/images/me.jpg" alt="A picture of me!")
+    h3 Hi there!
+    p.
+      My name is Adam Heins. I'm currently an undergraduate at the University of Waterloo studying
+      Mechatronics Engineering. I'm interested in the combination of computer science and robotics.
+
+    h3 Technical Background
+    p.
+      I like to explore new technologies and use them to express my creativity. I love putting
+      together side projects in my spare time, which can be viewed on the
+      #[a.inline(href="/projects") Projects] page. I really enjoy solving challenging problems and
+      developing elegant algorithms to do so. I've had experience with software for enterprise,
+      desktop, web and a bit of mobile. I'm also a member of Waterloo's robotics team. For more
+      details, see my #[a.inline(href="/resume") résumé].
+
+    h3 Interests and Activities
+    p.
+      I enjoy living a balanced, healthy lifestyle. I like to exercise regularly and get outside
+      whenever I can. I particularly enjoy running and playing Ultimate Frisbee. I'm currently
+      participating in an intramural ultimate team at university. I also love being around nature.
+      The sheer beauty and tranquility of nature inspires and relaxes me.
+    p.
+      I like to express my creativity in a variety of ways. I enjoy building cool software,
+      tinkering with electronics, drawing, and writing. I like to participate in events like
+      hackathons to get to do this creative, cool stuff with other awesome people.

@@ -1,0 +1,17 @@
+extends layout
+
+block header
+  meta(name="description", content="The blog and project site of Adam Heins.")
+  title Adam Heins
+
+block content
+  h1 Welcome!
+  .page-description.
+    Welcome to my website, which is home to my personal blog and project portfolio. Take a look around, stay a while.
+
+  h3 Recent Articles
+  each article, i in articles
+    a.inline(href= '/blog/' + article.link, style='display: block;')= article.title
+
+  h3 Recent Projects
+  a.inline(href= 'https://github.com/adamheins/diff', style='display: block;') Diff

@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Adam Heins")
+
+    link(rel="icon", href="/images/leaf-icon.png")
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Ubuntu:300')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
+    link(rel="stylesheet", href="/stylesheets/prism.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")
+
+    script(src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default")
+    script(src="/javascripts/prism.js")
+
+    block header
+    block scripts
+    block styles
+
+  body
+    .container
+      .header
+        #brand
+          a#name(href='/') Adam Heins
+          #flavour Code, Math, and Robots
+        .nav-bar
+          a.sexy-link(href='/blog') Blog
+          a.sexy-link(href='/projects') Projects
+          a.sexy-link(href='/resume') Résumé
+          a.sexy-link(href='/about') About
+      .content
+        block content
+      .footer
+        .contact
+          a#twitter-link.symbol.fa.fa-twitter.fa-lg(href='https://twitter.com/adamheins')
+          a#github-link.symbol.fa.fa-github.fa-lg(href='https://github.com/adamheins')
+          a#email-link.symbol.fa.fa-envelope.fa-lg(href='mailto:adamwheins@gmail.com')
+          a#linkedin-link.symbol.fa.fa-linkedin.fa-lg(href='http://ca.linkedin.com/pub/adam-heins/66/507/506')
+        .credit Adam Heins &copy 2015 All Rights Reserved.

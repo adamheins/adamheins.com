@@ -1,0 +1,20 @@
+extends layout
+
+block header
+  title= article.title
+  meta(name="description", content= article.description)
+
+block scripts
+  each script, i in article.scripts
+    script(src= script)
+
+block styles
+  each style, i in article.styles
+    link(rel="stylesheet", href= style)
+
+block content
+  .page-header
+    .page-date= article.formatted_date
+    .page-title= article.title
+    .flavour= article.flavour
+  .post!= article.body

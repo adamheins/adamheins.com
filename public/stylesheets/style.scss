@@ -1,0 +1,287 @@
+$primary-color: #333;
+$primary-color-light: #666;
+$highlight-color: #39b1a4;
+$highlight-color-light: #8dded6;
+
+
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  height: 100%;
+}
+
+@media (max-width: 750px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+body {
+  color: #666;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Contains all content on a page. */
+.container {
+  box-sizing: border-box;
+  font-family: inherit;
+  margin: 0 auto 0 auto;
+  min-height: 100%;
+  padding-bottom: 130px;
+  padding-top: 1.5rem;
+  position: relative;
+  width: 700px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 90%;
+  }
+}
+
+/* Page header */
+.header {
+  text-align: center;
+}
+
+#brand {
+  margin-bottom: 2rem;
+}
+
+#logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#name {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 300;
+  color: #777;
+}
+
+#flavour {
+  color: $highlight-color;
+  font-size: 1rem;
+}
+
+
+/* Navigation bar styles */
+.nav-bar {
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  font-weight: 300;
+  margin-top: 2rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.nav-bar a {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 1rem 1.25rem;
+}
+
+/* Page content */
+.content {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.content p {
+  margin-bottom: 10px
+}
+
+a.inline {
+  color: $highlight-color;
+  transition: color 0.5s ease;
+}
+
+a.inline:hover {
+  color: #48e5d4 !important;
+}
+
+a.sexy {
+  transition: color 0.5s ease;
+}
+
+a.sexy:hover {
+  color: $highlight-color !important;
+}
+
+.inline-link {
+  color: $highlight-color;
+  transition: color 0.5s ease;
+}
+
+.inline-link:hover {
+  color: $highlight-color-light;
+}
+
+.sexy-link {
+  transition: color 0.5s ease;
+}
+
+.sexy-link:hover {
+  color: $highlight-color !important;
+}
+
+.page-title {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 2.5rem;
+  color: $primary-color;
+}
+
+h1 {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 2.5rem;
+  color: $primary-color;
+  margin: 0;
+}
+
+h2 {
+  @extend h1;
+  color: #777;
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #555;
+}
+
+.page-description {
+  margin-bottom: 20px;
+}
+
+.page-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.flavour {
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+
+/* Style of a post on a page of posts. */
+.post {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+
+  .title {
+    color: $primary-color;
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.35rem;
+  }
+
+  .date {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .subtitle {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .description {
+    color: $primary-color;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .links {
+    margin-bottom: 0.35rem;
+    margin-top: 0.35rem;
+
+    a {
+      @extend .inline-link;
+    }
+  }
+}
+
+/* Special properties for posts and projects featured on the home page. */
+.front-page {
+  margin-top: 1.5rem
+}
+
+/* Pushes inline content over by a fixed amount. */
+.push {
+  margin-left: 1.4rem;
+}
+
+/* Format for math displayed on a page. */
+.math {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Format for a block of code. */
+.code {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+/* Style for the page footer. */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+  height: 130px;
+}
+
+/* Style for the block of contact links in the page footer. */
+.contact {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Style for the copyright notification in the page footer. */
+.credit {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+/* Contact link symbol. */
+.symbol {
+  transition: color 0.5s ease;
+  color: #666;
+  margin-left: 0.35rem;
+  margin-right: 0.35rem;
+}
+
+.symbol:hover {
+  color: $highlight-color;
+}
