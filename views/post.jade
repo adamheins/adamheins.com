@@ -14,7 +14,7 @@ block styles
 
 block content
   .page-header
-    .page-date= article.formatted_date
-    .page-title= article.title
-    .flavour= article.flavour
-  .post!= article.body
+    .article-date= article.formatted_date
+    h1= article.title
+    .article-flavour= article.flavour
+  .page-body!= article.body
