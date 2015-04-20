@@ -1,0 +1,18 @@
+extends ../layout
+
+block header
+  meta(name="description", content="Admin bloggin tool.")
+  title Blogging
+
+block content
+  .page-header
+    h1 Blogging
+    p View, create, and edit blog articles.
+  .page-body
+    h3 Create New Articles
+    form(action="/admin/blog/create", method="GET")
+      button.submit(type="submit") Create New
+    h3 View and Edit Existing Articles
+    form(action="/admin/blog/view", method="POST")
+      input.block(name="link", type="text", placeholder="Article Link")
+      button.submit(type="submit") View and Edit

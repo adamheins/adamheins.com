@@ -53,6 +53,32 @@ body {
     color: $highlight-color !important;
   }
 
+  a.inline {
+    color: $highlight-color;
+    transition: color 0.5s ease;
+  }
+
+  a.inline:hover {
+    color: $highlight-color-light !important;
+  }
+
+  a.auth {
+    @extend .inline;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 0.25rem;
+  }
+
+  a.signin-link {
+    @extend .auth;
+    right: 0.25rem;
+  }
+
+  a.admin-link {
+    @extend .auth;
+    left: 0.25rem;
+  }
+
   /* Style for the static page header. */
   .header {
     text-align: center;
@@ -110,6 +136,16 @@ body {
       display: block;
     }
 
+    /* Makes the element have extra emaphasis. */
+    .emphasized {
+      font-weight: 400;
+    }
+
+    /* FLoats the element to the right side of the parent. */
+    .right {
+      float: right;
+    }
+
     /* Pushes inline content over by a fixed amount. */
     .push {
       margin-left: 1.4rem;
@@ -125,17 +161,9 @@ body {
 
     /* Format for a block of code. */
     .code {
+      font-size: 0.8rem;
       margin-bottom: 2rem;
       margin-top: 2rem;
-    }
-
-    a.inline {
-      color: $highlight-color;
-      transition: color 0.5s ease;
-    }
-
-    a.inline:hover {
-      color: $highlight-color-light !important;
     }
 
     h1 {
@@ -171,7 +199,7 @@ body {
     }
 
     .article-date {
-      color: $primary-color-light;
+      color: #999;
       font-size: 0.9rem;
     }
 
@@ -213,6 +241,143 @@ body {
           @extend a.inline;
         }
       }
+    }
+
+    /* Styling for the comments section. */
+    textarea, input {
+      padding: 0.25rem;
+      border: 1px solid #aaa;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      margin: 0.5rem 0;
+      border-radius: 4px;
+      display: block;
+    }
+
+    input {
+      width: 47%;
+      display: inline;
+    }
+
+    textarea {
+      width: calc(100% - 0.5rem - 2px);
+    }
+
+    textarea:focus, input:focus {
+      outline: none !important;
+      border: 1px solid #39b1a4;
+      box-shadow: 0 0 0.25rem #cae8e5;
+    }
+
+    p.error {
+      color: #d56666;
+      font-weight: 400;
+    }
+
+    input.error {
+      background-color: #fce6e6;
+      border: 1px solid #d56666;
+    }
+
+    input.error:focus {
+      border: 1px solid #d56666;
+      box-shadow: 0 0 0.25rem #faacac;
+    }
+
+    button {
+      padding: 0.25rem;
+      background: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      margin: 0.5rem 0;
+      transition: color 0.5s ease;
+    }
+
+    button.remove {
+      color: #d56666;
+      float: right;
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+    }
+
+    button.remove:hover {
+      color: #faacac;
+    }
+
+    button.cancel {
+      border: 1px solid #d56666;
+      color: #d56666;
+    }
+
+    button.cancel:hover {
+      color: #faacac;
+    }
+
+    button.cancel:focus {
+      outline: none;
+      box-shadow:0 0 0.3rem 0 #d56666;
+    }
+
+    button.submit {
+      border: 1px solid #39b1a4;
+      color: #39b1a4;
+    }
+
+    button.submit:hover {
+      color: #8dded6;
+    }
+
+    button.submit:focus {
+      outline: none;
+      box-shadow:0 0 0.3rem 0 #39b1a4;
+    }
+
+    .comments {
+      margin-top: 3rem;
+
+      p {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        white-space: pre-wrap;
+      }
+
+      .comment {
+        border-top: 1px solid #ccc;
+        padding-top: 0.5rem;
+        margin: 1rem 0;
+
+        .date {
+          color: #999;
+          font-size: 0.9rem;
+          margin-bottom: 0.35rem;
+        }
+
+        .name {
+          font-weight: 400;
+          margin-bottom: 0;
+        }
+      }
+
+      .comment:last-child {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    .post-comment {
+      margin-top: 3rem;
+    }
+
+    form {
+      margin: 0;
+      padding: 0;
     }
   }
 

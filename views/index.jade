@@ -2,17 +2,41 @@ extends layout
 
 block header
   meta(name="description", content="The blog and project site of Adam Heins.")
+  link(rel='stylesheet', href='/stylesheets/sandbox.css')
   title Adam Heins
 
 block content
   .page-header
     h1 Welcome!
-    div.
-      Welcome to my website, which is home to my personal blog and project portfolio. Take a look around, stay a while.
+    p.
+      Welcome to my website, which is home to my personal blog and project
+      portfolio. Take a look around, stay a while. If you want to get in touch,
+      send me an email at <a class="inline" href="mailto:mail@adamheins.com">mail@adamheins.com</a>.
+    p.
+      The code for this website is open source and can be viewed <a class="inline" href="https://https://github.com/adamheins/personal-website">here</a>.
   .page-body
-    h3 Recent Articles
-    each article, i in articles
+
+    h2 Recent Articles
+    each article in articles
       a.inline.block(href= '/blog/' + article.link)= article.title
 
-    h3 Recent Projects
-    a.inline.block(href= 'https://github.com/adamheins/diff') Diff
+    h2 Recent Projects
+    a.inline.block(href= 'http://baseconverter.io') baseconverter.io
+    a.inline.block(href= 'https://github.com/adamheins/multicell') Multicell
+    a.inline.block(href= 'https://github.com/adamheins/mtrx') mtrx
+
+    h2 The Sandbox
+    p.
+      The sandbox is a place where I try out cool web things I'm working on
+      that aren't quite ready or large enough to be their own project.
+      Prototypes and experiments are common here.
+    div.sandbox
+      canvas#dragon
+    p.
+      The first program to demo here is an interactive implementation of the
+      dragon fractal curve. Press the #[span.emphasized right arrow key] to
+      increase the fractal detail and the #[span.emphasized left arrow key] to
+      reduce it. Alternatively, clicking on the fractal's canvas will also
+      increase the fractal detail. The source can be found
+      #[a.inline(href='https://github.com/adamheins/fractals/tree/master/dragon') here].
+    script(src='/javascripts/sandbox.js')

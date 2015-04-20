@@ -1,13 +1,15 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
+var moment = require('moment');
+
+var Article = require('../models/article');
 
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    var db = req.db;
-    var collection = db.get('posts');
-    collection.find({}, {sort: {date_posted : -1}, limit: 3}, function(error, articles) {
+    var query = Article.find().sort({date_posted: -1}).limit(3);
+    query.exec(function(err, articles) {
         res.render('index', { articles: articles });
     });
 });
@@ -15,28 +17,66 @@ router.get('/', function(req, res) {
 
 /* GET blog page. */
 router.get('/blog', function(req, res) {
-    var db = req.db;
-    var collection = db.get('posts');
-    collection.find({}, {sort: {date_posted : -1}}, function(error, docs) {
-        res.render('blog', {"posts" : docs});
+    var query = Article.find().sort({date_posted: -1});
+    query.exec(function(err, articles) {
+        res.render('blog', {"posts" : articles});
     });
 });
 
 
 /* GET the page for a specific article. */
 router.get('/blog/:link', function(req, res, next) {
-    var db = req.db;
-    var collection = db.get('posts');
-    collection.findOne({link: req.params.link}, function(error, article) {
+    var query = Article.findOne({link: req.params.link});
+    query.exec(function(err, article) {
         if (article === null || article === undefined) {
             var err = new Error('Not found');
             err.status = 404;
             next(err);
-        } else
-            res.render('post', {article: article});
+        } else {
+          article.comments.forEach(function(val, index, arr) {
+            arr[index].time = moment(val.time).format('MMMM DD, YYYY [at] h:mm a');
+          });
+          article.formattedDate = moment(new Date(article.date_posted)).format('MMMM DD, YYYY');
+          res.render('post', {article: article});
+        }
     });
 });
 
+router.post('/blog/:link/comment', function(req, res, next) {
+  Article.update({link: req.params.link}, {
+    $push: { comments: {
+      name: res.locals.user.name,
+      time: new Date(),
+      content: req.body.content
+    }}}, {upsert: true}, function(err) {
+      if (err) {
+        next(err);
+      } else {
+        console.log('Comment added.');
+        res.redirect('/blog/' + req.params.link);
+      }
+    }
+  );
+});
+
+router.post('/blog/:link/comment/:id/remove', function(req, res, next) {
+  if (res.locals.isAdmin) {
+    Article.update({link: req.params.link}, {
+      $pull: { comments: {
+        _id: req.params.id
+      }}}, function(err) {
+        if (err) {
+          next(err);
+        } else {
+          console.log('Comment removed.');
+          res.redirect('/blog/' + req.params.link);
+        }
+      }
+    );
+  } else {
+    res.redirect('/blog/' + req.params.link);
+  }
+});
 
 /** GET projects page. */
 router.get('/projects', function(req, res) {
@@ -46,7 +86,6 @@ router.get('/projects', function(req, res) {
 
 /** GET the resume page. */
 router.get('/resume', function(req, res) {
-    var resume = 'resume.pdf';
     res.sendfile(path.join(__dirname, '../public/pdfs', 'resume.pdf'));
 });
 
@@ -54,12 +93,6 @@ router.get('/resume', function(req, res) {
 /** GET the about page. */
 router.get('/about', function(req, res) {
     res.render('about');
-});
-
-
-/** GET the special page made for Melanie. */
-router.get('/melanie', function(req, res) {
-    res.render('anniversary');
 });
 
 module.exports = router;

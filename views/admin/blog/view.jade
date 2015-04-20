@@ -1,0 +1,49 @@
+extends ../../layout
+
+block header
+  meta(name="description", content="Console for creating new blog posts.")
+  title Console
+  style.
+    label, input {
+      display: block;
+    }
+    .page-body div {
+      margin-bottom: 1rem;
+    }
+  script(src='/javascripts/blog-view.js')
+
+block content
+  .page-header
+    h1 Console
+    p Let's get blogging.
+  .page-body
+    form(action="/admin/blog/save", method="POST")
+      div
+        label(for="title") Title
+        input(id="title", name="title", type="text", value= article.title)
+      div
+        label(for="date-posted") Date Posted
+        input(id="date-posted", type="text", value= article.date_posted, readonly)
+      div
+        label(for="formatted-date") Formatted Date
+        input(id="formatted-date", type="text", value= article.formatted_date, readonly)
+      div
+        label(for="description") Description
+        textarea(id="description", name="description", type="text", rows="2")= article.description
+      div
+        label(for="flavour") Flavour
+        input(id="flavour", name="flavour", type="text", value= article.flavour)
+      div
+        label(for="body") Body
+        textarea(id="body", name="body", type="text", rows="15")= article.body
+      div
+        label(for="link") Link
+        input(id="link", name="link", type="text", value= article.link)
+      button.submit(type="submit") Save
+      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="post") Exit
+  div(style="margin-top: 2rem")
+    .page-header
+      .article-date= article.formatted_date
+      h1#article-title= article.title
+      #article-flavour.article-flavour= article.flavour
+    #article-body.page-body!= article.body

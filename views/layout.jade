@@ -6,13 +6,13 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(name="author", content="Adam Heins")
 
-    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700')
-    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Ubuntu:300')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Ubuntu:300')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
     link(rel="stylesheet", href="/stylesheets/prism.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
 
-    script(src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default")
+    script(src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default")
     script(src="/javascripts/prism.js")
 
     block header
@@ -21,10 +21,16 @@ html
 
   body
     .container
+      if user
+        a.signin-link(href="/user/signout") Sign out
+      else
+        a.signin-link(href="/user/signin") Sign in
+      if isAdmin
+        a.admin-link(href="/admin") Admin
       .header
         .brand
           a.name(href='/') Adam Heins
-          .flavour Code, Math, and Robots
+          .flavour Code, Math, and Robotics
         .nav-bar
           a.sexy(href='/blog') Blog
           a.sexy(href='/projects') Projects
