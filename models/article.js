@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 var articleSchema = new mongoose.Schema({
-  date_posted: { date: Date },
+  date_posted: Date,
   scripts: [ String ],
   styles: [ String ],
   title: String,

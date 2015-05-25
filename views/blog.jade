@@ -11,10 +11,10 @@ block content
       A collection of my writings and project updates.
       I like to write about cool technologies I see and work on.
   .page-body
-    each post in posts
+    each article in articles
       .post
-        a.title.sexy(href= '/blog/' + post.link)= post.title
-        .date= post.formatted_date
-        p.description= post.description
+        a.title.sexy(href= '/blog/' + article.link)= article.title
+        .date= article.formattedDate
+        p.description= article.description
         .links
-          a.inline(href= '/blog/' + post.link) Read Article
+          a.inline(href= '/blog/' + article.link) Read Article

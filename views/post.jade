@@ -27,8 +27,9 @@ block content
     else
       each comment in article.comments
         .comment
-          if isAdmin
+          if isAdmin || (user && user.name === comment.name)
             form(action="/blog/" + article.link + "/comment/" + comment._id + "/remove", method="post")
+              input(name="name", type="hidden", value=comment.name)
               button.remove(type="submit") Remove
           p.name= comment.name
           p.date= comment.time

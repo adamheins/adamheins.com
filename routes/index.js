@@ -17,10 +17,14 @@ router.get('/', function(req, res) {
 
 /* GET blog page. */
 router.get('/blog', function(req, res) {
-    var query = Article.find().sort({date_posted: -1});
-    query.exec(function(err, articles) {
-        res.render('blog', {"posts" : articles});
+  var query = Article.find().sort({date_posted: -1});
+  query.exec(function(err, articles) {
+    articles.forEach(function(article) {
+      article.formattedDate = moment(new Date(article.date_posted)).local()
+          .format('MMMM DD, YYYY');
     });
+    res.render('blog', {"articles" : articles});
+  });
 });
 
 
@@ -34,9 +38,11 @@ router.get('/blog/:link', function(req, res, next) {
             next(err);
         } else {
           article.comments.forEach(function(val, index, arr) {
-            arr[index].time = moment(val.time).format('MMMM DD, YYYY [at] h:mm a');
+            arr[index].time = moment(val.time).local()
+                .format('MMMM DD, YYYY [at] h:mm a');
           });
-          article.formattedDate = moment(new Date(article.date_posted)).format('MMMM DD, YYYY');
+          article.formattedDate = moment(new Date(article.date_posted)).local()
+              .format('MMMM DD, YYYY');
           res.render('post', {article: article});
         }
     });
@@ -60,7 +66,7 @@ router.post('/blog/:link/comment', function(req, res, next) {
 });
 
 router.post('/blog/:link/comment/:id/remove', function(req, res, next) {
-  if (res.locals.isAdmin) {
+  if (res.locals.isAdmin || res.locals.user.name === req.body.name) {
     Article.update({link: req.params.link}, {
       $pull: { comments: {
         _id: req.params.id

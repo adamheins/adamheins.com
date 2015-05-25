@@ -16,28 +16,23 @@ block content
     h1 Console
     p Let's get blogging.
   .page-body
-    div
-      label(for="title") Title
-      input(id="title" type="text")
-    div
-      label(for="date-posted") Date Posted
-      input(id="date-posted" type="text")
-    div
-      label(for="formatted-date") Formatted Date
-      input(id="formatted-date" type="text")
-    div
-      label(for="description") Description
-      textarea(id="description" type="text" rows="2")
-    div
-      label(for="flavour") Flavour
-      input(id="flavour" type="text")
-    div
-      label(for="body") Body
-      textarea(id="body" type="text" rows="15")
-    div
-      label(for="link") Link
-      input(id="link" type="text")
-    button.submit Save
-    button.submit.push Save as Draft
-    button.cancel.right Go Back
-    button.submit.block Download
+    form(action="/admin/blog/create/save", method="POST")
+      div
+        label(for="title") Title
+        input(name="title", id="title", type="text")
+      div
+        label(for="description") Description
+        textarea(name="description", id="description", type="text", rows="2")
+      div
+        label(for="flavour") Flavour
+        input(name="flavour", id="flavour", type="text")
+      div
+        label(for="body") Body
+        textarea(name="body", id="body", type="text", rows="15")
+      div
+        label(for="link") Link
+        input(name="link", id="link", type="text")
+      button.submit(type="submit") Save
+      button.submit.push Save as Draft
+      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="POST") Cancel
+      button.submit.block Download

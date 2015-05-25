@@ -11,24 +11,26 @@ var passwordless = require('passwordless');
 var MongoStore = require('passwordless-mongostore-bcrypt-node');
 var email = require('emailjs');
 var session = require('express-session');
+var MongoSessionStore = require('connect-mongo')(session);
 
 // MongoDB setup.
+var mongoPath = process.env.MONGO_URI;
 var mongoose = require('mongoose');
-mongoose.connect(process.env.CUSTOMCONNSTR_MONGOLAB_URI);
+mongoose.connect(mongoPath);
 var User = require('./models/user');
 
 // Set up an email server to deliver password tokens.
 var smtpServer = email.server.connect({
-  user: process.env.AUTH_EMAIL_ADDRESS,
-  password: process.env.AUTH_EMAIL_PASSWORD,
-  host: 'smtp.gmail.com',
+  user: process.env.AUTH_EMAIL_USER,
+  password: process.env.AUTH_EMAIL_PASS,
+  host: process.env.AUTH_EMAIL_SMTP,
   ssl: true
 });
 
 var host = 'adamheins.com';
 
 // Set up authentication.
-passwordless.init(new MongoStore(process.env.CUSTOMCONNSTR_MONGOLAB_URI));
+passwordless.init(new MongoStore(mongoPath));
 passwordless.addDelivery(
   function(tokenToSend, uidToSend, recipient, callback) {
     User.findById(uidToSend, function(err, user) {
@@ -51,10 +53,6 @@ passwordless.addDelivery(
 
 var tokenMaxAge = 1000 * 60 * 60 * 24;
 
-var routes = require('./routes/index');
-var user = require('./routes/user');
-var admin = require('./routes/admin');
-
 var app = express();
 
 // View engine.
@@ -67,14 +65,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(flash());
+
+// Make things in the public folder accessible.
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Support for user sessions.
 app.use(session({
+  store: new MongoSessionStore({
+    url: mongoPath
+  }),
   secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: tokenMaxAge },
   saveUninitialized: true,
   resave: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(flash());
 
 // Intercept the UUID.
 app.use(passwordless.sessionSupport());
@@ -91,8 +95,23 @@ app.use(function(req, res, next) {
   });
 });
 
+// Redirect to https if the connection is not already secure.
+app.use(function(req, res, next) {
+  if (!req.secure) {
+    return res.redirect('https://' + req.headers.host + req.url);
+  }
+  next();
+});
+
+// Set up routes.
+var routes = require('./routes/index');
+var user = require('./routes/user');
+var admin = require('./routes/admin');
+
 app.use('/', routes);
 app.use('/user', user);
+
+// Restrict access to admin section of the website.
 app.use('/admin', passwordless.restricted({ failureRedirect: '/user/signin' }),
   function(req, res, next) {
     if (res.locals.user.isAdmin()) {
@@ -103,7 +122,6 @@ app.use('/admin', passwordless.restricted({ failureRedirect: '/user/signin' }),
   }
 );
 app.use('/admin', admin);
-
 
 // Catch 404 error and forward it to the error handler.
 app.use(function(req, res, next) {
@@ -135,5 +153,17 @@ app.use(function(err, req, res, next) {
     });
   }
 });
+
+// Set up https to connect securely.
+var https = require('https');
+var fs = require('fs');
+var options = {
+  pfx: fs.readFileSync(process.env.PFX_FILE),
+  passphrase: process.env.PFX_PASS
+};
+https.createServer(options, app).listen(3000);
+
+// Listen for http requests.
+app.listen(8080);
 
 module.exports = app;
