@@ -8,7 +8,6 @@ cd ~/personal-website/
 git checkout master
 git pull origin master
 
-./tools/kill.sh
 ./deploy.sh
 '"
 echo Deployment complete.
