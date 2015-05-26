@@ -96,12 +96,14 @@ app.use(function(req, res, next) {
 });
 
 // Redirect to https if the connection is not already secure.
-app.use(function(req, res, next) {
-  if (!req.secure) {
-    return res.redirect('https://' + req.headers.host + req.url);
-  }
-  next();
-});
+if (process.env.NODE_ENV === 'production') {
+  app.use(function(req, res, next) {
+    if (!req.secure) {
+      return res.redirect('https://' + req.headers.host + req.url);
+    }
+    next();
+  });
+}
 
 // Set up routes.
 var routes = require('./routes/index');
@@ -154,16 +156,20 @@ app.use(function(err, req, res, next) {
   }
 });
 
-// Set up https to connect securely.
-var https = require('https');
-var fs = require('fs');
-var options = {
-  pfx: fs.readFileSync(process.env.PFX_FILE),
-  passphrase: process.env.PFX_PASS
-};
-https.createServer(options, app).listen(3000);
+if (process.env.NODE_ENV === 'production') {
+  // Set up https to connect securely.
+  var https = require('https');
+  var fs = require('fs');
+  var options = {
+    pfx: fs.readFileSync(process.env.PFX_FILE),
+    passphrase: process.env.PFX_PASS
+  };
+  https.createServer(options, app).listen(3000);
 
-// Listen for http requests.
-app.listen(8080);
+  // Listen for http requests.
+  app.listen(8080);
+} else {
+  app.listen(3000);
+}
 
 module.exports = app;
