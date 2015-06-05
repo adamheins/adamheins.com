@@ -99,7 +99,7 @@ app.use(function(req, res, next) {
 if (process.env.NODE_ENV === 'production') {
   app.use(function(req, res, next) {
     if (!req.secure) {
-      return res.redirect('https://' + req.headers.host + req.url);
+      return res.redirect('https://adamheins.com' + req.url);
     }
     next();
   });
