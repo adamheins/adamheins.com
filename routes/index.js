@@ -5,8 +5,7 @@ var moment = require('moment');
 
 var Article = require('../models/article');
 
-
-/* GET home page. */
+// Home page.
 router.get('/', function(req, res) {
     var query = Article.find().sort({date_posted: -1}).limit(3);
     query.exec(function(err, articles) {
@@ -14,8 +13,7 @@ router.get('/', function(req, res) {
     });
 });
 
-
-/* GET blog page. */
+// Blog landing page.
 router.get('/blog', function(req, res) {
   var query = Article.find().sort({date_posted: -1});
   query.exec(function(err, articles) {
@@ -27,8 +25,7 @@ router.get('/blog', function(req, res) {
   });
 });
 
-
-/* GET the page for a specific article. */
+// Get the page of the specified article.
 router.get('/blog/:link', function(req, res, next) {
     var query = Article.findOne({link: req.params.link});
     query.exec(function(err, article) {
@@ -48,6 +45,7 @@ router.get('/blog/:link', function(req, res, next) {
     });
 });
 
+// Endpoint to submit a comment on an article.
 router.post('/blog/:link/comment', function(req, res, next) {
   Article.update({link: req.params.link}, {
     $push: { comments: {
@@ -58,13 +56,14 @@ router.post('/blog/:link/comment', function(req, res, next) {
       if (err) {
         next(err);
       } else {
-        console.log('Comment added.');
         res.redirect('/blog/' + req.params.link);
       }
     }
   );
 });
 
+// Endpoint to remove a comment from an article. Only available to an admin
+// or the user that posted the comment.
 router.post('/blog/:link/comment/:id/remove', function(req, res, next) {
   if (res.locals.isAdmin || res.locals.user.name === req.body.name) {
     Article.update({link: req.params.link}, {
@@ -84,21 +83,29 @@ router.post('/blog/:link/comment/:id/remove', function(req, res, next) {
   }
 });
 
-/** GET projects page. */
+// Projects page.
 router.get('/projects', function(req, res) {
-    res.render('projects');
+  res.render('projects');
 });
 
-
-/** GET the resume page. */
+// Resume landing page, which provides links to different formats.
 router.get('/resume', function(req, res) {
-    res.sendfile(path.join(__dirname, '../public/pdfs', 'resume.pdf'));
+  res.render('resume');
 });
 
+// PDF version of my resume.
+router.get('/resume/pdf', function(req, res) {
+  res.sendfile(path.join(__dirname, '../public/pdfs', 'resume.pdf'));
+});
 
-/** GET the about page. */
+// JSON version of my resume.
+router.get('/resume/json', function(req, res) {
+  res.render('resume/json');
+});
+
+// About me page.
 router.get('/about', function(req, res) {
-    res.render('about');
+  res.render('about');
 });
 
 module.exports = router;

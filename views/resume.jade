@@ -1,0 +1,22 @@
+extends layout
+
+block header
+  meta(name="description", content="Landing page from which to view my résumé.")
+  title Adam Heins
+
+block content
+  .page-header
+    h1 Résumé
+    p.
+      My résumé is available in a couple of different formats, which can be
+      found below. The current formats are PDF and JSON.
+
+    h3 PDF
+    p.
+      This is my standard résumé. Check it out
+      #[a.inline(href="/resume/pdf") here].
+
+    h3 JSON
+    p.
+      This is my résumé written in JSON. Stripped of all the formatting, it's
+      just the raw data left. Available #[a.inline(href="/resume/json") here].
