@@ -43,9 +43,17 @@ body {
 
   a {
     text-decoration: none;
+    color: $highlight-color;
+    transition: color 0.5s ease;
   }
 
+  a:hover {
+    color: $highlight-color-light !important;
+  }
+
+  /* Links that start as the primary color. */
   a.sexy {
+    color: $primary-color;
     transition: color 0.5s ease;
   }
 
@@ -53,27 +61,20 @@ body {
     color: $highlight-color !important;
   }
 
-  a.inline {
-    color: $highlight-color;
-    transition: color 0.5s ease;
-  }
-
-  a.inline:hover {
-    color: $highlight-color-light !important;
-  }
-
+  /* General style for authentication/account links. */
   a.auth {
-    @extend .inline;
     font-size: 0.9rem;
     position: absolute;
     top: 0.25rem;
   }
 
+  /* Link to sign in and out. */
   a.signin-link {
     @extend .auth;
     right: 0.25rem;
   }
 
+  /* Link to administrator services. */
   a.admin-link {
     @extend .auth;
     left: 0.25rem;
@@ -83,28 +84,24 @@ body {
   .header {
     text-align: center;
 
+    /* The name and flavour text at the top of the header. */
     .brand {
       margin-bottom: 2rem;
+
+      .name {
+        color: $primary-color-light;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 1.9rem;
+        font-weight: 300;
+      }
+
+      .flavour {
+        color: $highlight-color;
+        font-size: 1rem;
+      }
     }
 
-    .logo {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .name {
-      color: $primary-color-light;
-      font-family: 'Ubuntu', sans-serif;
-      font-size: 1.9rem;
-      font-weight: 300;
-    }
-
-    .flavour {
-      color: $highlight-color;
-      font-size: 1rem;
-    }
-
+    /* Navigation bar. */
     .nav-bar {
       border-bottom: 1px solid $nav-border-color;
       border-top: 1px solid $nav-border-color;
@@ -236,10 +233,6 @@ body {
       .links {
         margin-bottom: 0.35rem;
         margin-top: 0.35rem;
-
-        a {
-          @extend a.inline;
-        }
       }
     }
 
