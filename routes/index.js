@@ -95,7 +95,7 @@ router.get('/resume', function(req, res) {
 
 // PDF version of my resume.
 router.get('/resume/pdf', function(req, res) {
-  res.sendfile(path.join(__dirname, '../public/pdfs', 'resume.pdf'));
+  res.sendfile(path.join(__dirname, '../public/resume', 'resume.pdf'));
 });
 
 // JSON version of my resume.
