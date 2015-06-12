@@ -6,7 +6,7 @@
     "website": "https://adamheins.com",
     "github": "https://github.com/adamheins",
     "skills": {
-      "languages": ["C", "C++", "Java", "Python", "JavaScript", "MATLAB"],
+      "languages": ["C", "C++", "Java", "Python", "JavaScript", "MATLAB", "bash"],
       "software": ["git", "GDB", "jQuery", "Node.js", "Express", "MongoDB", "AngularJS", "ROS", "vim"],
       "hardware": ["PLCs", "FPGAs", "soldering", "circuit design"]
     },
@@ -14,10 +14,10 @@
       "company": "Pebble Technology",
       "title": "Embedded Firmware Developer",
       "location": "Palo Alto, CA",
-      "startDate": "January 2015",
-      "endDate": "April 2015",
+      "startDate": "2015-01-01",
+      "endDate": "2015-04-30",
       "highlights": [
-        "Developed a robust dialog windowing system for the Pebble Time SmartWatch C.",
+        "Developed a robust dialog windowing system for the Pebble Time SmartWatch in C.",
         "Built core Golf and Sports APIs for the Pebble Time SmartWatch.",
         "Contributed to internal scripting language known as MonkeyScript; designed a new engine for MonkeyScript 2.0.",
         "Implemented screenshot and power calibration tools for automated testing in Python."
@@ -30,7 +30,7 @@
       "endDate": "2014-08-31",
       "highlights": [
         "Built a simulation of the entire BBM call flow in Java in order to automate integration tests. Automated over 500 tests, reducing total testing time from several hours to under 30 minutes.",
-        "Integrated testing framework with REST APIs and a Cassandra cluster to validate user and message statistics",
+        "Integrated testing framework with REST APIs and a Cassandra cluster to validate user and message statistics.",
         "Wrote an internal tool in Java to automatically configure files deployed from Jenkins."
       ]
     }, {
@@ -51,7 +51,7 @@
       "startDate": "2013-01-01",
       "endDate": "2013-04-30",
       "highlights": [
-        "Led project development of a desktop applciation for collecting statistics from large networks of printers in C++.",
+        "Led project development of a desktop application for collecting statistics from large networks of printers in C++.",
         "Built a Firebird SQL database to efficiently organize and store printer data.",
         "Designed algorithms to analyze printing statistics and pinpoint bottlenecks where Uniprint printer driver software could ease flow and reduce costs by 20-30%."
       ]
@@ -75,7 +75,7 @@
     "projects": [{
       "title": "Predator Prey Simulation",
       "link": "https://github.com/adamheins/predator-prey-sim",
-      "description": "A web-based simulation of flocking birds being hunted by predators, exhibitingg swarm intelligence."
+      "description": "A web-based simulation of flocking birds being hunted by predators, exhibiting swarm intelligence."
     }, {
       "title": "Dervish",
       "link": "https://github.com/adamheins/dervish",
