@@ -1,4 +1,0 @@
-#!/usr/bin/env nodejs
-var app = require('../server');
-//app.set('port', 80);
-//app.listen(app.get('port'));

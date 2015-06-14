@@ -8,7 +8,10 @@
     "node": "0.12.0"
   },
   "scripts": {
-    "start": "nodejs ./bin/www"
+    "prestart": "./sh/prestart",
+    "start": "./sh/start",
+    "stop": "./sh/stop",
+    "poststop": "./sh/poststop"
   },
   "dependencies": {
     "express": "4.0.x",

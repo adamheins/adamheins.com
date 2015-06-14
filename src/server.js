@@ -109,9 +109,13 @@ if (process.env.NODE_ENV === 'production') {
 var routes = require('./routes/index');
 var user = require('./routes/user');
 var admin = require('./routes/admin');
+var blog = require('./routes/blog');
+var resume = require('./routes/resume');
 
 app.use('/', routes);
 app.use('/user', user);
+app.use('/blog', blog);
+app.use('/resume', resume);
 
 // Restrict access to admin section of the website.
 app.use('/admin', passwordless.restricted({ failureRedirect: '/user/signin' }),
@@ -123,7 +127,7 @@ app.use('/admin', passwordless.restricted({ failureRedirect: '/user/signin' }),
     }
   }
 );
-app.use('/admin', admin);
+app.use('/admin', admin); // TODO is this required?
 
 // Catch 404 error and forward it to the error handler.
 app.use(function(req, res, next) {

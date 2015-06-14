@@ -6,7 +6,7 @@ var router = express.Router();
 var Article = require('../models/article');
 
 router.get('/', function(req, res) {
-  res.render('admin');
+  res.render('admin/index');
 });
 
 router.get('/blog', function(req, res) {

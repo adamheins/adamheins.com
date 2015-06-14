@@ -1,6 +1,7 @@
 .sass-cache/
-cert/
-node_modules/
 .env
 *.swp
 *.out
+db/
+cert/
+node_modules/
