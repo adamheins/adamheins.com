@@ -1,4 +1,7 @@
 #!/bin/sh
 
+# Compile SCSS to minified CSS.
+scss src/public/style/style.scss src/public/style/style.css --style compressed
+
 # Start mongo.
 mongod --dbpath db --fork --logpath /dev/null
