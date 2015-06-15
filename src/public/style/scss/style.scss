@@ -43,12 +43,6 @@ body {
 
   a {
     text-decoration: none;
-    color: $highlight-color;
-    transition: color 0.5s ease;
-  }
-
-  a:hover {
-    color: $highlight-color-light !important;
   }
 
   /* Links that start as the primary color. */
@@ -64,8 +58,14 @@ body {
   /* General style for authentication/account links. */
   a.auth {
     font-size: 0.9rem;
+    color: $highlight-color;
     position: absolute;
     top: 0.25rem;
+    transition: color 0.5s ease;
+  }
+
+  a.auth:hover {
+    color: $highlight-color-light !important;
   }
 
   /* Link to sign in and out. */
@@ -126,6 +126,15 @@ body {
 
     p {
       margin-bottom: 0.7rem
+    }
+
+    a {
+      color: $highlight-color;
+      transition: color 0.5s ease;
+    }
+
+    a:hover {
+      color: $highlight-color-light !important;
     }
 
     /* Formats the element as a block. */
