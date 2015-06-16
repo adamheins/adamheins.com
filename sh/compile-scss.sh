@@ -1,14 +1,18 @@
 #!/bin/sh
 
-scss_dir=src/public/style/scss/
-css_dir=src/public/style/css/
+# Compile SCSS into minified CSS.
 
-echo 'Compiling SCSS...'
+in_dir=src/public/style
+out_dir=$in_dir/min
 
-for f in $scss_dir*.scss; do
-  out=$css_dir$(basename -s .scss $f).css;
-  scss $f $out --style compressed
-  echo "Compiled $(basename $f).";
+echo 'Compiling SCSS...';
+
+mkdir $out_dir
+
+for in_file in $in_dir/*.scss; do
+  out_file=$out_dir/$(basename -s .scss $in_file).min.css;
+  scss $in_file $out_file --cache-location $in_dir/.sass-cache --style compressed;
+  echo "* $(basename $in_file)";
 done
 
-echo 'Compilation complete.\n'
+echo 'SCSS compilation complete.\n';
