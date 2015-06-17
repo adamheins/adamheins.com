@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var passwordless = require('passwordless');
@@ -6,7 +8,8 @@ var request = require('request');
 
 var User = require('../models/user');
 
-/* Redirects to Sign In page currently, unless you are already authenticated. */
+// Redirects to Sign In page currently, unless you are already authenticated,
+// in wihch case you are simply redirected to the home page.
 router.get('/', function(req, res) {
   if (req.auth) {
     res.redirect('/');
@@ -15,6 +18,7 @@ router.get('/', function(req, res) {
   }
 });
 
+// Sign in to the website.
 router.get('/signin', function(req, res) {
   console.log(res.locals.user);
   res.render('user/signin', {
@@ -24,10 +28,12 @@ router.get('/signin', function(req, res) {
   });
 });
 
+// Sign out of the website.
 router.get('/signout', passwordless.logout(), function(req, res) {
   res.redirect('/');
 });
 
+// Displays error messages to the user if their sign in fails for some reason.
 function signinFlash(req, name, email, field, message) {
   console.log(message);
   req.flash('error', {
@@ -38,7 +44,7 @@ function signinFlash(req, name, email, field, message) {
   req.flash('email', email);
 }
 
-/* Checks to see if an entire string is matched be a regex pattern. */
+// Checks to see if an entire string is matched by a regex pattern.
 function matchWhole(str, pattern) {
   var match = pattern.exec(str);
   if (match === null)
@@ -46,9 +52,9 @@ function matchWhole(str, pattern) {
   return match[0].length === str.length;
 }
 
-/* Post to create a new user. */
+// Authenticate a user. If the user does not already exist, they are added to
+// the database.
 router.post('/authenticate', function(req, res, next) {
-
   var screenName = req.body.name.trim();
   var userEmail = req.body.email.trim().toLowerCase();
 
@@ -67,6 +73,11 @@ router.post('/authenticate', function(req, res, next) {
     return;
   }
 
+  // Run a query to check for conflicts with existing users.
+  // If this user name and email are both assigned to the same user already,
+  // we know that this user already exists. If neither the user name or email
+  // is already in use, we can safely create a new user. Otherwise, there is
+  // a conflict with user name or email (or both).
   var nameQuery = User.findOne({name: screenName});
   nameQuery.exec(function(err, user) {
     if (err) {
@@ -99,6 +110,7 @@ router.post('/authenticate', function(req, res, next) {
           newUser.save(function(err, user) {
             if (err) {
               console.log('Error creating user.');
+              next(err);
             }
             next();
           });
@@ -130,12 +142,12 @@ router.post('/authenticate', function(req, res, next) {
   }
 );
 
-/* Route telling user that token was sent. */
+// Tell user that token was sent after successful sign in.
 router.get('/sent', function(req, res) {
   res.render('user/sent');
 });
 
-/* Route telling user that they are authenticated. */
+// Tell the user that they are successfully authenticated.
 router.get('/authenticated', function(req, res) {
 
   // Update the lastAccessed field of this User to the current time.

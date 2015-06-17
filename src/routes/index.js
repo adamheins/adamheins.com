@@ -1,15 +1,16 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
-var moment = require('moment');
 
 var Article = require('../models/article');
 
 // Home page.
 router.get('/', function(req, res) {
-    var query = Article.find().sort({date_posted: -1}).limit(3);
-    query.exec(function(err, articles) {
-        res.render('index', { articles: articles });
-    });
+  var query = Article.find().sort({date_posted: -1}).limit(3);
+  query.exec(function(err, articles) {
+    res.render('index', { articles: articles });
+  });
 });
 
 // Projects page.
