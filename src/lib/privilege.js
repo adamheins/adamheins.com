@@ -1,5 +1,6 @@
-/* Privilege module, for managing user access rights. */
+'use strict';
 
+// Manage user access rights.
 function Privilege(value) {
   this.value = value;
 }
