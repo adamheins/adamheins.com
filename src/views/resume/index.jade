@@ -19,4 +19,9 @@ block content
     h3 JSON
     p.
       This is my résumé written in JSON. Stripped of all the formatting, it's
-      just the raw data left. Available #[a.inline(href="/resume/json") here].
+      just the raw data left. It can be viewed
+      #[a.inline(href="/resume/json") here]. You can also play with my resume
+      as a JavaScript object in the console, where it is a global variable
+      named <i>resume</i>.
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+  script(src="/scripts/min/json-resume.min.js")

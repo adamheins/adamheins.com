@@ -16,7 +16,7 @@ router.get('/pdf', function(req, res) {
 
 // JSON version of my resume.
 router.get('/json', function(req, res) {
-  res.render('resume/json');
+  res.sendfile(path.join(__dirname, '../public/resume', 'resume.json'));
 });
 
 module.exports = router;
