@@ -40,21 +40,19 @@ router.post('/blog/create/save', function(req, res, next) {
   // Create a new article.
   var article = new Article({
     date_posted: new Date(),
-    scripts: [],
-    styles: [],
-    title: req.body.title,
-    flavour: req.body.flavour,
+    title:       req.body.title,
+    flavour:     req.body.flavour,
     description: req.body.description,
-    body: req.body.body,
-    link: req.body.link
+    body:        req.body.body,
+    link:        req.body.link,
+    scripts:     req.body.scripts.trim().split('\n'),
+    styles:      req.body.styles.trim().split('\n')
   });
   article.save(function(err) {
     if (err) {
-       console.log(err);
        next(err);
     }
   });
-
   res.redirect('/admin/blog');
 });
 
@@ -65,14 +63,16 @@ router.post('/blog/draft', function(req, res) {
 });
 
 // Saves the updated version of the article.
-router.post('/blog/save', function(req, res) {
+router.post('/blog/update', function(req, res) {
   Article.update({link: req.body.link}, {
-    title: req.body.title,
-    flavour: req.body.flavour,
+    title:       req.body.title,
+    flavour:     req.body.flavour,
     description: req.body.description,
-    body: req.body.body,
-    link: req.body.link
-  }, function(err, num, raw) {
+    body:        req.body.body,
+    link:        req.body.link,
+    scripts:     req.body.scripts.split('\n'),
+    styles:      req.body.styles.split('\n'),
+  }, function(err) {
     if (err) {
       next(err);
     } else {
@@ -91,7 +91,11 @@ router.get('/blog/view/:link', function(req, res, next) {
       err.status = 404;
       next(err);
     } else {
-      res.render('admin/blog/view', {article: article});
+      res.render('admin/blog/view', {
+        article: article,
+        scripts: article.formatScripts(),
+        styles: article.formatStyles()
+      });
     }
   });
 });

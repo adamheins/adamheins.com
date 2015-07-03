@@ -15,4 +15,28 @@ var articleSchema = new mongoose.Schema({
   link: String
 });
 
+/*
+ * Format the list of referenced scripts into a string with each script
+ * on a new line.
+ */
+articleSchema.methods.formatScripts = function() {
+  var scripts = '';
+  article.scripts.forEach(function(value) {
+    scripts = scripts + value + '\n';
+  });
+  return scripts.trim();
+}
+
+/*
+ * Format the list of referenced styles into a string with each style
+ * on a new line.
+ */
+articleSchema.methods.formatStyles = function() {
+  var styles = '';
+  article.styles.forEach(function(value) {
+    styles = styles + value + '\n';
+  });
+  return styles.trim();
+}
+
 module.exports = mongoose.model('Article', articleSchema, 'posts');

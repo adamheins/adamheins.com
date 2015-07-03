@@ -1,15 +1,10 @@
 extends ../../layout
 
 block header
-  meta(name="description", content="Cnosole for creating new blog posts.")
+  meta(name="description", content="Console for creating new blog posts.")
   title Console
-  style.
-    label, input {
-      display: block;
-    }
-    .page-body div {
-      margin-bottom: 1rem;
-    }
+
+  link(rel="stylesheet", href="/style/min/blog-view.min.css")
 
 block content
   .page-header
@@ -32,6 +27,12 @@ block content
       div
         label(for="link") Link
         input(name="link", id="link", type="text")
+      div
+        label(for="scripts") Scripts
+        textarea(id="scripts", name="scripts", type="text", rows="3")
+      div
+        label(for="styles") Styles
+        textarea(id="styles", name="styles", type="text", rows="3")
       button.submit(type="submit") Save
       button.submit.push Save as Draft
       button.cancel.right(type="submit", formaction="/admin/blog", formmethod="POST") Cancel
