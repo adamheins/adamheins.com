@@ -21,7 +21,7 @@ var articleSchema = new mongoose.Schema({
  */
 articleSchema.methods.formatScripts = function() {
   var scripts = '';
-  article.scripts.forEach(function(value) {
+  this.scripts.forEach(function(value) {
     scripts = scripts + value + '\n';
   });
   return scripts.trim();
@@ -33,7 +33,7 @@ articleSchema.methods.formatScripts = function() {
  */
 articleSchema.methods.formatStyles = function() {
   var styles = '';
-  article.styles.forEach(function(value) {
+  this.styles.forEach(function(value) {
     styles = styles + value + '\n';
   });
   return styles.trim();
