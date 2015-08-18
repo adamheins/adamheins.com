@@ -15,13 +15,19 @@ exports.init = function(app) {
     function(tokenToSend, uidToSend, recipient, callback) {
       User.findById(uidToSend, function(err, user) {
         smtpServer.send({
-          text: 'Hi ' +  user.name + '!\n\nAccess your account here:\nhttps://'
+          text: 'Hi ' +  user.name + '!'
+              + '\n\n'
+              + 'Access your account here: '
+              + (process.env.NODE_ENV === 'production' ? 'https://' : '')
               + process.env.HOST + '?token=' + tokenToSend + '&uid='
-              + encodeURIComponent(uidToSend) + '\n\nThis token expires in 10 '
-              + 'minutes and can only be used once.\n\nCheers!',
-          from: 'Authentication Token <password@adamheins.com>',
+              + encodeURIComponent(uidToSend)
+              + '\n\n'
+              + 'This token expires in 10 minutes and can only be used once.'
+              + '\n\n'
+              + 'Cheers!',
+          from: 'Authentication Token <' + process.env.AUTH_EMAIL_USER + '>',
           to: recipient,
-          subject: 'Token for ' + process.env.HOST
+          subject: 'Token from ' + process.env.HOST
       }, function (err, message) {
         if (err) {
           console.log(err);
