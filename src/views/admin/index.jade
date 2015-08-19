@@ -1,15 +1,17 @@
 extends ../layout
 
 block header
-  meta(name="description", content="Admin portal.")
-  title Admin
+  meta(name="description", content="Adminstration.")
+  title Administration
 
 block content
   .page-header
-    h1 Admin
-    p Admin portal.
+    h1 Administration
+    p Administrative tools and tasks.
   .page-body
-    h3 Blogging Tool
-    p Use this tool to view, edit and create new blog posts.
-    a.inline(href="/admin/blog") Get blogging
+    .post
+      a.title.sexy(href="/admin/blog") Blogger
+      p.description View, edit and create new blog posts.
+      .links
+        a.inline(href="/admin/blog") Go
 
