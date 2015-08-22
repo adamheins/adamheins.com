@@ -254,15 +254,14 @@ body {
       font-weight: 300;
       margin: 0.5rem 0;
       border-radius: 4px;
-      display: block;
     }
 
     input {
       width: 47%;
-      display: inline;
     }
 
     textarea {
+      display: block;
       width: calc(100% - 0.5rem - 2px);
     }
 
@@ -311,6 +310,17 @@ body {
 
     button.remove:hover {
       color: #faacac;
+    }
+
+    button.link {
+      color: $highlight-color;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+    }
+
+    button.link:hover {
+      color: $highlight-color-light;
     }
 
     button.cancel {

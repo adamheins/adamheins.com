@@ -2,14 +2,14 @@ extends ../../layout
 
 block header
   meta(name="description", content="Console for creating new blog posts.")
-  title Console
+  title Create
 
   link(rel="stylesheet", href="/style/min/blog-view.min.css")
 
 block content
   .page-header
-    h1 Console
-    p Let's get blogging.
+    h1 Create
+    p Create a new blog article.
   .page-body
     form(action="/admin/blog/create/save", method="POST")
       div
@@ -33,7 +33,7 @@ block content
       div
         label(for="styles") Styles
         textarea(id="styles", name="styles", type="text", rows="3")
-      button.submit(type="submit") Save
-      button.submit.push Save as Draft
+      button.submit(type="submit") Publish
+      button.submit.push Save
+      button.submit.push Download
       button.cancel.right(type="submit", formaction="/admin/blog", formmethod="POST") Cancel
-      button.submit.block Download
