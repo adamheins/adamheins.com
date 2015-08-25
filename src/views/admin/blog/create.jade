@@ -4,6 +4,7 @@ block header
   meta(name="description", content="Console for creating new blog posts.")
   title Create
 
+block styles
   link(rel="stylesheet", href="/style/min/blog-view.min.css")
 
 block content
@@ -11,29 +12,29 @@ block content
     h1 Create
     p Create a new blog article.
   .page-body
-    form(action="/admin/blog/create/save", method="POST")
+    form(action="/admin/blog/create/publish", method="post")
       div
         label(for="title") Title
-        input(name="title", id="title", type="text")
+        input(name="title", id="title", type="text", value= draft ? draft.title : "")
       div
         label(for="description") Description
-        textarea(name="description", id="description", type="text", rows="2")
+        textarea(name="description", id="description", type="text", rows="2")= draft ? draft.description : ""
       div
         label(for="flavour") Flavour
-        input(name="flavour", id="flavour", type="text")
+        input(name="flavour", id="flavour", type="text", value= draft ? draft.flavour : "")
       div
         label(for="body") Body
-        textarea(name="body", id="body", type="text", rows="15")
+        textarea(name="body", id="body", type="text", rows="15")= draft ? draft.body : ""
       div
         label(for="link") Link
-        input(name="link", id="link", type="text")
+        input(name="link", id="link", type="text", value= draft ? draft.link : "")
       div
         label(for="scripts") Scripts
-        textarea(id="scripts", name="scripts", type="text", rows="3")
+        textarea(id="scripts", name="scripts", type="text", rows="3")= scripts ? scripts : ""
       div
         label(for="styles") Styles
-        textarea(id="styles", name="styles", type="text", rows="3")
+        textarea(id="styles", name="styles", type="text", rows="3")= styles ? styles : ""
       button.submit(type="submit") Publish
-      button.submit.push Save
+      button.submit.push(type="submit", formaction="/admin/blog/create/save", formmethod="post") Save
       button.submit.push Download
-      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="POST") Cancel
+      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="get") Cancel

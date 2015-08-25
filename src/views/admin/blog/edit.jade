@@ -4,15 +4,23 @@ block header
   meta(name="description", content="Console for editing existing blog posts.")
   title= article.title
 
+block styles
   link(rel="stylesheet", href="/style/min/blog-view.min.css")
+  each style in article.styles
+    link(rel="stylesheet", href= style)
+
+block scripts
+  script(src="https://code.jquery.com/jquery-1.11.3.min.js")
   script(src="/scripts/min/blog-view.min.js")
+  each script in article.scripts
+    script(src= script)
 
 block content
   .page-header
     h1 Console
     p Let's get blogging.
   .page-body
-    form(action="/admin/blog/update", method="post")
+    form(action="/admin/blog/edit/update", method="post")
       div
         label(for="title") Title
         input(id="title", name="title", type="text", value= article.title)
@@ -37,15 +45,11 @@ block content
       div
         label(for="styles") Styles
         textarea(id="styles", name="styles", type="text", rows="3")= styles
-      button.submit(type="submit") Save
-      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="post") Exit
+      button#update.submit(type="submit") Update
+      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="get") Exit
   #article
     .page-header
       .article-date= article.formatted_date
       h1#article-title= article.title
       #article-flavour.article-flavour= article.flavour
     #article-body.page-body!= article.body
-    each script in article.scripts
-      script(src= script)
-    each style in article.styles
-      link(rel="stylesheet", href= style)

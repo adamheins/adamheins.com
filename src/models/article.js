@@ -1,3 +1,5 @@
+'use strict';
+
 /* Module that models a blog article. */
 
 var mongoose = require('mongoose');

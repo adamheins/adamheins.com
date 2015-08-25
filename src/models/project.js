@@ -1,3 +1,5 @@
+'use strict';
+
 /* Model of a project. */
 
 var mongoose = require('mongoose');
