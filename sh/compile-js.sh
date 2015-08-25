@@ -7,7 +7,9 @@ out_dir=$in_dir/min
 
 echo 'Compiling JavaScript...';
 
-mkdir $out_dir;
+if [ ! -d "$out_dir" ]; then
+  mkdir $out_dir;
+fi
 
 for in_file in $in_dir/*.js; do
   out_file=$out_dir/$(basename -s .js $in_file).min.js;

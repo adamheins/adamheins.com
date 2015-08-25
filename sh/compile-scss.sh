@@ -7,7 +7,9 @@ out_dir=$in_dir/min
 
 echo 'Compiling SCSS...';
 
-mkdir $out_dir
+if [ ! -d "$out_dir" ]; then
+  mkdir $out_dir
+fi
 
 for in_file in $in_dir/*.scss; do
   out_file=$out_dir/$(basename -s .scss $in_file).min.css;
