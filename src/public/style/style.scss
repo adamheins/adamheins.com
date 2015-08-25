@@ -166,8 +166,11 @@ body {
     }
 
     /* Format for a block of code. */
-    .code {
+    code {
       font-size: 0.8rem;
+    }
+
+    pre {
       margin-bottom: 2rem;
       margin-top: 2rem;
     }
