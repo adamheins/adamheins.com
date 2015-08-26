@@ -6,15 +6,18 @@ var moment = require('moment');
 
 var Article = require('../models/article');
 
+var PUBLICATION_DATE_FORMAT = 'MMMM D, YYYY';
+var COMMENT_DATE_FORMAT = PUBLICATION_DATE_FORMAT + ' [at] h:mm a';
+
 // Blog landing page.
 router.get('/', function(req, res) {
   var query = Article.find().sort({date_posted: -1});
   query.exec(function(err, articles) {
     articles.forEach(function(article) {
       article.formattedDate = moment(new Date(article.date_posted)).local()
-          .format('MMMM DD, YYYY');
+          .format(PUBLICATION_DATE_FORMAT);
     });
-    res.render('blog/index', {"articles" : articles});
+    res.render('blog/index', {'articles': articles});
   });
 });
 
@@ -29,10 +32,10 @@ router.get('/:link', function(req, res, next) {
     } else {
       article.comments.forEach(function(val, index, arr) {
         arr[index].time = moment(val.time).local()
-            .format('MMMM DD, YYYY [at] h:mm a');
+            .format(COMMENT_DATE_FORMAT);
       });
       article.formattedDate = moment(new Date(article.date_posted)).local()
-          .format('MMMM DD, YYYY');
+          .format(PUBLICATION_DATE_FORMAT);
       res.render('blog/article', {article: article});
     }
   });

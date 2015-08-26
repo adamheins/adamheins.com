@@ -23,6 +23,7 @@ function saved(saved) {
 }
 
 function main() {
+  var articleDate = document.getElementById('article-date');
   var articleTitle = document.getElementById('article-title');
   var articleFlavour = document.getElementById('article-flavour');
   var articleBody = document.getElementById('article-body');
@@ -31,8 +32,22 @@ function main() {
   var flavourInput = document.getElementById('flavour');
   var bodyInput = document.getElementById('body');
 
+  if (articleTitle.innerHTML === '') {
+    articleDate.style.display = 'none';
+  } else {
+    articleDate.style.display = 'block';
+  }
+
   titleInput.addEventListener('input', function() {
-    articleTitle.innerHTML = titleInput.value;
+    var title = titleInput.value;
+    articleTitle.innerHTML = title;
+    if (title === '') {
+      articleDate.style.display = 'none';
+      articleFlavour.style.display = 'none';
+    } else {
+      articleDate.style.display = 'block';
+      articleFlavour.style.display = 'block';
+    }
     saved(false);
   });
 

@@ -40,15 +40,15 @@ block content
         input(id="link", name="link", type="text", value= article.link)
       div
         label(for="scripts") Scripts
-        textarea(id="scripts", name="scripts", type="text", rows="3")= scripts
+        textarea(id="scripts", name="scripts", type="text", rows="3")= scriptsText
       div
         label(for="styles") Styles
-        textarea(id="styles", name="styles", type="text", rows="3")= styles
+        textarea(id="styles", name="styles", type="text", rows="3")= stylesText
       button#update.submit(type="submit") Update
-      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="get") Exit
+      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="get") Cancel
   #article
     .page-header
-      .article-date= article.formatted_date
+      #article-date.article-date= article.formattedDate
       h1#article-title= article.title
       #article-flavour.article-flavour= article.flavour
     #article-body.page-body!= article.body

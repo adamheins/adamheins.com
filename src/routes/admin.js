@@ -3,9 +3,12 @@
 var express = require('express');
 var passwordless = require('passwordless');
 var router = express.Router();
+var moment = require('moment');
 
 var Article = require('../models/article');
 var Draft = require('../models/draft');
+
+var PUBLICATION_DATE_FORMAT = 'MMMM D, YYYY';
 
 // Admin landing page.
 router.get('/', function(req, res) {
@@ -19,7 +22,20 @@ router.get('/blog', function(req, res) {
 
 // Create new blog article.
 router.get('/blog/create', function(req, res) {
-  res.render('admin/blog/create');
+  res.render('admin/blog/create', {
+    draft: {
+      title: '',
+      flavour: '',
+      description: '',
+      body: '',
+      link: '',
+      scripts: [],
+      styles: [],
+      formattedDate: moment().local().format(PUBLICATION_DATE_FORMAT)
+    },
+    scriptsText: '',
+    stylesText: ''
+  });
 });
 
 // Load a draft for further editing.
@@ -37,10 +53,11 @@ router.get('/blog/create/:link', function(req, res, next) {
       err.status = 404;
       next(err);
     } else {
+      draft.formattedDate = moment().local().format(PUBLICATION_DATE_FORMAT);
       res.render('admin/blog/create', {
         draft: draft,
-        scripts: draft.formatScripts(),
-        styles: draft.formatStyles()
+        scriptsText: draft.scripts.join('\n'),
+        stylesText: draft.styles.join('\n')
       });
     }
   });
@@ -138,10 +155,12 @@ router.get('/blog/edit/:link', function(req, res, next) {
       err.status = 404;
       next(err);
     } else {
+      article.formattedDate = moment(new Date(article.date_posted)).local()
+          .format(PUBLICATION_DATE_FORMAT);
       res.render('admin/blog/edit', {
         article: article,
-        scripts: article.formatScripts(),
-        styles: article.formatStyles()
+        scriptsText: article.scripts.join('\n'),
+        stylesText: article.styles.join('\n')
       });
     }
   });

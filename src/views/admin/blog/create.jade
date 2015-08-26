@@ -6,6 +6,13 @@ block header
 
 block styles
   link(rel="stylesheet", href="/style/min/blog-view.min.css")
+  each style in draft.styles
+    link(rel="stylesheet", href= style)
+
+block scripts
+  script(src="/scripts/min/blog-view.min.js")
+  each script in draft.scripts
+    script(src= script)
 
 block content
   .page-header
@@ -15,26 +22,33 @@ block content
     form(action="/admin/blog/create/publish", method="post")
       div
         label(for="title") Title
-        input(name="title", id="title", type="text", value= draft ? draft.title : "")
+        input(name="title", id="title", type="text", value= draft.title)
       div
         label(for="description") Description
-        textarea(name="description", id="description", type="text", rows="2")= draft ? draft.description : ""
+        textarea(name="description", id="description", type="text", rows="2")= draft.description
       div
         label(for="flavour") Flavour
-        input(name="flavour", id="flavour", type="text", value= draft ? draft.flavour : "")
+        input(name="flavour", id="flavour", type="text", value= draft.flavour)
       div
         label(for="body") Body
-        textarea(name="body", id="body", type="text", rows="15")= draft ? draft.body : ""
+        textarea(name="body", id="body", type="text", rows="15")= draft.body
       div
         label(for="link") Link
-        input(name="link", id="link", type="text", value= draft ? draft.link : "")
+        input(name="link", id="link", type="text", value= draft.link)
       div
         label(for="scripts") Scripts
-        textarea(id="scripts", name="scripts", type="text", rows="3")= scripts ? scripts : ""
+        textarea(id="scripts", name="scripts", type="text", rows="3")= scriptsText
       div
         label(for="styles") Styles
-        textarea(id="styles", name="styles", type="text", rows="3")= styles ? styles : ""
+        textarea(id="styles", name="styles", type="text", rows="3")= stylesText
       button.submit(type="submit") Publish
       button.submit.push(type="submit", formaction="/admin/blog/create/save", formmethod="post") Save
       button.submit.push Download
-      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="get") Cancel
+      form
+        button.cancel.right(type="submit", action="/admin/blog", method="get") Cancel
+  #article
+    .page-header
+      #article-date.article-date= draft.formattedDate
+      h1#article-title= draft.title
+      #article-flavour.article-flavour= draft.title === "" ? "" : draft.flavour
+    #article-body.page-body!= draft.body
