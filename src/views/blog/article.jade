@@ -4,18 +4,18 @@ block header
   title= article.title
   meta(name="description", content= article.description)
 
-block scripts
-  each script in article.scripts
-    script(src= script)
-
 block styles
   each style in article.styles
     link(rel="stylesheet", href= style)
 
+block scripts
+  each script in article.scripts
+    script(src= script)
+
 block content
   .page-header
     if isAdmin
-      a.inline.right(href="/admin/blog/view/" + article.link) Edit
+      a.inline.right(href="/admin/blog/edit/" + article.link) Edit
     .article-date= article.formattedDate
     h1= article.title
     .article-flavour= article.flavour
@@ -37,9 +37,9 @@ block content
   .post-comment
     h2 Post a comment
     if !user
-      p You need to <a class="inline" href="/user/signin">sign in</a> to post a comment.
+      p You need to <a href="/user/signin">sign in</a> to post a comment.
     else
-      form(action="/blog/" + article.link + "/comment", method="POST")
+      form(action="/blog/" + article.link + "/comment", method="post")
         textarea(name="content", placeholder="Comment", rows="3")
         button.submit(type="submit") Submit
         button#clear.cancel.right(type="button") Clear

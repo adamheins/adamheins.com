@@ -6,12 +6,12 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(name="author", content="Adam Heins")
 
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Ubuntu:300')
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Ubuntu:300")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css")
     link(rel="stylesheet", href="/style/min/style.min.css")
 
     block header
-    block scripts
     block styles
 
   body
@@ -24,23 +24,20 @@ html
         a.admin-link(href="/admin") Admin
       .header
         .brand
-          a.name(href='/') Adam Heins
+          a.name(href="/") Adam Heins
           .flavour Code, Math, and Robotics
         .nav-bar
-          a.sexy(href='/blog') Blog
-          a.sexy(href='/projects') Projects
-          a.sexy(href='/resume') Résumé
-          a.sexy(href='/about') About
+          a.sexy(href="/blog") Blog
+          a.sexy(href="/projects") Projects
+          a.sexy(href="/resume") Résumé
+          a.sexy(href="/about") About
       .content
         block content
       .footer
         .contact
-          a#twitter-link.symbol.fa.fa-twitter.fa-lg(href='https://twitter.com/adamheins')
-          a#github-link.symbol.fa.fa-github.fa-lg(href='https://github.com/adamheins')
-          a#email-link.symbol.fa.fa-envelope.fa-lg(href='mailto:mail@adamheins.com')
-          a#linkedin-link.symbol.fa.fa-linkedin.fa-lg(href='http://ca.linkedin.com/pub/adam-heins/66/507/506')
+          a#github-link.symbol.fa.fa-github.fa-lg(href="https://github.com/adamheins")
+          a#email-link.symbol.fa.fa-envelope.fa-lg(href="mailto:mail@adamheins.com")
+          a#twitter-link.symbol.fa.fa-twitter.fa-lg(href="https://twitter.com/adamheins")
+          a#linkedin-link.symbol.fa.fa-linkedin.fa-lg(href="http://ca.linkedin.com/pub/adam-heins/66/507/506")
         .credit Adam Heins &copy 2015
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
-    link(rel="stylesheet", href="/style/min/prism.min.css")
-    script(src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default")
-    script(src="/scripts/min/prism.min.js")
+    block scripts
