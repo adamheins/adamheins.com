@@ -16,7 +16,7 @@ function ajaxRequest(url, callback) {
 var resume;
 window.addEventListener('load', function load(e) {
   window.removeEventListener('load', load, false);
-  ajaxRequest('/resume/resume.json', function(res) {
+  ajaxRequest('/res/resume.json', function(res) {
     resume = res;
   });
 }, false);

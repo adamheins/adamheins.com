@@ -11,12 +11,12 @@ router.get('/', function(req, res) {
 
 // PDF version of my resume.
 router.get('/pdf', function(req, res) {
-  res.sendfile(path.join(__dirname, '../public/resume', 'resume.pdf'));
+  res.sendfile(path.join(__dirname, '../public/res', 'resume.pdf'));
 });
 
 // JSON version of my resume.
 router.get('/json', function(req, res) {
-  res.sendfile(path.join(__dirname, '../public/resume', 'resume.json'));
+  res.sendfile(path.join(__dirname, '../public/res', 'resume.json'));
 });
 
 module.exports = router;

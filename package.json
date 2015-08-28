@@ -8,10 +8,10 @@
     "node": "0.12.0"
   },
   "scripts": {
-    "prestart": "./sh/prestart",
-    "start": "./sh/start",
-    "stop": "./sh/stop",
-    "poststop": "./sh/poststop"
+    "prestart": "./sh/prestart.sh",
+    "start": "./sh/start.sh",
+    "stop": "./sh/stop.sh",
+    "poststop": "./sh/poststop.sh"
   },
   "dependencies": {
     "express": "4.0.x",

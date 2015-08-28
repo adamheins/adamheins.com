@@ -5,10 +5,10 @@ block header
   title Adam Heins
 
 block styles
-  link(rel="stylesheet", href="/style/min/sandbox.min.css")
+  link(rel="stylesheet", href="/css/sandbox.css")
 
 block scripts
-  script(src="/scripts/min/sandbox.min.js")
+  script(src="/js/sandbox.js")
 
 block content
   .page-header
@@ -27,7 +27,8 @@ block content
       a.block(href= "/blog/" + article.link)= article.title
 
     h2 Recent Projects
-    a.block(href="http://adamheins.github.io/predator-prey-sim/") Predator Prey Simulation
+    a.block(href="http://adamheins.github.io/predator-prey-sim/").
+      Predator Prey Simulation
     a.block(href="http://adamheins.github.io/fractals/") Fractals
     a.block(href="https://github.com/adamheins/multicell") Multicell
 

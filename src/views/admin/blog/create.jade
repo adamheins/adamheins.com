@@ -5,12 +5,12 @@ block header
   title Create
 
 block styles
-  link(rel="stylesheet", href="/style/min/blog-view.min.css")
+  link(rel="stylesheet", href="/css/blog-view.css")
   each style in draft.styles
     link(rel="stylesheet", href= style)
 
 block scripts
-  script(src="/scripts/min/blog-view.min.js")
+  script(src="/js/blog-view.js")
   each script in draft.scripts
     script(src= script)
 
