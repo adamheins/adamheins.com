@@ -2,5 +2,3 @@
 
 # Stop mongo.
 mongod --dbpath db --shutdown
-
-./sh/clean.sh

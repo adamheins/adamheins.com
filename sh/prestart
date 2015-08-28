@@ -1,8 +1,4 @@
 #!/bin/sh
 
-# Compile and minify code.
-./sh/compile-scss.sh
-./sh/compile-js.sh
-
 # Start mongo.
 mongod --dbpath db --fork --logpath /dev/null
