@@ -30,7 +30,7 @@ block content
           if isAdmin || (user && user.name === comment.name)
             form(action="/blog/" + article.link + "/comment/" + comment._id + "/remove", method="post")
               input(name="name", type="hidden", value=comment.name)
-              button.remove(type="submit") Remove
+              button.btn.remove(type="submit") Remove
           p.name= comment.name
           p.date= comment.time
           p= comment.content
