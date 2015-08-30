@@ -41,6 +41,6 @@ block content
     else
       form(action="/blog/" + article.link + "/comment", method="post")
         textarea(name="content", placeholder="Comment", rows="3")
-        button.submit(type="submit") Submit
-        button#clear.cancel.right(type="button") Clear
+        button.btn.submit(type="submit") Submit
+        button#clear.btn.cancel.right(type="button") Clear
 

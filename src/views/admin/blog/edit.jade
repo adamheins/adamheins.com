@@ -44,8 +44,8 @@ block content
       div
         label(for="styles") Styles
         textarea(id="styles", name="styles", type="text", rows="3")= stylesText
-      button#update.submit(type="submit") Update
-      button.cancel.right(type="submit", formaction="/admin/blog", formmethod="get") Cancel
+      button#update.btn.submit(type="submit") Update
+      a.btn.cancel.right(href="/admin/blog") Cancel
   #article
     .page-header
       #article-date.article-date= article.formattedDate

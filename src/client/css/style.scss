@@ -134,7 +134,7 @@ body {
     }
 
     a:hover {
-      color: $highlight-color-light !important;
+      color: $highlight-color-light;
     }
 
     /* Formats the element as a block. */
@@ -154,7 +154,7 @@ body {
 
     /* Pushes inline content over by a fixed amount. */
     .push {
-      margin-left: 1.4rem;
+      margin-left: 1.4rem !important;
     }
 
     /* Format for math displayed on a page. */
@@ -290,7 +290,7 @@ body {
     }
 
     /* Buttons */
-    button {
+    .btn {
       padding: 0.25rem;
       background: none;
       border: none;
@@ -303,7 +303,7 @@ body {
       transition: color 0.5s ease;
     }
 
-    button.remove {
+    .btn.remove {
       color: #d56666;
       float: right;
       font-size: 0.9rem;
@@ -312,7 +312,7 @@ body {
       padding: 0;
     }
 
-    button.remove:hover {
+    .btn.remove:hover {
       color: #faacac;
     }
 
@@ -327,30 +327,30 @@ body {
       color: $highlight-color-light;
     }
 
-    button.cancel {
+    .btn.cancel {
       border: 1px solid #d56666;
       color: #d56666;
     }
 
-    button.cancel:hover {
+    .btn.cancel:hover {
       color: #faacac;
     }
 
-    button.cancel:focus {
+    .btn.cancel:focus {
       outline: none;
       box-shadow:0 0 0.3rem 0 #d56666;
     }
 
-    button.submit {
+    .btn.submit {
       border: 1px solid #39b1a4;
       color: #39b1a4;
     }
 
-    button.submit:hover {
+    .btn.submit:hover {
       color: #8dded6;
     }
 
-    button.submit:focus {
+    .btn.submit:focus {
       outline: none;
       box-shadow:0 0 0.3rem 0 #39b1a4;
     }

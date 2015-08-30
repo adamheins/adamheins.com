@@ -19,10 +19,10 @@ block content
       p.description Load an unpublished draft of an article.
       form(action="/admin/blog/create", method="post")
         input.block(name="link", type="text", placeholder="Draft Link")
-        button.link(type="submit") Load
+        button.btn.link(type="submit") Load
     .post
       a.title.sexy Edit
       p.description View and edit an existing article.
       form(action="/admin/blog/edit", method="post")
         input.block(name="link", type="text", placeholder="Article Link")
-        button.link(type="submit") Edit
+        button.btn.link(type="submit") Edit
