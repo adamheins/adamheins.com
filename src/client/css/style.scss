@@ -217,8 +217,7 @@ body {
       margin-top: 0.35rem;
     }
 
-    /* Style of a post on a page of posts. */
-    .post {
+    .content-block {
       margin-top: 2.5rem;
       margin-bottom: 2.5rem;
 
@@ -422,14 +421,14 @@ body {
     }
 
     /* Contact link symbol. */
-    .symbol {
+    .fa {
       transition: color 0.5s ease;
       color: $primary-color-light;
       margin-left: 0.35rem;
       margin-right: 0.35rem;
     }
 
-    .symbol:hover {
+    .fa:hover {
       color: $highlight-color;
     }
   }

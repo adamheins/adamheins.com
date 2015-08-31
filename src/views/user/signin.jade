@@ -9,7 +9,7 @@ block content
     h1 Sign In
     p If this is your first time, your account will be created automatically.
   .page-body
-    form(action="/user/authenticate", method="POST")
+    form(action="/user/authenticate", method="post")
       if error
         p.error= error.message
         if error.field === 0
@@ -21,4 +21,4 @@ block content
       else
         input.block(name="name", type="text", placeholder="Screen Name")
         input.block(name="email", type="text", placeholder="Email Address")
-      button.submit(type="submit") Submit
+      button.btn.submit(type="submit") Submit
