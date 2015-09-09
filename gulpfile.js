@@ -23,7 +23,7 @@ paths.css = {
   cust: [paths.src + '/css/**/*.css', paths.src + '/css/**/*.scss',
          '!' + paths.src + '/css/ext/**/*.css'],
   ext: [paths.src + '/css/ext/**/*.css'],
-  cat: ['opensans.css', 'ubuntu.css', 'fa/font-awesome.css', 'style.css'],
+  cat: ['opensans.css', 'ubuntu.css', 'style.css'],
   dest: paths.dest + '/css'
 };
 paths.res = {
