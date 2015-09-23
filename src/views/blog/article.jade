@@ -9,6 +9,7 @@ block styles
     link(rel="stylesheet", href= style)
 
 block scripts
+  script(src="/js/comment.js")
   each script in article.scripts
     script(src= script)
 
@@ -37,10 +38,10 @@ block content
   .post-comment
     h2 Post a comment
     if !user
-      p You need to <a href="/user/signin">sign in</a> to post a comment.
+      p You need to #[a(href="/user/signin") sign in] to post a comment.
     else
       form(action="/blog/" + article.link + "/comment", method="post")
-        textarea(name="content", placeholder="Comment", rows="3")
+        textarea#comment(name="content", placeholder="Comment", rows="3")
         button.btn.submit(type="submit") Submit
         button#clear.btn.cancel.right(type="button") Clear
 
