@@ -12,7 +12,7 @@ block scripts
 
 block content
   .page-header
-    h1 Welcome!
+    h1 Welcome
     p.
       Welcome to my website, which is home to my personal blog and project
       portfolio. Take a look around, stay a while. If you want to get in touch,
@@ -24,13 +24,17 @@ block content
   .page-body
     h2 Recent Articles
     each article in articles
-      a.block(href= "/blog/" + article.link)= article.title
+      div
+        a(href= "/blog/" + article.link)= article.title
 
     h2 Recent Projects
-    a.block(href="http://adamheins.github.io/predator-prey-sim/").
-      Predator Prey Simulation
-    a.block(href="http://adamheins.github.io/fractals/") Fractals
-    a.block(href="https://github.com/adamheins/multicell") Multicell
+    div
+      a(href="http://adamheins.github.io/predator-prey-sim/").
+        Predator Prey Simulation
+    div
+      a(href="http://adamheins.github.io/fractals/") Fractals
+    div
+      a(href="https://github.com/adamheins/multicell") Multicell
 
     h2 The Sandbox
     p.
@@ -41,8 +45,8 @@ block content
       canvas#dragon
     p.
       The first program to demo here is an interactive implementation of the
-      dragon fractal curve. Press the #[span.emphasized right arrow key] to
-      increase the fractal detail and the #[span.emphasized left arrow key] to
-      reduce it. Alternatively, clicking on the fractal's canvas will also
-      increase the fractal detail. The source can be found
+      dragon fractal curve. Press the #[strong right arrow key] to increase the
+      fractal detail and the #[strong left arrow key] to reduce it.
+      Alternatively, clicking on the fractal's canvas will also increase the
+      fractal detail. The source can be found
       #[a(href="https://github.com/adamheins/fractals/tree/master/dragon") here].
