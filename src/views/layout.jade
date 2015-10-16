@@ -22,13 +22,14 @@ html
         a.admin-link(href="/admin") Admin
       .header
         .brand
-          a.name(href="/") Adam Heins
+          h1
+            a.name(href="/") Adam Heins
           .flavour Code, Math, and Robotics
-        .nav-bar
-          a.sexy(href="/blog") Blog
-          a.sexy(href="/projects") Projects
-          a.sexy(href="/resume") Résumé
-          a.sexy(href="/about") About
+        nav
+          a(href="/blog") Blog
+          a(href="/projects") Projects
+          a(href="/resume") Résumé
+          a(href="/about") About
       .content
         block content
       .footer

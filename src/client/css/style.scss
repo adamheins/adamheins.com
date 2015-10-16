@@ -80,6 +80,14 @@ body {
     left: 0.25rem;
   }
 
+  h1 {
+    color: $primary-color;
+    font-family: inherit;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
   /* Style for the static page header. */
   .header {
     text-align: center;
@@ -93,6 +101,7 @@ body {
         font-family: 'Ubuntu', sans-serif;
         font-size: 1.9rem;
         font-weight: 300;
+        margin: 0;
       }
 
       .flavour {
@@ -102,7 +111,7 @@ body {
     }
 
     /* Navigation bar. */
-    .nav-bar {
+    nav {
       border-bottom: 1px solid $nav-border-color;
       border-top: 1px solid $nav-border-color;
       font-weight: 300;
@@ -115,6 +124,11 @@ body {
         font-size: 1rem;
         font-weight: 400;
         margin: 1rem 1.25rem;
+        transition: color 0.5s ease;
+      }
+
+      a:hover {
+        color: $highlight-color !important;
       }
     }
   }
@@ -175,13 +189,6 @@ body {
       margin-top: 2rem;
     }
 
-    h1 {
-      color: $primary-color;
-      font-family: inherit;
-      font-size: 2.5rem;
-      font-weight: 400;
-      margin: 0;
-    }
 
     h2 {
       color: #555;
@@ -197,6 +204,10 @@ body {
       font-size: 1.25rem;
       margin-top: 1.4rem;
       margin-bottom: 0.75rem;
+    }
+
+    .wrapper {
+      margin: 0;
     }
 
     .page-header {
@@ -227,6 +238,7 @@ body {
         font-size: 1.25rem;
         font-weight: 400;
         margin-bottom: 0.35rem;
+        margin-top: 0;
       }
 
       .date {
