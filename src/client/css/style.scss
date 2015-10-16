@@ -45,16 +45,6 @@ body {
     text-decoration: none;
   }
 
-  /* Links that start as the primary color. */
-  a.sexy {
-    color: $primary-color;
-    transition: color 0.5s ease;
-  }
-
-  a.sexy:hover {
-    color: $highlight-color !important;
-  }
-
   /* General style for authentication/account links. */
   a.auth {
     font-size: 0.9rem;
@@ -189,7 +179,6 @@ body {
       margin-top: 2rem;
     }
 
-
     h2 {
       color: #555;
       font-weight: 400;
@@ -204,10 +193,6 @@ body {
       font-size: 1.25rem;
       margin-top: 1.4rem;
       margin-bottom: 0.75rem;
-    }
-
-    .wrapper {
-      margin: 0;
     }
 
     .page-header {
@@ -228,17 +213,25 @@ body {
       margin-top: 0.35rem;
     }
 
-    .content-block {
+    section {
       margin-top: 2.5rem;
       margin-bottom: 2.5rem;
 
       .title {
-        color: #555;
         display: inline-block;
         font-size: 1.25rem;
         font-weight: 400;
         margin-bottom: 0.35rem;
         margin-top: 0;
+
+        a {
+          color: #555;
+          transition: color 0.5s ease;
+        }
+
+        a:hover {
+          color: $highlight-color !important;
+        }
       }
 
       .date {

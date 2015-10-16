@@ -12,7 +12,8 @@ block content
       technology, engineering, and life.
   .page-body
     each article in articles
-      .content-block
-        a.title.sexy(href= '/blog/' + article.link)= article.title
+      section
+        h2.title
+          a(href= '/blog/' + article.link)= article.title
         .date= article.formattedDate
         p.description= article.description

@@ -9,19 +9,20 @@ block content
     h1 Blogger
     p View, edit, and create blog articles.
   .page-body
-    .content-block
-      a.title.sexy(href="/admin/blog/create") Create
+    section
+      h2.title
+        a(href="/admin/blog/create") Create
       p.description Create a new article.
       .links
         a(href="/admin/blog/create") Create
-    .content-block
-      a.title.sexy Load
+    section
+      h2.title Load
       p.description Load an unpublished draft of an article.
       form(action="/admin/blog/create", method="post")
         input.block(name="link", type="text", placeholder="Draft Link")
         button.btn.link(type="submit") Load
-    .content-block
-      a.title.sexy Edit
+    section
+      h2.title Edit
       p.description View and edit an existing article.
       form(action="/admin/blog/edit", method="post")
         input.block(name="link", type="text", placeholder="Article Link")

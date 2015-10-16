@@ -1,4 +1,9 @@
+'use strict';
+
 // Clear current comment content.
-document.getElementById('clear').addEventListener('click', function() {
-  document.getElementById('comment').value = '';
-});
+var clearButton = document.getElementById('clear');
+if (clearButton) {
+  clearButton.addEventListener('click', function() {
+    document.getElementById('comment').value = '';
+  });
+}
