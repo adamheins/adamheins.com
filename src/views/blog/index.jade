@@ -5,15 +5,16 @@ block header
   title Blog
 
 block content
-  .page-header
-    h1 Blog
-    p.
-      A collection of my writings and project updates. I like to write about
-      technology, engineering, and life.
-  .page-body
-    each article in articles
-      section
-        h2.title
-          a(href= '/blog/' + article.link)= article.title
-        .date= article.formattedDate
-        p.description= article.description
+  article
+    section.page-header
+      h1 Blog
+      p.
+        A collection of my writings and project updates. I like to write about
+        technology, engineering, and life.
+    section.page-body
+      each article in articles
+        section
+          h2.title
+            a(href= '/blog/' + article.link)= article.title
+          .date= article.formattedDate
+          p.description= article.description

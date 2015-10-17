@@ -11,42 +11,46 @@ block scripts
   script(src="/js/sandbox.js")
 
 block content
-  .page-header
-    h1 Welcome
-    p.
-      Welcome to my website, which is home to my personal blog and project
-      portfolio. Take a look around, stay a while. If you want to get in touch,
-      send me an email at
-      #[a(href="mailto:mail@adamheins.com") mail@adamheins.com].
-    p.
-      The code for this website is open source and can be viewed
-      #[a(href="https://github.com/adamheins/personal-website") here].
-  .page-body
-    h2 Recent Articles
-    each article in articles
-      div
-        a(href= "/blog/" + article.link)= article.title
+  article
+    section.page-header
+      h1 Welcome
+      p.
+        Welcome to my website, which is home to my personal blog and project
+        portfolio. Take a look around, stay a while. If you want to get in touch,
+        send me an email at
+        #[a(href="mailto:mail@adamheins.com") mail@adamheins.com].
+      p.
+        The code for this website is open source and can be viewed
+        #[a(href="https://github.com/adamheins/personal-website") here].
+    section.page-body
+      section
+        h2.title Recent Articles
+        each article in articles
+          div
+            a(href= "/blog/" + article.link)= article.title
 
-    h2 Recent Projects
-    div
-      a(href="http://adamheins.github.io/predator-prey-sim/").
-        Predator Prey Simulation
-    div
-      a(href="http://adamheins.github.io/fractals/") Fractals
-    div
-      a(href="https://github.com/adamheins/multicell") Multicell
+      section
+        h2 Recent Projects
+        div
+          a(href="http://adamheins.github.io/predator-prey-sim/").
+            Predator Prey Simulation
+        div
+          a(href="http://adamheins.github.io/fractals/") Fractals
+        div
+          a(href="https://github.com/adamheins/multicell") Multicell
 
-    h2 The Sandbox
-    p.
-      The sandbox is a place where I try out cool web things I'm working on
-      that aren't quite ready or large enough to be their own project.
-      Prototypes and experiments are common here.
-    .sandbox
-      canvas#dragon
-    p.
-      The first program to demo here is an interactive implementation of the
-      dragon fractal curve. Press the right arrow key to increase the fractal
-      detail and the left arrow key to reduce it.  Alternatively, clicking on
-      the fractal's canvas will also increase the fractal detail. The source
-      can be found
-      #[a(href="https://github.com/adamheins/fractals/tree/master/dragon") here].
+      section
+        h2 The Sandbox
+        p.
+          The sandbox is a place where I try out cool web things I'm working on
+          that aren't quite ready or large enough to be their own project.
+          Prototypes and experiments are common here.
+        .sandbox
+          canvas#dragon
+        p.
+          The first program to demo here is an interactive implementation of the
+          dragon fractal curve. Press the right arrow key to increase the fractal
+          detail and the left arrow key to reduce it.  Alternatively, clicking on
+          the fractal's canvas will also increase the fractal detail. The source
+          can be found
+        #[a(href="https://github.com/adamheins/fractals/tree/master/dragon") here].
