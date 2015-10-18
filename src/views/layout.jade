@@ -16,14 +16,13 @@ html
     .container
       .account
         if user
-          .signin
-            a.auth(href="/user/signout") Sign out
+          a.signin.auth(href="/user/signout") Sign out
           if isAdmin
             .username!= 'Hi, <a class="auth" href="/admin">' + user.name + '</a>'
           else
             .username= 'Hi, ' + user.name
         else
-          a.signin(href="/user/signin") Sign in
+          a.signin.auth(href="/user/signin") Sign in
       .header
         .brand
           h1
