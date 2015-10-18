@@ -45,31 +45,6 @@ body {
     text-decoration: none;
   }
 
-  /* General style for authentication/account links. */
-  a.auth {
-    font-size: 0.9rem;
-    color: $highlight-color;
-    position: absolute;
-    top: 0.25rem;
-    transition: color 0.5s ease;
-  }
-
-  a.auth:hover {
-    color: $highlight-color-light !important;
-  }
-
-  /* Link to sign in and out. */
-  a.signin-link {
-    @extend .auth;
-    right: 0.25rem;
-  }
-
-  /* Link to administrator services. */
-  a.admin-link {
-    @extend .auth;
-    left: 0.25rem;
-  }
-
   h1 {
     color: $primary-color;
     font-family: inherit;
@@ -78,11 +53,36 @@ body {
     margin: 0;
   }
 
-  /* Style for the static page header. */
+  // Account-related links
+  .account {
+    a.auth {
+      font-size: 0.9rem;
+      color: $highlight-color;
+      transition: color 0.5s ease;
+    }
+
+    a.auth:hover {
+      color: $highlight-color-light !important;
+    }
+
+    .signin {
+      position: absolute;
+      top: 0.25rem;
+      right: 0.25rem;
+    }
+
+    .username {
+      font-size: 0.9rem;
+      position: absolute;
+      top: 0.25rem;
+      left: 0.25rem;
+    }
+  }
+
+  // Page header.
   .header {
     text-align: center;
 
-    /* The name and flavour text at the top of the header. */
     .brand {
       margin-bottom: 2rem;
 
@@ -100,7 +100,7 @@ body {
       }
     }
 
-    /* Navigation bar. */
+    // Navigation bar.
     nav {
       border-bottom: 1px solid $nav-border-color;
       border-top: 1px solid $nav-border-color;
@@ -118,7 +118,7 @@ body {
       }
 
       a:hover {
-        color: $highlight-color !important;
+        color: $highlight-color;
       }
     }
   }

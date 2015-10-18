@@ -14,12 +14,16 @@ html
 
   body
     .container
-      if user
-        a.signin-link(href="/user/signout") Sign out
-      else
-        a.signin-link(href="/user/signin") Sign in
-      if isAdmin
-        a.admin-link(href="/admin") Admin
+      .account
+        if user
+          .signin
+            a.auth(href="/user/signout") Sign out
+          if isAdmin
+            .username!= 'Hi, <a class="auth" href="/admin">' + user.name + '</a>'
+          else
+            .username= 'Hi, ' + user.name
+        else
+          a.signin(href="/user/signin") Sign in
       .header
         .brand
           h1
