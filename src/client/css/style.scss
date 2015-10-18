@@ -123,7 +123,7 @@ body {
     }
   }
 
-  /* Page content */
+  // Page content
   .content {
     margin-bottom: 3rem;
     margin-top: 4rem;
@@ -141,22 +141,14 @@ body {
       color: $highlight-color-light;
     }
 
-    /* Formats the element as a block. */
     .block {
       display: block;
     }
 
-    /* Makes the element have extra emaphasis. */
-    .emphasized {
-      font-weight: 400;
-    }
-
-    /* FLoats the element to the right side of the parent. */
     .right {
       float: right;
     }
 
-    /* Pushes inline content over by a fixed amount. */
     .push {
       margin-left: 1.4rem !important;
     }
@@ -169,7 +161,6 @@ body {
       margin-bottom: 2rem;
     }
 
-    /* Format for a block of code. */
     code {
       font-size: 0.8rem;
     }
@@ -252,7 +243,6 @@ body {
       }
     }
 
-    /* Input and textarea styling. */
     textarea, input {
       padding: 0.25rem;
       border: 1px solid #aaa;
@@ -401,7 +391,7 @@ body {
     }
   }
 
-  /* Style for the page footer. */
+  // Page footer.
   .footer {
     position: absolute;
     bottom: 0;
@@ -411,7 +401,6 @@ body {
     margin: auto;
     text-align: center;
 
-    /* Style for the block of contact links in the page footer. */
     .contact {
       padding-bottom: 1.5rem;
       padding-top: 1.5rem;
@@ -419,13 +408,11 @@ body {
       text-align: center;
     }
 
-    /* Style for the copyright notification in the page footer. */
     .credit {
       font-size: 0.8rem;
       font-weight: 300;
     }
 
-    /* Contact link symbol. */
     .fa {
       transition: color 0.5s ease;
       color: $primary-color-light;
