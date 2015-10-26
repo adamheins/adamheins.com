@@ -18,9 +18,14 @@ router.get('/projects', function(req, res) {
   res.render('projects');
 });
 
-// About me page.
+// About page.
 router.get('/about', function(req, res) {
   res.render('about');
+});
+
+// pgp page.
+router.get('/pgp', function(req, res) {
+  res.render('pgp');
 });
 
 module.exports = router;
