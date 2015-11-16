@@ -22,27 +22,3 @@ block content
       h1= article.title
       .article-flavour= article.flavour
     .page-body!= article.body
-  .comments
-    h2 Comments
-    if !article.comments || article.comments.length === 0
-      p There are no comments yet.
-    else
-      each comment in article.comments
-        .comment
-          if isAdmin || (user && user.name === comment.name)
-            form(action="/blog/" + article.link + "/comment/" + comment._id + "/remove", method="post")
-              input(name="name", type="hidden", value=comment.name)
-              button.btn.remove(type="submit") Remove
-          p.name= comment.name
-          p.date= comment.time
-          p= comment.content
-  .post-comment
-    h2 Post a comment
-    if !user
-      p You need to #[a(href="/user/signin") sign in] to post a comment.
-    else
-      form(action="/blog/" + article.link + "/comment", method="post")
-        textarea#comment(name="content", placeholder="Comment", rows="3")
-        button.btn.submit(type="submit") Submit
-        button#clear.btn.cancel.right(type="button") Clear
-

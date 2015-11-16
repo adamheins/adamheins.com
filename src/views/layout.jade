@@ -21,8 +21,6 @@ html
             .username!= 'Hi, <a class="auth" href="/admin">' + user.name + '</a>'
           else
             .username= 'Hi, ' + user.name
-        else
-          a.signin.auth(href="/user/signin") Sign in
       .header
         .brand
           h1
