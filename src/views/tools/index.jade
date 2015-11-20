@@ -1,0 +1,92 @@
+extends ../layout
+
+block header
+  meta(name="description", content="Tools I like to use.")
+  title Tools
+
+block content
+  section
+    h1 Tools
+    p.
+      This is a list of tools I like. Most of them are CLI-based.
+
+  section
+    h2 Current Tools
+    p Tools I currently use.
+    .push
+      div.
+        #[a(href="https://github.com/ggreer/the_silver_searcher") ag] - A wicked
+        fast source code search tool.
+      div.
+        #[a(href="http://cscope.sourceforge.net/") Cscope] - A code search tool
+        for C and other languages
+      div.
+        #[a(href="https://github.com/adamheins/f") f] - A tool for favouriting
+        files, directories, and git branches.
+      div.
+        #[a(href="https://github.com/junegunn/fzf") fzf] - A fuzzy-finder for
+        the command line.
+      div.
+        #[a(href="http://brew.sh/") Homebrew] - A package manager for OSX.
+      div.
+        #[a(href="https://mosh.mit.edu/") mosh] - A more robust replacement for
+        ssh.
+      div.
+        #[a(href="http://www.passwordstore.org/") pass] - A local password
+        manager based on gpg.
+      div.
+        #[a(href="http://www.vim.org/") vim] - An excellent text editor.
+      div.
+        #[a(href="http://www.vimperator.org/vimperator") Vimperator] - An
+        add-on for Firefox that makes it look and behave similar to vim.
+      div.
+        #[a(href="https://github.com/rupa/z") z] - Learns which directories you
+        visit most and takes you there based on a regex.
+      div.
+        #[a(href="http://www.zsh.org/") zsh] - The shell I currently use.
+        Mostly compatible with bash and more refined.
+
+  section
+    h2 Prospective Tools
+    p.
+      These are tools that I am interested in using once the projects are more
+      mature.
+    .push
+      div.
+        #[a(href="https://neovim.io/") neovim] - A rewrite of vim to strip out
+        the cruft and add some much needed features. Currently lacks full lua
+        support, so it breaks some plugins.
+
+  section
+    h2 Vim Plugins
+    p.
+      Some of the plugins I use for vim. For the full list, look in my
+      #[a(href="https://github.com/adamheins/.vim/tree/master/bundle") ~/.vim/bundle]
+      directory.
+    .push
+      div.
+        #[a(href="http://www.vim.org/scripts/script.php?script_id=31") a] -
+        Toggles between C header (.h) and source (.c) files.
+      div.
+        #[a(href="https://github.com/airblade/vim-gitgutter") gitgutter] - Shows
+        a git diff in the page gutter.
+      div.
+        #[a(href="https://github.com/ntpeters/vim-better-whitespace") better-whitespace]
+        - Highlights trailing whitespace and makes it easy to remove.
+      div.
+        #[a(href="http://cscope.sourceforge.net/cscope_vim_tutorial.html") Cscope]
+        - A plugin for the code search tool mentioned above.
+      div.
+        #[a(href="https://github.com/kien/ctrlp.vim") ctrlp] - File search plugin.
+      div.
+        #[a(href="https://github.com/Shougo/neocomplete.vim") neocomplete] -
+        Autocompletion engine that is very easy to set up.
+      div.
+        #[a(href="https://github.com/scrooloose/nerdtree") NERDTree] - Nice
+        directory browsing.
+      div.
+        #[a(href="https://github.com/jeffkreeftmeijer/vim-numbertoggle") numbertoggle]
+        - Toggle line numbers between absolute and relative mode.
+      div.
+        #[a(href="https://github.com/vim-scripts/tComment") tComment] -
+        Provides shortcuts for commenting out blocks of code.
