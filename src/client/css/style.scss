@@ -1,5 +1,6 @@
 // Colors.
 $heading-color: #333;
+$bold-color: $heading-color;
 $text-color: #666;
 $date-color: #999;
 $nav-border-color: #ccc;
@@ -182,6 +183,7 @@ body {
     }
 
     strong {
+      color: $bold-color;
       font-weight: 400;
     }
 
