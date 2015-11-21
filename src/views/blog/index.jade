@@ -6,15 +6,15 @@ block header
 
 block content
   article
-    section.page-header
+    section
       h1 Blog
       p.
         A collection of my writings and project updates. I like to write about
         technology, engineering, and life.
-    section.page-body
+    section
       each article in articles
         section
-          h2.title
+          h2
             a(href= '/blog/' + article.link)= article.title
           .date= article.formattedDate
           p.description= article.description
