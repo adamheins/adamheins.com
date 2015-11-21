@@ -19,14 +19,14 @@ block content
     section
       h2 Recent Articles
       .article-flavour The latest articles from my blog.
-      ul
+      ul.bare
         each article in articles
           li
             a(href= "/blog/" + article.link)= article.title
     section
       h2 Recent Projects
       .article-flavour Some of the personal projects I've been working on lately.
-      ul
+      ul.bare
         li
           a(href="https://github.com/adamheins/f") f
         li
@@ -37,7 +37,7 @@ block content
     section
       h2 Other Links
       .article-flavour Additional miscellaneous pages.
-      ul
+      ul.bare
         li
           a(href="/tools") Tools
         li
