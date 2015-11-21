@@ -14,10 +14,10 @@ block scripts
 
 block content
   article
-    .page-header
+    section
       if isAdmin
         a.right(href="/admin/blog/edit/" + article.link) Edit
       .article-date= article.formattedDate
       h1= article.title
       .article-flavour= article.flavour
-    .page-body!= article.body
+    section!= article.body

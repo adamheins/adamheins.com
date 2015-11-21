@@ -1,40 +1,42 @@
 extends ../layout
 
 block header
-  meta(name="description", content="Learn a bit more about the person behind the website.")
+  meta(name="description", content="Find out more about me.")
   title About
 
-block styles
-  link(rel="stylesheet", href="/css/about.css")
-
 block content
-  .page-header
-    h1 About
-    p Find out more about me.
-  .page-body
-    h3 Introduction
-    p.
-      My name is Adam. I'm an undergraduate at the University of Waterloo
-      studying Mechatronics Engineering. I'm particularly interested in
-      computer science, math and robotics. I currently work at
-      #[a(href="https://www.pebble.com") Pebble] on the firmware team.
-    h3 Technical Background
-    p.
-      I like to explore new technologies and put them to use. I enjoy the
-      challenge of solving difficult problems and creating interesting things.
-      I've had experience working with embedded systems, enterprise, desktop,
-      and the web. I'm also a member of Waterloo's robotics team. I've created
-      a number of side projects, with a particular focus on math- and
-      systems-related tasks. Most of them are open-source and can be viewed on
-      #[a(href="https://github.com/adamheins") GitHub]. For more details, see
-      my #[a(href="/resume") résumé].
-    h3 Other Interests and Activities
-    p.
-      I like hiking, running, cycling, and other outdoor activities. I try to
-      explore and do new things as much as I can. I also enjoy tinkering
-      with electronics, reading, and writing.
-    h3 Contact
-    p.
-      The best way to get in touch is through email at
-      #[a(href="mailto:mail@adamheins.com") mail@adamheins.com]. If you want to
-      encrypt the message, use my #[a(href="/pgp") PGP key].
+  article
+    section
+      h1 About
+      p Find out more about me.
+    section
+      section
+        h2 Introduction
+        p.
+          My name is Adam. I'm an undergraduate at the University of Waterloo
+          studying Mechatronics Engineering. I'm particularly interested in
+          computer science, math and robotics. I currently work at
+          #[a(href="https://www.pebble.com") Pebble] on the firmware team.
+      section
+        h2 Technical Background
+        p.
+          I like to explore new technologies and put them to use. I enjoy the
+          challenge of solving difficult problems and creating interesting
+          things.  I've had experience working with embedded systems,
+          enterprise, desktop, and the web. I've created a number of side
+          projects, with a particular focus on math- and systems-related tasks.
+          Most of them are open-source and can be viewed on
+          #[a(href="https://github.com/adamheins") GitHub].  For more details,
+          see my #[a(href="/resume") résumé].
+      section
+        h2 Other Interests and Activities
+        p.
+          I like hiking, running, cycling, and other outdoor activities. I try
+          to explore and do new things as much as I can. I also enjoy tinkering
+          with electronics, reading, and writing.
+      section
+        h2 Contact
+        p.
+          The best way to get in touch is through email at
+          #[a(href="mailto:mail@adamheins.com") mail@adamheins.com]. If you
+          want to encrypt the message, use my #[a(href="/pgp") PGP key].

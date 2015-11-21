@@ -1,13 +1,23 @@
-$primary-color: #333;
-$primary-color-light: #666;
+// Colors.
+$heading-color: #333;
+$text-color: #666;
+$date-color: #999;
+$nav-border-color: #ccc;
+
 $highlight-color: #39b1a4;
 $highlight-color-light: #48e5d4;
-$nav-border-color: #ccc;
+
+// Text sizes.
+$h1-size: 2.5rem;
+$h2-size: 1.4rem;
+$text-size: 1rem;
+$date-size: 0.9rem;
+$name-size: 1.9rem;
 
 
 html {
   font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
+  font-size: $text-size;
   font-weight: 300;
   height: 100%;
 }
@@ -25,7 +35,7 @@ html {
 }
 
 body {
-  color: $primary-color-light;
+  color: $text-color;
   height: 100%;
   margin: 0;
 }
@@ -46,9 +56,9 @@ body {
   }
 
   h1 {
-    color: $primary-color;
+    color: $heading-color;
     font-family: inherit;
-    font-size: 2.5rem;
+    font-size: $h1-size;
     font-weight: 400;
     margin: 0;
   }
@@ -87,16 +97,16 @@ body {
       margin-bottom: 2rem;
 
       .name {
-        color: $primary-color-light;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 1.9rem;
+        color: $text-color;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: $name-size;
         font-weight: 300;
         margin: 0;
       }
 
       .flavour {
         color: $highlight-color;
-        font-size: 1rem;
+        font-size: $text-size;
       }
     }
 
@@ -110,8 +120,8 @@ body {
       padding-top: 0.75rem;
 
       a {
-        color: $primary-color-light;
-        font-size: 1rem;
+        color: $text-color;
+        font-size: $text-size;
         font-weight: 400;
         margin: 1rem 1.25rem;
         transition: color 0.5s ease;
@@ -156,7 +166,7 @@ body {
     /* Format for math displayed on a page. */
     .math-block {
       text-align: center;
-      font-size: 1rem;
+      font-size: $text-size;
       margin-top: 2rem;
       margin-bottom: 2rem;
     }
@@ -170,33 +180,31 @@ body {
       margin-top: 2rem;
     }
 
+    strong {
+      font-weight: 400;
+    }
+
     h2 {
-      color: #555;
+      color: $heading-color;
       font-weight: 400;
-      font-size: 1.75rem;
+      font-size: $h2-size;
       margin-top: 1.4rem;
-      margin-bottom: 0.75rem;
-    }
+      margin-bottom: 0.7rem;
 
-    h3 {
-      color: #555;
-      font-weight: 400;
-      font-size: 1.25rem;
-      margin-top: 1.4rem;
-      margin-bottom: 0.75rem;
-    }
+      a {
+        color: $heading-color;
+        transition: color 0.5s ease;
+      }
 
-    .page-header {
-      margin-bottom: 1.35rem
-    }
-
-    .page-body {
-      margin-top: 3rem
+      a:hover {
+        color: $highlight-color !important;
+      }
     }
 
     .article-date {
-      color: #999;
-      font-size: 0.9rem;
+      color: $date-color;
+      font-size: $date-size;
+      margin-bottom: 0.35rem;
     }
 
     .article-flavour {
@@ -208,31 +216,14 @@ body {
       margin-top: 2.5rem;
       margin-bottom: 2.5rem;
 
-      .title {
-        display: inline-block;
-        font-size: 1.25rem;
-        font-weight: 400;
-        margin-bottom: 0.35rem;
-        margin-top: 0;
-
-        a {
-          color: #555;
-          transition: color 0.5s ease;
-        }
-
-        a:hover {
-          color: $highlight-color !important;
-        }
-      }
-
       .date {
-        color: #999;
-        font-size: 0.9rem;
+        color: $date-color;
+        font-size: $date-size;
+        margin-top: -0.35rem;
         margin-bottom: 0.35rem;
       }
 
       .description {
-        color: $primary-color-light;
         margin-top: 0;
         margin-bottom: 0;
       }
@@ -247,7 +238,7 @@ body {
       padding: 0.25rem;
       border: 1px solid #aaa;
       font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
+      font-size: $text-size;
       font-weight: 300;
       margin: 0.5rem 0;
       border-radius: 4px;
@@ -291,7 +282,7 @@ body {
       border-radius: 4px;
       cursor: pointer;
       font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
+      font-size: $text-size;
       font-weight: 400;
       margin: 0.5rem 0;
       transition: color 0.5s ease;
@@ -349,42 +340,6 @@ body {
       box-shadow:0 0 0.3rem 0 #39b1a4;
     }
 
-    .comments {
-      margin-top: 3rem;
-
-      p {
-        margin: 0;
-        margin-bottom: 0.5rem;
-        white-space: pre-wrap;
-      }
-
-      .comment {
-        border-top: 1px solid #ccc;
-        padding-top: 0.5rem;
-        margin: 1rem 0;
-
-        .date {
-          color: #999;
-          font-size: 0.9rem;
-          margin-bottom: 0.35rem;
-        }
-
-        .name {
-          font-weight: 400;
-          margin-bottom: 0;
-        }
-      }
-
-      .comment:last-child {
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 0.5rem;
-      }
-    }
-
-    .post-comment {
-      margin-top: 3rem;
-    }
-
     form {
       margin: 0;
       padding: 0;
@@ -415,7 +370,7 @@ body {
 
     .fa {
       transition: color 0.5s ease;
-      color: $primary-color-light;
+      color: $text-color;
       margin-left: 0.35rem;
       margin-right: 0.35rem;
     }

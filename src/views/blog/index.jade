@@ -5,16 +5,17 @@ block header
   title Blog
 
 block content
-  .page-header
-    h1 Blog
-    p.
-      A collection of my writings and project updates. I like to write about
-      technology, engineering, and life. Interested in commenting on an
-      article? Send me an #[a(href="mailto:mail@adamheins.com") email].
-  .page-body
-    each article in articles
-      section
-        h2.title
-          a(href= '/blog/' + article.link)= article.title
-        .date= article.formattedDate
-        p.description= article.description
+  article
+    section
+      h1 Blog
+      p.
+        A collection of my writings and project updates. I like to write about
+        technology, engineering, and life. Interested in commenting on an
+        article? Send me an #[a(href="mailto:mail@adamheins.com") email].
+    section
+      each article in articles
+        section
+          h2
+            a(href= '/blog/' + article.link)= article.title
+          .date= article.formattedDate
+          p.description= article.description
