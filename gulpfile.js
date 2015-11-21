@@ -27,8 +27,8 @@ paths.css = {
   dest: paths.dest + '/css'
 };
 paths.res = {
-  all: [paths.src + '/res/**'],
-  dest: paths.dest + '/res'
+  all: [paths.src + '/resume/**'],
+  dest: paths.dest + '/resume'
 };
 paths.img = {
   all: [paths.src + '/img/**'],
