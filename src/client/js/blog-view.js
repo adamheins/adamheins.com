@@ -5,9 +5,7 @@ window.addEventListener('load', function load(e) {
   main();
 }, false);
 
-/*
- * Update the document appearance based on whether it is currently saved or not.
- */
+// Update the document appearance based on whether it is currently saved or not.
 function saved(saved) {
   var title = document.title
   if (saved) {

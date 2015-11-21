@@ -1,6 +1,6 @@
 'use strict';
 
-/* Load JSON resume for use in the console. */
+// Load JSON resume for use in the console.
 
 function ajaxRequest(url, callback) {
   var xmlhttp = new XMLHttpRequest();
@@ -16,7 +16,7 @@ function ajaxRequest(url, callback) {
 var resume;
 window.addEventListener('load', function load(e) {
   window.removeEventListener('load', load, false);
-  ajaxRequest('/res/resume.json', function(res) {
+  ajaxRequest('/resume/resume.json', function(res) {
     resume = res;
   });
 }, false);

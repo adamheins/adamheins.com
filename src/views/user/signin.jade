@@ -6,20 +6,13 @@ block header
 
 block content
   article
-    section.page-header
+    section
       h1 Sign In
-      p If this is your first time, your account will be created automatically.
-    section.page-body
+      p Sign in to the website.
+    section
       form(action="/user/authenticate", method="post")
         if error
-          p.error= error.message
-          if error.field === 0
-            input.block.error(name="name", type="text", placeholder="Screen Name", value=name)
-            input.block(name="email", type="text", placeholder="Email Address", value=email)
-          else if error.field === 1
-            input.block(name="name", type="text", placeholder="Screen Name", value=name)
-            input.block.error(name="email", type="text", placeholder="Email Address", value=email)
-        else
-          input.block(name="name", type="text", placeholder="Screen Name")
-          input.block(name="email", type="text", placeholder="Email Address")
-      button.btn.submit(type="submit") Submit
+          p.error= error
+        input.block(name="name", type="text", placeholder="Screen Name")
+        input.block(name="email", type="text", placeholder="Email Address")
+        button.btn.submit(type="submit") Submit
