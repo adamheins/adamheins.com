@@ -34,6 +34,10 @@ paths.img = {
   all: [paths.src + '/img/**'],
   dest: paths.dest + '/img'
 };
+paths.projects = {
+  all: [paths.src + '/projects/**'],
+  dest: paths.dest + '/projects'
+}
 
 gulp.task('clean', function(cb) {
   del([paths.dest], cb);
@@ -47,6 +51,11 @@ gulp.task('res', ['clean'], function() {
 gulp.task('img', ['clean'], function() {
   return gulp.src(paths.img.all)
       .pipe(gulp.dest(paths.img.dest));
+});
+
+gulp.task('projects', ['clean'], function() {
+  return gulp.src(paths.projects.all)
+      .pipe(gulp.dest(paths.projects.dest));
 });
 
 gulp.task('js', ['clean'], function() {
@@ -71,6 +80,6 @@ gulp.task('css', ['clean'], function() {
       .pipe(gulp.dest(paths.css.dest));
 });
 
-gulp.task('build', ['clean', 'res', 'img', 'js', 'css']);
+gulp.task('build', ['clean', 'res', 'img', 'projects', 'js', 'css']);
 
 gulp.task('default', ['build']);
