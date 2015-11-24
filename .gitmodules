@@ -1,3 +1,15 @@
 [submodule "resume"]
 	path = src/client/resume
 	url = git@github.com:adamheins/resume.git
+[submodule "src/client/projects/base-converter"]
+	path = src/client/projects/base-converter
+	url = git@github.com:adamheins/base-converter
+[submodule "src/client/projects/fractals"]
+	path = src/client/projects/fractals
+	url = git@github.com:adamheins/fractals
+[submodule "src/client/projects/primality-checker"]
+	path = src/client/projects/primality-checker
+	url = git@github.com:adamheins/primality-checker
+[submodule "src/client/projects/predator-prey-sim"]
+	path = src/client/projects/predator-prey-sim
+	url = git@github.com:adamheins/predator-prey-sim
