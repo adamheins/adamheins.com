@@ -10,7 +10,6 @@ var flash = require('connect-flash');
 var mongoose = require('mongoose');
 
 var auth = require('./lib/auth');
-var connection = require('./lib/connection');
 var router = require('./lib/router');
 var error = require('./lib/error');
 
@@ -36,9 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Logic.
 auth.init(app);
-connection.redirect(app);
 router.route(app);
 error.handle(app);
-connection.listen(app);
+app.listen(process.env.PORT);
 
 module.exports = app;
