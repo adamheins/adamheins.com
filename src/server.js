@@ -30,9 +30,6 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(flash());
 
-// Make things in the public folder accessible.
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Logic.
 auth.init(app);
 router.route(app);

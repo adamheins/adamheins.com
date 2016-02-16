@@ -5,10 +5,10 @@ block header
   title PGP Key
 
 block styles
-  link(rel="stylesheet", href="/css/prism.css")
+  link(rel="stylesheet", href="#{process.env.STATIC_HOST}/css/prism.css")
 
 block scripts
-  script(src="/js/prism.js")
+  script(src="#{process.env.STATIC_HOST}/js/prism.js")
 
 block content
   article

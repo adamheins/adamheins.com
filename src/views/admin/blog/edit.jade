@@ -5,14 +5,20 @@ block header
   title= article.title
 
 block styles
-  link(rel="stylesheet", href="/css/blog-view.css")
+  link(rel="stylesheet", href="#{process.env.STATIC_HOST}/css/blog-view.css")
   each style in article.styles
-    link(rel="stylesheet", href= style)
+    if style.charAt(0) == "/"
+      link(rel="stylesheet", href="#{process.env.STATIC_HOST}" + style)
+    else
+      link(rel="stylesheet", href=style)
 
 block scripts
-  script(src="/js/blog-view.js")
+  script(src="#{process.env.STATIC_HOST}/js/blog-view.js")
   each script in article.scripts
-    script(src= script)
+    if script.charAt(0) == "/"
+      script(src="#{process.env.STATIC_HOST}" + script)
+    else
+      script(src=script)
 
 block content
   .page-header

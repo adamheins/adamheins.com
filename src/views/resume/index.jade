@@ -5,7 +5,7 @@ block header
   title Résumé
 
 block scripts
-  script(src="/js/json-resume.js")
+  script(src="#{process.env.STATIC_HOST}/js/json-resume.js")
 
 block content
   article
@@ -18,11 +18,13 @@ block content
       section
         h2.title PDF
         p.
-          This is my standard résumé. Check it out #[a(href="/resume/pdf") here].
+          This is my standard résumé. Check it out
+          #[a(href="#{process.env.STATIC_HOST}/resume/resume.pdf") here].
       section
         h2.title JSON
         p.
-          This is my résumé written in JSON. Stripped of all the formatting, it's
-          just the raw data left. It can be viewed #[a(href="/resume/json") here].
-          You can also play with my résumé as a JavaScript object in the console,
-        where it is a global variable named #[i resume].
+          This is my résumé written in JSON. Stripped of all the formatting,
+          it's just the raw data left. It can be viewed
+          #[a(href="#{process.env.STATIC_HOST}/resume/resume.json") here].
+          You can also play with my résumé as a JavaScript object in the
+          console, where it is a global variable named #[i resume].
