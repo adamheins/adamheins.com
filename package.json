@@ -12,7 +12,8 @@
     "prestart": "./sh/prestart.sh",
     "start": "./sh/start.sh",
     "stop": "./sh/stop.sh",
-    "poststop": "./sh/poststop.sh"
+    "poststop": "./sh/poststop.sh",
+    "status": "./sh/status.zsh"
   },
   "dependencies": {
     "express": "4.0.x",

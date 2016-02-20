@@ -11,7 +11,15 @@ root directory.
 The project requires a file called `.env` in the root directory from which to
 source environment variables.
 
-To start the server locally, just run `npm start`.
+To start and stop the server, run one of the following:
+```
+npm start
+npm stop
+npm restart
+```
+
+To check the status of the Node.js and mongod processes, run `npm run status`.
+
 
 This website uses [gulp](http://gulpjs.com) for it's build system. To build the
 client-side resources, run `gulp`.
