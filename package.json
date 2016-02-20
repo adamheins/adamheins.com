@@ -4,6 +4,7 @@
   "description": "My personal blog and project website.",
   "author": "Adam Heins <mail@adamheins.com>",
   "private": true,
+  "license": "MIT",
   "engines": {
     "node": "0.12.0"
   },
