@@ -1,4 +1,4 @@
-# Personal Website
+# adamheins.com
 This is the source code for my [personal website](https://adamheins.com). This
 website is home to my blog, project portfolio, and resume.
 
