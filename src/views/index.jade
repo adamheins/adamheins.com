@@ -9,23 +9,22 @@ block content
     section
       h1 Welcome
       p.
-        Welcome to my website, which is home to my personal blog and project
-        portfolio. Take a look around, stay a while. If you want to get in touch,
-        send me an email at
+        Welcome to my website, which is home to my blog and project portfolio.
+        If you want to get in touch, send me an email at
         #[a(href="mailto:mail@adamheins.com") mail@adamheins.com].
       p.
-        The code for this website is open source and can be viewed
+        The code for this website can be viewed
         #[a(href="https://github.com/adamheins/personal-website") here].
     section
       h2 Recent Articles
-      .article-flavour The latest articles from my blog.
+      p The latest articles from my blog.
       ul.bare
         each article in articles
           li
             a(href= "/blog/" + article.link)= article.title
     section
       h2 Recent Projects
-      .article-flavour Some of the projects I've been working on lately.
+      p Some of the projects I've been working on lately.
       ul.bare
         li
           a(href="https://github.com/adamheins/f") f
@@ -36,7 +35,7 @@ block content
             Predator Prey Simulation
     section
       h2 Other Links
-      .article-flavour Additional miscellaneous pages.
+      p Additional miscellaneous pages.
       ul.bare
         li
           a(href="/tools") Tools
