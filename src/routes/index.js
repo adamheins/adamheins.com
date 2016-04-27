@@ -6,7 +6,7 @@ var router = express.Router();
 var Article = require('../models/article');
 
 router.get('/', function(req, res) {
-  var query = Article.find().sort({date_posted: -1}).limit(3);
+  var query = Article.find().sort({date: -1}).limit(3);
   query.exec(function(err, articles) {
     res.render('index', { articles: articles });
   });

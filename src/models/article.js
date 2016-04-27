@@ -5,7 +5,7 @@
 var mongoose = require('mongoose');
 
 var articleSchema = new mongoose.Schema({
-  date_posted: Date,
+  date: Date,
   scripts: [ String ],
   styles: [ String ],
   title: String,

@@ -80,7 +80,7 @@ router.post('/blog/create/publish', function(req, res, next) {
 
   // Create a new article.
   var article = new Article({
-    date_posted: new Date(),
+    date:        new Date(),
     title:       req.body.title,
     flavour:     req.body.flavour,
     description: req.body.description,
@@ -155,7 +155,7 @@ router.get('/blog/edit/:link', function(req, res, next) {
       err.status = 404;
       next(err);
     } else {
-      article.formattedDate = moment(new Date(article.date_posted)).local()
+      article.formattedDate = moment(new Date(article.date)).local()
           .format(PUBLICATION_DATE_FORMAT);
       res.render('admin/blog/edit', {
         article: article,
