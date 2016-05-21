@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
+# Change to parent of this script's directory.
+cd "$(dirname "${BASH_SOURCE[0]}")"/..
 
 PID_FILE=/var/run/adamheins.com.pid
 
@@ -8,7 +11,7 @@ done < .env
 
 # Start the server as a daemon.
 if [ -f "$PID_FILE" ]; then
-  echo "nodejs process found, restarting..."
+  echo "adamheins.com PID file found, restarting..."
   npm restart
 else
   nohup nodejs src/server.js >/dev/null 2>&1 &
