@@ -10,12 +10,14 @@ exports.route = function(app) {
   var blog = require('../routes/blog');
   var resume = require('../routes/resume');
   var projects = require('../routes/projects');
+  var recipes = require('../routes/recipes');
 
   app.use('/', routes);
   app.use('/user', user);
   app.use('/blog', blog);
   app.use('/resume', resume);
   app.use('/projects', projects);
+  app.use('/recipes', recipes);
   app.use('/admin', passwordless.restricted({failureRedirect: '/user/signin'}),
     function(req, res, next) {
       if (res.locals.user.isAdmin()) {

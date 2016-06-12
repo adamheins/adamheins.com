@@ -1,0 +1,18 @@
+extends ../layout
+
+block header
+  meta(name="description", content="Recipes for cooking and baking.")
+  title Recipes
+
+block content
+  article
+    section
+      h1 Recipes
+      p.
+        This is a collection of recipes I like to use. They have been adapted
+        from a variety of sources, and references will be provided where
+        applicable.
+    section
+      ul.bare
+        li #[a(href="/recipes/bread") Bread]
+        li #[a(href="/recipes/salad") Salad]
