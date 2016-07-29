@@ -1,26 +1,30 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-var Article = require('../models/article');
+let Article = require('../models/article');
 
-router.get('/', function(req, res) {
-  var query = Article.find().sort({date: -1}).limit(3);
-  query.exec(function(err, articles) {
-    res.render('index', { articles: articles });
+router.get('/', (req, res, next) => {
+  let query = Article.find({visible: true}).sort({date: -1}).limit(3);
+  query.exec((err, articles) => {
+    if (err) {
+      next(err);
+    } else {
+      res.render('index', { articles: articles });
+    }
   });
 });
 
-router.get('/about', function(req, res) {
+router.get('/about', (req, res) => {
   res.render('about');
 });
 
-router.get('/pgp', function(req, res) {
+router.get('/pgp', (req, res) => {
   res.render('pgp');
 });
 
-router.get('/tools', function(req, res) {
+router.get('/tools', (req, res) => {
   res.render('tools');
 });
 

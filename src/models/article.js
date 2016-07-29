@@ -14,7 +14,8 @@ var articleSchema = new mongoose.Schema({
   description: String,
   body: String,
   comments: [{name: String, time: String, content: String}],
-  link: String
+  link: String,
+  visible: Boolean
 });
 
 /*
