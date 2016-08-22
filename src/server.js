@@ -9,7 +9,6 @@ var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var mongoose = require('mongoose');
 
-var auth = require('./lib/auth');
 var router = require('./lib/router');
 var error = require('./lib/error');
 
@@ -31,7 +30,6 @@ app.use(cookieParser());
 app.use(flash());
 
 // Logic.
-auth.init(app);
 router.route(app);
 error.handle(app);
 app.listen(process.env.PORT);

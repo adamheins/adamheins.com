@@ -14,13 +14,6 @@ html
 
   body
     .container
-      if user
-        .account
-          a.signin.auth(href="/user/signout") Sign out
-          if isAdmin
-            .username!= 'Hi, <a class="auth" href="/admin">' + user.name + '</a>'
-          else
-            .username= 'Hi, ' + user.name
       .header
         .brand
           h1
