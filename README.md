@@ -13,10 +13,6 @@ source environment variables. The required variables are:
 NODE_ENV        # Environment, either 'dev' or 'production'.
 HOST            # Host name.
 MONGO_URI       # URI of mongodb instance.
-AUTH_EMAIL_USER # Email address used to send auth tokens.
-AUTH_EMAIL_PASS # Password for the auth email account.
-AUTH_EMAIL_SMTP # SMTP server of the auth email account.
-SESSION_SECRET  # Secret used for user sessions.
 PORT            # The port to run on.
 STATIC_HOST     # URI pointing to static files.
 ```
