@@ -4,6 +4,6 @@
 if pgrep mongod >/dev/null; then
   echo "mongod process already running, continuing..."
 else
-  mongod --dbpath db --fork --logpath /dev/null
+  mongod --fork --config /etc/mongodb.conf
 fi
 
