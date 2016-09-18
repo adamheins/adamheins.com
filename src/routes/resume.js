@@ -1,10 +1,10 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-// Resume landing page.
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
+  // Present the static resume PDF.
   res.redirect(process.env.STATIC_HOST + '/resume/resume.pdf');
 });
 
