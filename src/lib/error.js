@@ -4,18 +4,20 @@
 exports.handle = function(app) {
 
   // Catch 404 error and forward it to the error handler.
-  app.use(function(req, res, next) {
+  app.use((req, res, next) => {
     console.log('Catching 404 error');
-    var err = new Error('Not Found');
+
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
   });
 
   // Error handler. Provides a custom page for 404 errors.
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
     console.log('Called error handler.');
-    if (err.status == 404) {
+
+    if (err.status === 404) {
       res.render('error', {
         status: '404',
         message: 'Page not found',

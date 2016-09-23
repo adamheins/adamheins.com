@@ -2,9 +2,9 @@
 
 /* Model of a project. */
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var projectSchema = new mongoose.Schema({
+let projectSchema = new mongoose.Schema({
   title: {
     text: String,
     link: String

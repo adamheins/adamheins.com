@@ -2,9 +2,9 @@
 
 /* Module that models a blog article. */
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var articleSchema = new mongoose.Schema({
+let articleSchema = new mongoose.Schema({
   date: Date,
   scripts: [ String ],
   styles: [ String ],
@@ -23,8 +23,8 @@ var articleSchema = new mongoose.Schema({
  * on a new line.
  */
 articleSchema.methods.formatScripts = function() {
-  var scripts = '';
-  this.scripts.forEach(function(value) {
+  let scripts = '';
+  this.scripts.forEach(value => {
     scripts = scripts + value + '\n';
   });
   return scripts.trim();
@@ -35,8 +35,8 @@ articleSchema.methods.formatScripts = function() {
  * on a new line.
  */
 articleSchema.methods.formatStyles = function() {
-  var styles = '';
-  this.styles.forEach(function(value) {
+  let styles = '';
+  this.styles.forEach(value => {
     styles = styles + value + '\n';
   });
   return styles.trim();
