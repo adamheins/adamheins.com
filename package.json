@@ -20,8 +20,6 @@
   },
   "dependencies": {
     "express": "4.0.x",
-    "serve-favicon": "2.2.x",
-    "morgan": "1.0.x",
     "cookie-parser": "1.0.x",
     "body-parser": "1.0.x",
     "debug": "0.7.x",
