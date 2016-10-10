@@ -2,7 +2,7 @@ extends ../layout
 
 block header
   meta(name="description", content="My PGP key.")
-  title PGP Key
+  title Adam Heins - PGP
 
 block styles
   link(rel="stylesheet", href="#{process.env.STATIC_HOST}/css/prism.css")
@@ -16,7 +16,8 @@ block content
       h1 PGP
       p.
         Here is my PGP public key. It can also be found on most
-        #[a(href="https://pgp.mit.edu/pks/lookup?op=vindex&search=0x8393976BCE8F5796") key servers].
+        #[a(href="https://pgp.mit.edu/pks/lookup?op=vindex&search=0x8393976BCE8F5796") key servers]
+        and #[a(href="https://keybase.io/adamheins") Keybase].
     section
       pre
         code.language-none.
