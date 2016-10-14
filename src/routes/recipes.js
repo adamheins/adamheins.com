@@ -23,4 +23,12 @@ router.get('/bread/cinnamon', (req, res) => {
   res.render('recipes/bread/cinnamon');
 });
 
+router.get('/no-regrets-french-toast', (req, res) => {
+  res.render('recipes/no-regrets-french-toast');
+});
+
+router.get('/gin-blitz', (req, res) => {
+  res.render('recipes/gin-blitz');
+});
+
 module.exports = router;
