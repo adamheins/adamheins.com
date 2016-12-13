@@ -11,6 +11,7 @@ let error = require('./lib/error');
 mongoose.connect(process.env.MONGO_URI);
 
 let app = express();
+app.locals.moment = require('moment');
 
 // View engine.
 app.set('views', path.join(__dirname, 'views'));
