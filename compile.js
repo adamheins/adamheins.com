@@ -16,7 +16,7 @@ let md = require('./md');
 
 const PRETTY_DATE_FORMAT = 'MMMM D, YYYY';
 const REQUIRED_FIELDS = ['title', 'date', 'link', 'flavour', 'description',
-                         'file', 'scripts', 'styles'];
+                         'file', 'scripts', 'styles', 'private'];
 const STATIC_HOST = 'https://static.adamheins.com';
 
 const TEMPLATE_PATH = 'templates';
@@ -63,8 +63,14 @@ function parseArticles() {
         let data = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
         let valid = validateArticleData(file, data);
 
+        // If the article is not valid, compilation fails.
         if (!valid) {
             process.exit(1);
+        }
+
+        // Skip this file if it is marked as private.
+        if (data.private) {
+            return;
         }
 
         // Parse body markdown file.
