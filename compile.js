@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 let yaml = require('js-yaml');
@@ -22,12 +24,11 @@ const ARTICLES_PATH = 'articles';
 const PUBLIC_PATH = 'public';
 
 const ARTICLE_TEMPLATE_PATH = path.join(TEMPLATE_PATH, 'blog/article.pug');
+const ARTICLE_PUBLIC_DIR = path.join(PUBLIC_PATH, 'blog');
 
 const ARTICLES_GLOB = ARTICLES_PATH + '/**/*.yaml';
 const TEMPLATE_GLOB = TEMPLATE_PATH + '/**/*.pug'
 const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug'];
-
-
 
 
 // Checks the article data to ensure all required fields exist.
@@ -45,6 +46,7 @@ function validateArticleData(file, data) {
     return valid;
 }
 
+
 function templateToPublic(file, html) {
     let htmlFile = file.replace(TEMPLATE_PATH, PUBLIC_PATH)
                        .replace('.pug', '.html');
@@ -54,7 +56,8 @@ function templateToPublic(file, html) {
 }
 
 
-function main() {
+// Parse articles from yaml and markdown files.
+function parseArticles() {
     let articles = [];
     glob.sync(ARTICLES_GLOB).forEach(file => {
         let data = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
@@ -82,6 +85,12 @@ function main() {
         return a.date.isBefore(b.date);
     });
 
+    return articles;
+}
+
+
+// Compile pug template files to html files.
+function renderTemplates(articles) {
     let pugOptions = {
         basedir: TEMPLATE_PATH
     };
@@ -93,11 +102,13 @@ function main() {
         staticHost: STATIC_HOST
     }
 
+    // Render non-article templates.
     glob.sync(TEMPLATE_GLOB, { ignore: TEMPLATE_IGNORE }).forEach(file => {
         let html = pug.renderFile(file, merge(pugOptions, pugLocals));
         templateToPublic(file, html);
     });
 
+    // Render each article.
     let articleFunc = pug.compileFile(ARTICLE_TEMPLATE_PATH, pugOptions);
     articles.forEach(article => {
         let options = {
@@ -105,11 +116,16 @@ function main() {
             moment: moment,
             staticHost: STATIC_HOST
         };
-        let file = ARTICLE_TEMPLATE_PATH.replace(TEMPLATE_PATH, PUBLIC_PATH)
-                                        .replace('article.pug', article.link + '.html');
+        let file = path.join(ARTICLE_PUBLIC_DIR, article.link + '.html');
         let html = articleFunc(options);
         fs.writeFileSync(file, html);
     });
+}
+
+
+function main() {
+    let articles = parseArticles();
+    renderTemplates(articles);
 }
 
 main();

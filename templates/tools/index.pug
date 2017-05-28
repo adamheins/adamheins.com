@@ -1,0 +1,74 @@
+extends ../layout
+
+block header
+  meta(name="description", content="Tools I like to use.")
+  title Adam Heins - Tools
+
+block content
+  article
+    section
+      h1 Tools
+      p This is a list of tools I like. Most of them are CLI-based.
+
+    section
+      h2 Current Tools
+      ul.bare
+        li.
+          #[a(href="https://github.com/ggreer/the_silver_searcher") ag] - A
+          text search tool.
+        li.
+          #[a(href="http://cscope.sourceforge.net/") Cscope] - A code search
+          tool for C and other languages.
+        li.
+          #[a(href="https://github.com/adamheins/f") f] - A tool for favouriting
+          files and directories.
+        li.
+          #[a(href="https://github.com/junegunn/fzf") fzf] - A fuzzy-finder for
+          the command line.
+        li.
+          #[a(href="https://mosh.mit.edu/") mosh] - A more robust replacement
+          for ssh.
+        li.
+          #[a(href="https://neovim.io/") neovim] - A text editor.
+        li.
+          #[a(href="http://www.passwordstore.org/") pass] - A local password
+          manager based on gpg.
+        li.
+          #[a(href="http://www.vimperator.org/vimperator") Vimperator] - An
+          add-on for Firefox that makes it look and behave similar to vim.
+        li.
+          #[a(href="http://www.zsh.org/") zsh] - A shell.
+
+    section
+      h2 Vim Plugins
+      p.
+        Some of the plugins I use for vim. For the full list, look in my
+        #[a(href="https://github.com/adamheins/.vim/tree/master/bundle") ~/.vim/bundle]
+        directory.
+      ul.bare
+        li.
+          #[a(href="https://github.com/ntpeters/vim-better-whitespace") better-whitespace]
+          - Highlights trailing whitespace and makes it easy to remove.
+        li.
+          #[a(href="http://cscope.sourceforge.net/cscope_vim_tutorial.html") Cscope]
+          - A plugin for the code search tool mentioned above.
+        li.
+          #[a(href="https://github.com/kien/ctrlp.vim") ctrlp] - File search plugin.
+        li.
+          #[a(href="http://www.vim.org/scripts/script.php?script_id=2590") fswitch] -
+          Toggles between C header (.h) and source (.c) files.
+        li.
+          #[a(href="https://github.com/airblade/vim-gitgutter") gitgutter] - Shows
+          a git diff in the page gutter.
+        li.
+          #[a(href="https://github.com/Shougo/neocomplete.vim") neocomplete] -
+          Autocompletion engine that is very easy to set up.
+        li.
+          #[a(href="https://github.com/scrooloose/nerdtree") NERDTree] - Nice
+          directory browsing.
+        li.
+          #[a(href="https://github.com/jeffkreeftmeijer/vim-numbertoggle") numbertoggle]
+          - Toggle line numbers between absolute and relative mode.
+        li.
+          #[a(href="https://github.com/vim-scripts/tComment") tComment] -
+          Provides shortcuts for commenting out blocks of code.

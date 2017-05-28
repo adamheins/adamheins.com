@@ -1,0 +1,21 @@
+mixin header
+  .header
+    .brand
+      h1
+        a.name(href="/") Adam Heins
+      .flavour Mechatronics Engineering
+    nav
+      a(href="/blog") Blog
+      a(href="/projects") Projects
+      a(href="/resume") Résumé
+      a(href="/about") About
+
+mixin footer
+  .footer
+    .contact
+      a(href="https://github.com/adamheins") GitHub
+      span &nbsp|&nbsp
+      a(href="mailto:mail@adamheins.com") Email
+      span &nbsp|&nbsp
+      a(href="http://ca.linkedin.com/in/adamwheins") LinkedIn
+    .credit Adam Heins &copy #{moment().format('YYYY')}

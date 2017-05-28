@@ -1,0 +1,27 @@
+extends /includes/layout
+
+block header
+  title= article.title
+  meta(name="description", content= article.description)
+
+block styles
+  each style in article.styles
+    if style.charAt(0) == "/"
+      link(rel="stylesheet", href=staticHost + style)
+    else
+      link(rel="stylesheet", href=style)
+
+block scripts
+  each script in article.scripts
+    if script.charAt(0) == "/"
+      script(src=staticHost + script)
+    else
+      script(src=script)
+
+block content
+  article
+    section
+      .article-date= article.prettyDate
+      h1= article.title
+      .article-flavour= article.flavour
+    section!= article.body
