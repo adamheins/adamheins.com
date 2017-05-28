@@ -1,9 +1,2 @@
-.sass-cache/
-.env
-*.swp
-*.out
-*.log
-db/
-cert/
 node_modules/
 public/
