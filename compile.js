@@ -7,6 +7,7 @@ let path = require('path');
 let moment = require('moment');
 let pug = require('pug');
 let mkdirp = require('mkdirp');
+let merge = require('merge');
 
 let md = require('./md');
 
@@ -20,12 +21,13 @@ const TEMPLATE_PATH = 'templates';
 const ARTICLES_PATH = 'articles';
 const PUBLIC_PATH = 'public';
 
+const ARTICLE_TEMPLATE_PATH = path.join(TEMPLATE_PATH, 'blog/article.pug');
+
 const ARTICLES_GLOB = ARTICLES_PATH + '/**/*.yaml';
 const TEMPLATE_GLOB = TEMPLATE_PATH + '/**/*.pug'
-const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*'];
+const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug'];
 
 
-let articles = [];
 
 
 // Checks the article data to ensure all required fields exist.
@@ -43,27 +45,18 @@ function validateArticleData(file, data) {
     return valid;
 }
 
-function templateToPublic(file, pugOptions) {
-    // Create web directory structure.
+function templateToPublic(file, html) {
     let htmlFile = file.replace(TEMPLATE_PATH, PUBLIC_PATH)
                        .replace('.pug', '.html');
     let htmlDir = path.dirname(htmlFile)
     mkdirp.sync(htmlDir);
-
-    // Parse pug file.
-    let html = pug.renderFile(file, pugOptions);
     fs.writeFileSync(htmlFile, html);
 }
 
 
-// TODO sync glob
-glob(ARTICLES_GLOB, (err, files) => {
-    if (err) {
-        console.log(err);
-        return 1;
-    }
-
-    files.forEach(file => {
+function main() {
+    let articles = [];
+    glob.sync(ARTICLES_GLOB).forEach(file => {
         let data = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
         let valid = validateArticleData(file, data);
 
@@ -90,31 +83,33 @@ glob(ARTICLES_GLOB, (err, files) => {
     });
 
     let pugOptions = {
-        articles: articles,
-        articles3: articles.slice(0, 3),
-        basedir: TEMPLATE_PATH,
-        moment: moment,
-        staticHost: STATIC_HOST
+        basedir: TEMPLATE_PATH
     };
 
-    glob.glob(TEMPLATE_GLOB, { ignore: TEMPLATE_IGNORE }, (err, files) => {
-        if (err) {
-            console.log(err);
-            return 1;
-        }
+    let pugLocals = {
+        articles: articles,
+        articles3: articles.slice(0, 3),
+        moment: moment,
+        staticHost: STATIC_HOST
+    }
 
-        files.forEach(file => {
-            // Create web directory structure.
-            let htmlFile = file.replace(TEMPLATE_PATH, PUBLIC_PATH)
-                               .replace('.pug', '.html');
-            let htmlDir = path.dirname(htmlFile)
-            mkdirp.sync(htmlDir);
-
-            // Parse pug file.
-            let html = pug.renderFile(file, pugOptions);
-            fs.writeFileSync(htmlFile, html);
-        });
+    glob.sync(TEMPLATE_GLOB, { ignore: TEMPLATE_IGNORE }).forEach(file => {
+        let html = pug.renderFile(file, merge(pugOptions, pugLocals));
+        templateToPublic(file, html);
     });
 
-    // TODO write article html files
-});
+    let articleFunc = pug.compileFile(ARTICLE_TEMPLATE_PATH, pugOptions);
+    articles.forEach(article => {
+        let options = {
+            article: article,
+            moment: moment,
+            staticHost: STATIC_HOST
+        };
+        let file = ARTICLE_TEMPLATE_PATH.replace(TEMPLATE_PATH, PUBLIC_PATH)
+                                        .replace('article.pug', article.link + '.html');
+        let html = articleFunc(options);
+        fs.writeFileSync(file, html);
+    });
+}
+
+main();
