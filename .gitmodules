@@ -1,3 +1,0 @@
-[submodule "resume"]
-	path = src/client/resume
-	url = git@github.com:adamheins/resume.git
