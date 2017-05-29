@@ -11,8 +11,8 @@ let pug = require('pug');
 let mkdirp = require('mkdirp');
 let merge = require('merge');
 
-let md = require('./md');
-let resolve = require('./resolve');
+let md = require('./lib/md');
+let resolve = require('./lib/resolve');
 
 
 const PRETTY_DATE_FORMAT = 'MMMM D, YYYY';
