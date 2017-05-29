@@ -12,6 +12,7 @@ let mkdirp = require('mkdirp');
 let merge = require('merge');
 
 let md = require('./md');
+let resolve = require('./resolve');
 
 
 const PRETTY_DATE_FORMAT = 'MMMM D, YYYY';
@@ -34,12 +35,11 @@ const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug'];
 // Checks the article data to ensure all required fields exist.
 function validateArticleData(file, data) {
     let keys = Object.keys(data);
-    let fileName = path.basename(file);
 
     let valid = true;
     REQUIRED_FIELDS.forEach(field => {
         if (keys.indexOf(field) < 0) {
-            console.log(fileName + ' missing field: ' + field);
+            console.log(file + ' missing field: ' + field);
             valid = false;
         }
     });
@@ -75,9 +75,11 @@ function parseArticles() {
 
         // Parse body markdown file.
         let dirname = path.dirname(file);
-        let bodyFile = path.join(dirname, data['file']);
-        let html = md.markdown(fs.readFileSync(bodyFile, 'utf8'));
-        data['html'] = html;
+        let bodyFile = path.join(dirname, data.file);
+        data.html = md.markdown(fs.readFileSync(bodyFile, 'utf8'));
+
+        data.scripts = data.scripts.map(resolve.script);
+        data.styles = data.styles.map(resolve.style);
 
         // Format date.
         data['date'] = moment(data['date']);
@@ -119,6 +121,7 @@ function renderTemplates(articles) {
     articles.forEach(article => {
         let options = {
             article: article,
+            doctype: 'html',
             moment: moment,
             staticHost: STATIC_HOST
         };
