@@ -11,7 +11,7 @@ let pug = require('pug');
 let mkdirp = require('mkdirp');
 let merge = require('merge');
 
-let md = require('./lib/md');
+let md = require('./lib/markdown');
 let resolve = require('./lib/resolve');
 
 
@@ -106,8 +106,8 @@ function renderTemplates(articles) {
     let pugLocals = {
         articles: articles,
         articles3: articles.slice(0, 3),
-        moment: moment,
-        staticHost: STATIC_HOST
+        staticHost: STATIC_HOST,
+        year: moment().format('YYYY')
     }
 
     // Render non-article templates.

@@ -1,0 +1,11 @@
+title: Let's Talk String Reversal \#2
+link: lets-talk-string-reversal
+date: 2014-10-09
+flavour: Algorithms to check palindromes and reverse strings.
+description: >
+  A guide to some algorithms for checking if a string is a palindrome and
+  string reversal.
+file: body.md
+private: false
+scripts: [prism, mathjax]
+styles: [/css/prism.css]
