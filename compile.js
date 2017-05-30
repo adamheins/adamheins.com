@@ -35,14 +35,24 @@ const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug'];
 // Checks the article data to ensure all required fields exist.
 function validateArticleData(file, data) {
     let keys = Object.keys(data);
-
     let valid = true;
+
+    // Check that all required fields are present.
     REQUIRED_FIELDS.forEach(field => {
         if (keys.indexOf(field) < 0) {
             console.log(file + ' missing field: ' + field);
             valid = false;
         }
     });
+
+    // Check for unexpected fields.
+    keys.forEach(key => {
+        if (REQUIRED_FIELDS.indexOf(key) < 0) {
+            console.log(file + ' unknown field: ' + key);
+            valid = false;
+        }
+    });
+
     return valid;
 }
 
@@ -134,6 +144,7 @@ function renderTemplates(articles) {
 
 function main() {
     let articles = parseArticles();
+    console.log(articles.length + ' articles rendered.');
     renderTemplates(articles);
 }
 
