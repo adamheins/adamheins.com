@@ -2,13 +2,13 @@ mixin header
   .header
     .brand
       h1
-        a.name(href=".") Adam Heins
+        a.name(href=host) Adam Heins
       .flavour Mechatronics Engineering
     nav
-      a(href="blog") Blog
-      a(href="projects") Projects
-      a(href="resume") Résumé
-      a(href="about") About
+      a(href=host + "/blog") Blog
+      a(href=host + "/projects") Projects
+      a(href=staticHost + "/resume/resume.pdf") Résumé
+      a(href=host + "/about") About
 
 mixin footer
   .footer
