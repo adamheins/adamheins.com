@@ -1,0 +1,17 @@
+extends /includes/layout
+
+block header
+  meta(name="description", content="Recipes for food.")
+  title Adam Heins - Food
+
+block content
+  article
+    section
+      h1 Food Recipes
+      p.
+        My collection of food recipes.
+    section
+      ul.bare
+        li #[a(href="/recipes/food/bread") Bread]
+        li #[a(href="/recipes/food/no-regrets-french-toast") No Regrets French Toast]
+        li #[a(href="/recipes/food/bread-pudding-in-a-pumpkin") Bread Pudding in a Pumpkin]

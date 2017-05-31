@@ -1,0 +1,21 @@
+extends /includes/layout
+
+block header
+  title= article.title
+  meta(name="description", content= article.description)
+
+block styles
+  each style in article.styles
+    link(rel="stylesheet", href=style)
+
+block scripts
+  each script in article.scripts
+    script(defer src=script)
+
+block content
+  article
+    section
+      .article-date= article.prettyDate
+      h1= article.title
+      .article-flavour= article.flavour
+    section!= article.html

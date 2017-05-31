@@ -1,0 +1,29 @@
+include /includes/mixins/bookends
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Adam Heins")
+
+    // The media="bogus" theoretically makes the browser not block on these
+    // stylesheets, and will then use the files when it encounters non-bogus
+    // ones at the end of the body.
+    // See http://codepen.io/tigt/post/async-css-without-javascript
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic", media="bogus")
+    link(rel="stylesheet", href=staticHost + "/css/layout.css", media="bogus")
+
+    block header
+    block styles
+
+  body
+    .container
+      +header
+      .content
+        block content
+      +footer
+    block scripts
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic")
+    link(rel="stylesheet", href=staticHost + "/css/layout.css")

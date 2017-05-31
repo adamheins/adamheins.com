@@ -1,0 +1,9 @@
+local: true
+hosts:
+  host: https://adamheins.com
+  static: https://static.adamheins.com
+paths:
+  templates: 'templates'
+  articles: 'articles'
+  public: 'public'
+

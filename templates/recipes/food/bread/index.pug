@@ -1,0 +1,18 @@
+extends /includes/layout
+
+block header
+  meta(name="description", content="Recipes for bread.")
+  title Bread
+
+block content
+  article
+    section
+      h1 Bread
+      p.
+        Recipes for bread. All of the recipes are variants of the basic bread
+        recipe listed first.
+    section
+      ul.bare
+        li #[a(href="/recipes/food/bread/basic") Basic Bread]
+        li #[a(href="/recipes/food/bread/cinnamon") Cinnamon Bread]
+        li #[a(href="/recipes/food/bread/spicy") Spicy Bread]
