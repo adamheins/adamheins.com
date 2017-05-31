@@ -1,9 +1,0 @@
-title: Ctrl-P in the Terminal with fzf
-date: 2016-09-12
-link: ctrl-p-in-the-terminal-with-fzf
-flavour: Extend fzf to automatically change directories and open files when selected.
-description: Extend fzf to automatically change directories and open files when selected.
-file: ctrlp-in-the-terminal-with-fzf.md
-private: false
-scripts: [/js/prism.js]
-styles: [/css/prism.css]
