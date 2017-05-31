@@ -1,4 +1,4 @@
-local: true
+local: false
 hosts:
   host: https://adamheins.com
   static: https://static.adamheins.com
