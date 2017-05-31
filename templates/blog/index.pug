@@ -11,6 +11,6 @@ block content
     each article in articles
       section
         h2
-          a(href= '/blog/' + article.link)= article.title
-        .date= article.formattedDate
+          a(href= 'blog/' + article.link)= article.title
+        .date= article.prettyDate
         p.description= article.description

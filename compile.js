@@ -92,16 +92,21 @@ function parseArticles() {
         data.styles = data.styles.map(resolve.style);
 
         // Format date.
-        data['date'] = moment(data['date']);
-        data['prettyDate'] = data['date'].local().format(PRETTY_DATE_FORMAT);
+        data.date = moment(data.date);
+        data.prettyDate = data.date.local().format(PRETTY_DATE_FORMAT);
 
         articles.push(data);
     });
 
     // Sort articles by date in descending order.
     articles.sort((a, b) => {
-        return a.date.isBefore(b.date);
-    });
+        if (a.date.isBefore(b.date)) {
+            return 1;
+        } else if (a.date.isAfter(b.date)) {
+            return -1;
+        }
+        return 0;
+    })
 
     return articles;
 }
