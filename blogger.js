@@ -53,7 +53,7 @@ function validateArticleData(file, data) {
 
 
 function templateToPublic(file, html, config) {
-    let htmlFile = file.replace(config.paths.templates, config.paths.public)
+    let htmlFile = file.replace(config.paths.templates.root, config.paths.public)
                        .replace('.pug', '.html');
     let htmlDir = path.dirname(htmlFile)
     mkdirp.sync(htmlDir);
@@ -89,7 +89,7 @@ function parseArticles(config) {
         data.styles = data.styles.map(resolve.style);
 
         data.fileName = data.link + '.html';
-        if (config.local) {
+        if (!config.prod) {
             data.link = data.link + '.html';
         }
 
@@ -117,11 +117,11 @@ function parseArticles(config) {
 // Compile pug template files to html files.
 function renderTemplates(articles, config) {
     let localHost = path.join(fs.realpathSync('.'), config.paths.public)
-    let host = config.local ? localHost : config.hosts.host;
+    let host = config.prod ? config.hosts.host : localHost;
     let year = moment().format('YYYY');
 
     let pugOptions = {
-        basedir: config.paths.templates
+        basedir: config.paths.templates.root
     };
 
     let pugLocals = {
@@ -133,16 +133,15 @@ function renderTemplates(articles, config) {
     }
 
     // Render non-article templates.
-    let templateGlob = config.paths.templates + '/**/*.pug'
+    let templateGlob = config.paths.templates.root + '/**/*.pug'
     glob.sync(templateGlob, { ignore: TEMPLATE_IGNORE }).forEach(file => {
         let html = pug.renderFile(file, merge(pugOptions, pugLocals));
         templateToPublic(file, html, config);
     });
 
     // Render each article.
-    let articleTemplatePath = path.join(config.paths.templates,
-                                        'blog/article.pug');
-    let articleFunc = pug.compileFile(articleTemplatePath, pugOptions);
+    let articleFunc = pug.compileFile(config.paths.templates.article,
+                                      pugOptions);
 
     articles.forEach(article => {
         let options = {
@@ -162,7 +161,24 @@ function renderTemplates(articles, config) {
 
 
 function main() {
+    if (process.argv.length < 3) {
+        console.log('Usage: blogger {dev|prod}');
+        return 1;
+    }
+
     let config = loadConfig(CONFIG_PATH);
+
+    // Development vs. production environment is specified on the command line.
+    let environment = process.argv[2];
+    if (environment === 'prod') {
+        config.prod = true;
+    } else if (environment === 'dev') {
+        config.prod = false;
+    } else {
+        console.log('Invalid value passed for environment.');
+        return 1;
+    }
+
     let articles = parseArticles(config);
     console.log(articles.length + ' articles rendered.');
     renderTemplates(articles, config);

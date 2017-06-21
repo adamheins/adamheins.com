@@ -1,9 +1,10 @@
-local: false
 hosts:
-  host: https://adamheins.com
-  static: https://static.adamheins.com
+  host: 'https://adamheins.com'
+  static: 'https://static.adamheins.com'
 paths:
-  templates: 'templates'
+  templates:
+    root: 'templates'
+    article: 'templates/blog/article.pug'
   articles: 'articles'
   public: 'public'
 
