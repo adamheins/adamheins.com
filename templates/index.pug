@@ -13,14 +13,12 @@ block content
         #[a(href="https://github.com/adamheins/adamheins.com") here].
     section
       h2 Recent Articles
-      p The latest articles from my blog.
       ul.bare
         each article in articles3
           li
             a(href= host + "/blog/" + article.link)= article.title
     section
       h2 Recent Projects
-      p Some of the projects I've been working on lately.
       ul.bare
         li
           a(href="https://adamheins.com/blog/capstone-the-journey-thus-far").
@@ -33,7 +31,6 @@ block content
             Predator Prey Simulation
     section
       h2 Other Links
-      p Additional miscellaneous pages.
       ul.bare
         li
           a(href=host + "/tools") Tools
