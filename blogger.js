@@ -126,14 +126,18 @@ function parseProjects(config) {
 
     data.forEach(section => {
         section.projects.forEach(project => {
+            let links = project.links;
 
             // Reform the links list into an object that allows for easier
             // templating.
-            let links = project.links;
             if (links.length > 0) {
                 project.links = {
                     notLast: links.slice(0, -1),
                     last: links.slice(-1)[0],
+                };
+            } else {
+                project.links = {
+                    notLast: [],
                 };
             }
         });
