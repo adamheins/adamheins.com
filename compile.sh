@@ -3,7 +3,7 @@
 # Utility script to clean and compile a fresh version of the website.
 
 if [ -z $1 ]; then
-  echo "Error: Must specify dev or prod."
+  node ./blogger.js
   exit 1
 fi
 

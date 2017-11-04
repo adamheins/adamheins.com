@@ -5,6 +5,8 @@ paths:
   templates:
     root: 'templates'
     article: 'templates/blog/article.pug'
-  articles: 'articles'
+    projects: 'templates/projects/index.pug'
+  articles: 'data/articles'
+  projects: 'data/projects.yaml'
   public: 'public'
 

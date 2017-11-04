@@ -1,0 +1,44 @@
+-
+  name: Robotics and AI
+  projects:
+    -
+      title:
+        name: Nuclear Power Plant Inspection Robot
+        url: https://adamheins.com/blog/capstone-the-journey-thus-far
+      links:
+        -
+          name: Article
+          url: https://adamheins.com/blog/capstone-the-journey-thus-far
+      description:
+        A mobile robot capable of navigating the boiler room of a nuclear power
+        plant and autonomously performing pipe thickness measurements and
+        collection of other relevant data. Engineering Capstone project. I
+        focused largely on the software systems, particularly the vision system
+        and interface to the robot arm.
+    -
+      title:
+        name: Autonomous Obstacle Course Traversal Robot
+        url: https://github.com/adamheins/ramp-bot
+      links:
+        -
+          name: Source
+          url: https://github.com/adamheins/ramp-bot
+      description:
+        A mobile robot capable of navigating the boiler room of a nuclear power
+        plant and autonomously performing pipe thickness measurements and
+        collection of other relevant data. Engineering Capstone project. I
+        focused largely on the software systems, particularly the vision system
+        and interface to the robot arm.
+    -
+      title:
+        name: Read My Lips
+        url: https://static.adamheins.com/papers/read-my-lips.pdf
+      links:
+        -
+          name: Paper
+          url: https://static.adamheins.com/papers/read-my-lips.pdf
+        -
+          name: Source
+          url: https://github.com/adamheins/read-my-lips
+      description:
+        A neural network architecture designed to perform lip-reading.

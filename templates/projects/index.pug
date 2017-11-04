@@ -8,113 +8,126 @@ block content
   article
     section
       h1 Projects
-      section
-        h2 Robotics and AI
+      for section in sections
+        section
+          h2= section.name
+          for project in section.projects
+            .proj-header
+              h2 #[a(href=project.title.url)= project.title.name]
+              .links
+                for link in project.links.notLast
+                  a(href=link.url)=link.name
+                  span &nbsp; &middot; &nbsp;
+                a(href=project.links.last.url)= project.links.last.name
+            p.description= project.description
 
-        h2
-          a(href="https://adamheins.com/blog/capstone-the-journey-thus-far").
-            Nuclear Power Plant Inspection Robot
-        p.description.
-          A mobile robot capable of navigating the boiler room of a nuclear
-          power plant and autonomously performing pipe thickness measurements
-          and collection of other relevant data. Engineering Capstone project.
-          I focused largely on the software systems, particularly the vision
-          system and interface to the robot arm.
-          [#[a(href="https://adamheins.com/blog/capstone-the-journey-thus-far") Article]]
 
-        h2
-          a(href="https://github.com/adamheins/ramp-bot").
-            Autonomous Obstacle Course Traversal Robot
-        p.description.
-          A mobile robot that autonomously traverses an obstacle course,
-          including ascending and descending a ramp and locating a variable end
-          point. Developed as part of the MTE 380 design project course at the
-          University of Waterloo. I worked primarily on the robot's software,
-          including the signal processing, movement, and state machine.
-          [#[a(href="https://github.com/adamheins/ramp-bot") Source]]
-
-        h2
-          a(href="https://static.adamheins.com/papers/read-my-lips.pdf").
-            Read My Lips
-        p.description.
-          A neural network architecture designed to perform lip-reading.
-          [#[a(href="https://static.adamheins.com/papers/read-my-lips.pdf") Paper]]
-          [#[a(href="https://github.com/adamheins/read-my-lips") Source]]
-
-      section
-        h2 Simulations
-
-        h2
-          a(href="http://github.com/adamheins/predator-prey-sim/").
-            Predator Prey Simulation
-        p.description.
-          A web-based simulation of flocking birds being hunted by predators,
-          displaying swarm intelligence.
-          [#[a(href="https://adamheins.com/projects/predator-prey-sim/") Demo]]
-          [#[a(href="https://github.com/adamheins/predator-prey-sim") Source]]
-
-        h2
-          a(href="https://github.com/adamheins/multicell") Multicell
-        p.description.
-          A curses-based version of Conway's Game of Life that allows for
-          multiple species of cell, written in Python.
-          [#[a(href="https://github.com/adamheins/multicell") Source]]
-
-        h2
-          a(href="https://github.com/adamheins/revolutions") Revolutions
-        p.description.
-          A simulation of bodies with gravitational attraction and elastic
-          collisions in two dimensions.
-          [#[a(href="https://adamheins.com/projects/revolutions/") Demo]]
-          [#[a(href="https://github.com/adamheins/revolutions") Source]]
-
-      section
-        h2 Math
-
-        h2
-          a(href="https://github.com/adamheins/fractals") Fractals
-        p.description.
-          A collection of fractals.
-          [#[a(href="https://adamheins.com/projects/fractals/") Demo]]
-          [#[a(href="https://github.com/adamheins/fractals") Source]]
-
-        h2
-          a(href="https://github.com/adamheins/dervish") Dervish
-        p.description.
-          A command line tool for evaluating and differentiating mathematical
-          functions symbolically. Written in Java.
-          [#[a(href="https://github.com/adamheins/dervish") Source]]
-
-        h2
-          a(href="https://github.com/adamheins/mtrx") mtrx
-        p.description.
-          A linear algebra library written in C.
-          [#[a(href="https://github.com/adamheins/mtrx") Source]]
-
-        h2
-          a(href="https://github.com/adamheins/biginteger.js") BigInteger.js
-        p.description.
-          A Javascript library that for arbitrarily-sized integer mathematics.
-          A web app that uses this library can be found
-          #[a(href="https://github.com/adamheins/primality-checker") here].
-          [#[a(href="https://github.com/adamheins/biginteger.js") Source]]
-
-      section
-        h2 Other
-
-        h2
-          a(href="https://people.kth.se/~roand/half_fit.pdf") Half-fit
-        p.description.
-          A real-time dynamic memory allocator. Written for a school project. A
-          paper discussing half-fit in detail can be found
-          #[a(href="https://people.kth.se/~roand/half_fit.pdf") here]. I don't
-          make the source publicly available, because, as far as I know, it's
-          still being used as a class project.
-
-        h2
-          a(href="https://github.com/adamheins/f") f
-        p.description.
-          A simple command line utility for aliasing your favourite files,
-          directories, and git branches.
-          [#[a(href="https://github.com/adamheins/f") Source]]
-
+      // section
+      //   h2 Robotics and AI
+      //
+      //   .proj-header
+      //     h2 #[a(href="https://adamheins.com/blog/capstone-the-journey-thus-far") Nuclear Power Plant Inspection Robot]
+      //     a(href="https://adamheins.com/blog/capstone-the-journey-thus-far") Article
+      //   p.description.
+      //     A mobile robot capable of navigating the boiler room of a nuclear
+      //     power plant and autonomously performing pipe thickness measurements
+      //     and collection of other relevant data. Engineering Capstone project.
+      //     I focused largely on the software systems, particularly the vision
+      //     system and interface to the robot arm.
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/ramp-bot").
+      //       Autonomous Obstacle Course Traversal Robot
+      //   p.description.
+      //     A mobile robot that autonomously traverses an obstacle course,
+      //     including ascending and descending a ramp and locating a variable end
+      //     point. Developed as part of the MTE 380 design project course at the
+      //     University of Waterloo. I worked primarily on the robot's software,
+      //     including the signal processing, movement, and state machine.
+      //     [#[a(href="https://github.com/adamheins/ramp-bot") Source]]
+      //
+      //   h2
+      //     a(href="https://static.adamheins.com/papers/read-my-lips.pdf").
+      //       Read My Lips
+      //   p.description.
+      //     A neural network architecture designed to perform lip-reading.
+      //     [#[a(href="https://static.adamheins.com/papers/read-my-lips.pdf") Paper]]
+      //     [#[a(href="https://github.com/adamheins/read-my-lips") Source]]
+      //
+      // section
+      //   h2 Simulations
+      //
+      //   h2
+      //     a(href="http://github.com/adamheins/predator-prey-sim/").
+      //       Predator Prey Simulation
+      //   p.description.
+      //     A web-based simulation of flocking birds being hunted by predators,
+      //     displaying swarm intelligence.
+      //     [#[a(href="https://adamheins.com/projects/predator-prey-sim/") Demo]]
+      //     [#[a(href="https://github.com/adamheins/predator-prey-sim") Source]]
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/multicell") Multicell
+      //   p.description.
+      //     A curses-based version of Conway's Game of Life that allows for
+      //     multiple species of cell, written in Python.
+      //     [#[a(href="https://github.com/adamheins/multicell") Source]]
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/revolutions") Revolutions
+      //   p.description.
+      //     A simulation of bodies with gravitational attraction and elastic
+      //     collisions in two dimensions.
+      //     [#[a(href="https://adamheins.com/projects/revolutions/") Demo]]
+      //     [#[a(href="https://github.com/adamheins/revolutions") Source]]
+      //
+      // section
+      //   h2 Math
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/fractals") Fractals
+      //   p.description.
+      //     A collection of fractals.
+      //     [#[a(href="https://adamheins.com/projects/fractals/") Demo]]
+      //     [#[a(href="https://github.com/adamheins/fractals") Source]]
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/dervish") Dervish
+      //   p.description.
+      //     A command line tool for evaluating and differentiating mathematical
+      //     functions symbolically. Written in Java.
+      //     [#[a(href="https://github.com/adamheins/dervish") Source]]
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/mtrx") mtrx
+      //   p.description.
+      //     A linear algebra library written in C.
+      //     [#[a(href="https://github.com/adamheins/mtrx") Source]]
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/biginteger.js") BigInteger.js
+      //   p.description.
+      //     A Javascript library that for arbitrarily-sized integer mathematics.
+      //     A web app that uses this library can be found
+      //     #[a(href="https://github.com/adamheins/primality-checker") here].
+      //     [#[a(href="https://github.com/adamheins/biginteger.js") Source]]
+      //
+      // section
+      //   h2 Other
+      //
+      //   h2
+      //     a(href="https://people.kth.se/~roand/half_fit.pdf") Half-fit
+      //   p.description.
+      //     A real-time dynamic memory allocator. Written for a school project. A
+      //     paper discussing half-fit in detail can be found
+      //     #[a(href="https://people.kth.se/~roand/half_fit.pdf") here]. I don't
+      //     make the source publicly available, because, as far as I know, it's
+      //     still being used as a class project.
+      //
+      //   h2
+      //     a(href="https://github.com/adamheins/f") f
+      //   p.description.
+      //     A simple command line utility for aliasing your favourite files,
+      //     directories, and git branches.
+      //     [#[a(href="https://github.com/adamheins/f") Source]]
+      //

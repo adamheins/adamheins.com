@@ -2,23 +2,24 @@
 
 'use strict';
 
-let yaml = require('js-yaml');
-let glob = require('glob');
-let fs = require('fs');
-let path = require('path');
-let moment = require('moment');
-let pug = require('pug');
-let mkdirp = require('mkdirp');
-let merge = require('merge');
+const yaml = require('js-yaml');
+const glob = require('glob');
+const fs = require('fs');
+const path = require('path');
+const moment = require('moment');
+const pug = require('pug');
+const mkdirp = require('mkdirp');
+const merge = require('merge');
 
-let md = require('./lib/markdown');
-let resolve = require('./lib/resolve');
+const md = require('./lib/markdown');
+const resolve = require('./lib/resolve');
 
 
 const PRETTY_DATE_FORMAT = 'MMMM D, YYYY';
 const REQUIRED_FIELDS = ['title', 'date', 'link', 'flavour', 'description',
                          'file', 'scripts', 'styles', 'private'];
-const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug'];
+const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug',
+                         '**/projects/index.pug'];
 const CONFIG_PATH = 'config.yaml';
 
 
@@ -35,7 +36,7 @@ function validateArticleData(file, data) {
     // Check that all required fields are present.
     REQUIRED_FIELDS.forEach(field => {
         if (keys.indexOf(field) < 0) {
-            console.log(file + ' missing field: ' + field);
+            console.error(file + ' missing field: ' + field);
             valid = false;
         }
     });
@@ -43,7 +44,7 @@ function validateArticleData(file, data) {
     // Check for unexpected fields.
     keys.forEach(key => {
         if (REQUIRED_FIELDS.indexOf(key) < 0) {
-            console.log(file + ' unknown field: ' + key);
+            console.error(file + ' unknown field: ' + key);
             valid = false;
         }
     });
@@ -52,6 +53,7 @@ function validateArticleData(file, data) {
 }
 
 
+// Write a template file to a public file with the given html content.
 function templateToPublic(file, html, config) {
     let htmlFile = file.replace(config.paths.templates.root, config.paths.public)
                        .replace('.pug', '.html');
@@ -114,43 +116,46 @@ function parseArticles(config) {
 }
 
 
-// Compile pug template files to html files.
-function renderTemplates(articles, config) {
-    let localHost = path.join(fs.realpathSync('.'), config.paths.public)
-    let host = config.prod ? config.hosts.host : localHost;
-    let year = moment().format('YYYY');
+function validateProjectData(data) {
+    return true;
+}
 
-    let pugOptions = {
-        basedir: config.paths.templates.root
-    };
 
-    let pugLocals = {
-        articles:   articles,
-        articles3:  articles.slice(0, 3),
-        host:       host,
-        staticHost: config.hosts.static,
-        year:       year
-    }
+function parseProjects(config) {
+    let data = yaml.safeLoad(fs.readFileSync(config.paths.projects, 'utf8'));
 
-    // Render non-article templates.
-    let templateGlob = config.paths.templates.root + '/**/*.pug'
-    glob.sync(templateGlob, { ignore: TEMPLATE_IGNORE }).forEach(file => {
-        let html = pug.renderFile(file, merge(pugOptions, pugLocals));
-        templateToPublic(file, html, config);
+    data.forEach(section => {
+        section.projects.forEach(project => {
+
+            // Reform the links list into an object that allows for easier
+            // templating.
+            let links = project.links;
+            if (links.length > 0) {
+                project.links = {
+                    notLast: links.slice(0, -1),
+                    last: links.slice(-1)[0],
+                };
+            }
+        });
     });
 
-    // Render each article.
+    if (!validateProjectData(data)) {
+        process.exit(1);
+    }
+
+    return data;
+}
+
+
+function renderArticles(articles, config, pugOptions) {
     let articleFunc = pug.compileFile(config.paths.templates.article,
                                       pugOptions);
-
+    // Render each article.
     articles.forEach(article => {
-        let options = {
+        let options = merge(pugOptions, {
             article:    article,
-            host:       host,
             moment:     moment,
-            staticHost: config.hosts.static,
-            year:       year
-        };
+        });
 
         let articlePublicDir = path.join(config.paths.public, 'blog');
         let file = path.join(articlePublicDir, article.fileName);
@@ -160,19 +165,59 @@ function renderTemplates(articles, config) {
 }
 
 
+function renderProjects(projectData, config, pugOptions) {
+    let options = merge(pugOptions, { sections: projectData });
+    let html = pug.renderFile(config.paths.templates.projects, options);
+
+    let outFile = path.join(config.paths.public, 'projects', 'index.html');
+    mkdirp.sync(path.dirname(outFile));
+    fs.writeFileSync(outFile, html);
+}
+
+
+// Compile pug template files to html files.
+function renderTemplates(articles, projectData, config) {
+    let localHost = path.join(fs.realpathSync('.'), config.paths.public)
+    let host = config.prod ? config.hosts.host : localHost;
+    let year = moment().format('YYYY');
+
+    let pugOptions = {
+        basedir:    config.paths.templates.root,
+        host:       host,
+        staticHost: config.hosts.static,
+        year:       year
+    };
+
+    let pugLocals = {
+        articles:   articles,
+        articles3:  articles.slice(0, 3)
+    };
+
+    // Render non-article templates.
+    let templateGlob = config.paths.templates.root + '/**/*.pug'
+    glob.sync(templateGlob, { ignore: TEMPLATE_IGNORE }).forEach(file => {
+        let html = pug.renderFile(file, merge(pugOptions, pugLocals));
+        templateToPublic(file, html, config);
+    });
+
+    renderArticles(articles, config, pugOptions);
+    renderProjects(projectData, config, pugOptions);
+}
+
+
 function main() {
     if (process.argv.length < 3) {
-        console.log('Usage: blogger {dev|prod}');
+        console.log('Usage: blogger {[d]evelopment|[p]roduction}');
         return 1;
     }
 
     let config = loadConfig(CONFIG_PATH);
 
     // Development vs. production environment is specified on the command line.
-    let environment = process.argv[2];
-    if (environment === 'prod') {
+    let environment = process.argv[2].toLowerCase();
+    if ('production'.startsWith(environment)) {
         config.prod = true;
-    } else if (environment === 'dev') {
+    } else if ('development'.startsWith(environment)) {
         config.prod = false;
     } else {
         console.log('Invalid value passed for environment.');
@@ -180,8 +225,12 @@ function main() {
     }
 
     let articles = parseArticles(config);
+    let projectData = parseProjects(config);
+
+    renderTemplates(articles, projectData, config);
+
     console.log(articles.length + ' articles rendered.');
-    renderTemplates(articles, config);
+    console.log('Projects rendered.');
 }
 
 main();
