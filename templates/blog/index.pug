@@ -1,16 +1,17 @@
 extends /includes/layout
 
 block header
-  meta(name="description", content="A collection of my writings and project updates. I like to write about technology, engineering, and life.")
+  meta(name="description", content="I like writing, and this is where I put some of it.")
   title Adam Heins - Blog
 
 block content
   article
     section
       h1 Blog
-    each article in articles
-      section
-        h2
-          a(href= host + "/blog/" + article.link)= article.title
-        .date= article.prettyDate
-        p.description= article.description
+    section
+      each article in articles
+        .post
+          h2
+            a(href= host + "/blog/" + article.link)= article.title
+          .date= article.prettyDate
+          p.description= article.description
