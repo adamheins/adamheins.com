@@ -68,7 +68,7 @@ function parseArticles(config) {
     let articles = [];
     let articlesGlob = config.paths.articles + '/**/*.yaml';
 
-    glob.sync(articlesGlob).forEach(file => {
+    glob.sync(articlesGlob, { ignore: ['drafts/*'] }).forEach(file => {
         let data = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
         let valid = validateArticleData(file, data);
 
