@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 'use strict';
 
 const yaml = require('js-yaml');
@@ -32,6 +33,11 @@ function loadConfig(configPath) {
 
     config.paths.templates.article = path.join(templateRoot, templateArticles);
     config.paths.templates.projects = path.join(templateRoot, templateProjects);
+
+    let publicRoot = config.paths.public.root;
+    let publicArticles = config.paths.public.articles;
+
+    config.paths.public.articles = path.join(publicRoot, publicArticles);
 
     return config
 }
@@ -90,7 +96,10 @@ function parseArticle(config, data_file) {
     // Parse body markdown file.
     let dirname = path.dirname(data_file);
     let bodyFile = path.join(dirname, data.file);
-    data.html = md.markdown(fs.readFileSync(bodyFile, 'utf8'));
+    let text = fs.readFileSync(bodyFile, 'utf8');
+
+    md.spellCheck(config, text);
+    data.html = md.markdown(text);
 
     data.scripts = data.scripts.map(resolve.script);
     data.styles = data.styles.map(resolve.style);
@@ -141,8 +150,7 @@ function renderArticles(articles, config, pugOptions) {
             moment:     moment,
         });
 
-        // TODO need to fix before merge
-        let articlePublicDir = config.paths.public;
+        let articlePublicDir = config.paths.public.articles;
         let file = path.join(articlePublicDir, article.fileName);
         let html = articleFunc(options);
         fs.writeFileSync(file, html);
