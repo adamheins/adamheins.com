@@ -43,7 +43,7 @@
       description:
         A neural network architecture designed to perform lip-reading.
 -
-  name: Simulations
+  name: Toys
   projects:
     -
       title:
@@ -57,8 +57,7 @@
           name: Source
           url: https://github.com/adamheins/predator-prey-sim
       description:
-        A web-based simulation of flocking birds being hunted by predators,
-        displaying swarm intelligence.
+        A web-based simulation of flocking birds being hunted by predators.
     -
       title:
         name: Multicell
@@ -84,9 +83,6 @@
       description:
         A simulation of bodies with gravitational attraction and elastic
         collisions in two dimensions.
--
-  name: Math
-  projects:
     -
       title:
         name: Fractals
@@ -99,64 +95,5 @@
           name: Source
           url: https://github.com/adamheins/fractals
       description:
-        A collection of fractals.
-    -
-      title:
-        name: Dervish
-        url: https://github.com/adamheins/dervish
-      links:
-        -
-          name: Source
-          url: https://github.com/adamheins/dervish
-      description:
-        A command line tool for evaluating and differentiating mathematical
-        functions symbolically. Written in Java.
-    -
-      title:
-        name: mtrx
-        url: https://github.com/adamheins/mtrx
-      links:
-        -
-          name: Source
-          url: https://github.com/adamheins/mtrx
-      description:
-        A linear algebra library written in C.
-    -
-      title:
-        name: BigInteger.js
-        url: https://github.com/adamheins/biginteger.js
-      links:
-        -
-          name: Source
-          url: https://github.com/adamheins/biginteger.js
-      description:
-        A Javascript library that for arbitrarily-sized integer mathematics.
-        A simple web app that uses this library can be found
-        <a href="https://github.com/adamheins/primality-checker">here</a>.
--
-  name: Other
-  projects:
-    -
-      title:
-        name: Half-fit
-        url: https://people.kth.se/~roand/half_fit.pdf
-      links:
-        -
-          name: Reference
-          url: https://people.kth.se/~roand/half_fit.pdf
-      description:
-        A real-time dynamic memory allocator. Written for a school project. I
-        don't make the source publicly available, because, as far as I know,
-        it's still being used as a class project.
-    -
-      title:
-        name: f
-        url: https://github.com/adamheins/f
-      links:
-        -
-          name: Source
-          url: https://github.com/adamheins/f
-      description:
-        A simple command line utility for aliasing your favourite files,
-        directories, and git branches.
-
+        A collection of fractals including the dragon curve, Sierpinski
+        triangle, Mandelbrot set, and Koch snowflake.
