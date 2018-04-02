@@ -10,7 +10,7 @@ const moment = require('moment');
 const pug = require('pug');
 const mkdirp = require('mkdirp');
 const merge = require('merge');
-const commands = require('commander');
+const program = require('commander');
 
 const md = require('./lib/markdown');
 const resolve = require('./lib/resolve');
@@ -20,29 +20,34 @@ const spellcheck = require('./lib/spellcheck');
 const PRETTY_DATE_FORMAT = 'MMMM D, YYYY';
 const REQUIRED_FIELDS = ['title', 'date', 'link', 'flavour', 'description',
                          'file', 'scripts', 'styles', 'private'];
-const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/article.pug',
-                         '**/projects/index.pug'];
+const TEMPLATE_IGNORE = ['**/mixins/*', '**/includes/*', '**/blog/article.pug',
+                         '**/projects/index.pug', '**/blog/plain.pug'];
 const CONFIG_PATH = 'config.yaml';
+
+
+function fullPath(paths) {
+    let root = paths.root;
+    Object.keys(paths).forEach(k => {
+        if (k === 'root') {
+            return;
+        };
+        paths[k] = path.join(root, paths[k]);
+    });
+}
 
 
 function loadConfig(configPath) {
     let config = yaml.safeLoad(fs.readFileSync(configPath, 'utf8'));
 
-    let templateRoot = config.paths.templates.root;
-    let templateArticles = config.paths.templates.article;
-    let templatePlain = config.paths.templates.plain;
-    let templateProjects = config.paths.templates.projects;
+    fullPath(config.paths.templates);
+    fullPath(config.paths.public);
 
-    config.paths.templates.article = path.join(templateRoot, templateArticles);
-    config.paths.templates.plain = path.join(templateRoot, templatePlain);
-    config.paths.templates.projects = path.join(templateRoot, templateProjects);
+    // Data directory is optional.
+    if (config.paths.data) {
+        fullPath(config.paths.data);
+    }
 
-    let publicRoot = config.paths.public.root;
-    let publicArticles = config.paths.public.articles;
-
-    config.paths.public.articles = path.join(publicRoot, publicArticles);
-
-    return config
+    return config;
 }
 
 
@@ -73,7 +78,7 @@ function validateArticleData(file, data) {
 
 // Write a template file to a public file with the given html content.
 function templateToPublic(file, html, config) {
-    let htmlFile = file.replace(config.paths.templates.root, config.paths.public)
+    let htmlFile = file.replace(config.paths.templates.root, config.paths.public.root)
                        .replace('.pug', '.html');
     let htmlDir = path.dirname(htmlFile)
     mkdirp.sync(htmlDir);
@@ -82,9 +87,9 @@ function templateToPublic(file, html, config) {
 
 
 // Parse a single article.
-function parseArticle(config, data_file) {
-    let data = yaml.safeLoad(fs.readFileSync(data_file, 'utf8'));
-    let valid = validateArticleData(data_file, data);
+function parseArticle(config, datafile) {
+    let data = yaml.safeLoad(fs.readFileSync(datafile, 'utf8'));
+    let valid = validateArticleData(datafile, data);
 
     // If the article is not valid, compilation fails.
     if (!valid) {
@@ -97,11 +102,13 @@ function parseArticle(config, data_file) {
     }
 
     // Parse body markdown file.
-    let dirname = path.dirname(data_file);
+    let dirname = path.dirname(datafile);
     let bodyFile = path.join(dirname, data.file);
     let text = fs.readFileSync(bodyFile, 'utf8');
 
-    spellcheck.spellCheck(config, text);
+    if (config.spellcheck) {
+        spellcheck.spellCheck(config, text);
+    }
     data.html = md.markdown(text);
 
     data.scripts = data.scripts.map(resolve.script);
@@ -123,7 +130,7 @@ function parseArticle(config, data_file) {
 // Parse articles from yaml and markdown files.
 function parseArticles(config) {
     let articles = [];
-    let articlesGlob = config.paths.articles + '/**/*.yaml';
+    let articlesGlob = config.paths.data.articles + '/**/*.yaml';
 
     glob.sync(articlesGlob, { ignore: ['drafts/*'] }).forEach(file => {
         articles.push(parseArticle(config, file));
@@ -163,9 +170,45 @@ function renderArticles(articles, plain, config, pugOptions) {
 }
 
 
+function parseProjects(config) {
+    let data = yaml.safeLoad(fs.readFileSync(config.paths.data.projects, 'utf8'));
+
+    data.forEach(section => {
+        section.projects.forEach(project => {
+            let links = project.links;
+
+            // Reform the links list into an object that allows for easier
+            // templating.
+            if (links.length > 0) {
+                project.links = {
+                    notLast: links.slice(0, -1),
+                    last: links.slice(-1)[0],
+                };
+            } else {
+                project.links = {
+                    notLast: [],
+                };
+            }
+        });
+    });
+
+    return data;
+}
+
+
+function renderProjects(projectData, config, pugOptions) {
+    let options = merge(pugOptions, { sections: projectData });
+    let html = pug.renderFile(config.paths.templates.projects, options);
+
+    let outFile = path.join(config.paths.public.projects, 'index.html');
+    mkdirp.sync(path.dirname(outFile));
+    fs.writeFileSync(outFile, html);
+}
+
+
 // Compile pug template files to html files.
-function renderTemplates(articles, config) {
-    let localHost = path.join(fs.realpathSync('.'), config.paths.public)
+function renderSite(articles, projectData, config) {
+    let localHost = path.join(fs.realpathSync('.'), config.paths.public.root)
     let host = config.prod ? config.hosts.host : localHost;
     let year = moment().format('YYYY');
 
@@ -189,14 +232,13 @@ function renderTemplates(articles, config) {
     });
 
     renderArticles(articles, false, config, pugOptions);
+    renderProjects(projectData, config, pugOptions);
 }
 
 
 // Render a single article.
-function one(datafile, plain) {
-    let config = loadConfig(CONFIG_PATH);
+function one(datafile, plain, config) {
     let article = parseArticle(config, datafile);
-
 
     let pugOptions = {
         basedir:    config.paths.templates.root,
@@ -210,8 +252,7 @@ function one(datafile, plain) {
 
 
 // Render everything: all articles and projects.
-function all(type) {
-    let config = loadConfig(CONFIG_PATH);
+function all(type, config) {
 
     // Development vs. production environment is specified on the command line.
     if ('production'.startsWith(type)) {
@@ -224,25 +265,44 @@ function all(type) {
     }
 
     let articles = parseArticles(config);
-    renderTemplates(articles, config);
+    let projectData = parseProjects(config);
+
+    renderSite(articles, projectData, config);
 
     console.log(articles.length + ' articles rendered.');
+    console.log('Projects rendered.');
 }
 
 
 function main() {
-    commands
-        .command('one <data.yaml>')
-        .option('-p, --plain', 'Render without header and footer.')
-        .action((datafile, cmd) => {
-            one(datafile, !!cmd.plain);
-        })
-        .command('all <type>')
-        .action(type => {
-            all(type);
-        });
+    let args = process.argv;
+    if (args.length < 3) {
+        console.log('Usage: blogger {one|all} [...]');
+        return 1;
+    }
 
-    commands.parse(process.argv);
+    let config = loadConfig(CONFIG_PATH);
+
+    let cmd = args[2];
+    if (cmd === 'one') {
+        program.command('one <datafile>')
+               .option('-p, --plain', 'Render without header and footer.')
+               .option('-s, --spellcheck', 'Perform spellcheck on article.')
+               .action((datafile, cmd) => {
+                   config.spellcheck = !!cmd.spellcheck;
+                   one(datafile, !!cmd.plain, config);
+               });
+        program.parse(args);
+    } else if (cmd === 'all') {
+        program.command('all <type>')
+               .action(type => {
+                   all(type, config);
+               });
+        program.parse(args);
+    } else {
+        console.log('Usage: blogger {one|all} [...]');
+        return 1;
+    }
 }
 
 main();
