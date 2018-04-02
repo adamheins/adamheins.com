@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 'use strict';
 
 const yaml = require('js-yaml');
@@ -11,9 +10,11 @@ const moment = require('moment');
 const pug = require('pug');
 const mkdirp = require('mkdirp');
 const merge = require('merge');
+const commands = require('commander');
 
 const md = require('./lib/markdown');
 const resolve = require('./lib/resolve');
+const spellcheck = require('./lib/spellcheck');
 
 
 const PRETTY_DATE_FORMAT = 'MMMM D, YYYY';
@@ -29,9 +30,11 @@ function loadConfig(configPath) {
 
     let templateRoot = config.paths.templates.root;
     let templateArticles = config.paths.templates.article;
+    let templatePlain = config.paths.templates.plain;
     let templateProjects = config.paths.templates.projects;
 
     config.paths.templates.article = path.join(templateRoot, templateArticles);
+    config.paths.templates.plain = path.join(templateRoot, templatePlain);
     config.paths.templates.projects = path.join(templateRoot, templateProjects);
 
     let publicRoot = config.paths.public.root;
@@ -98,7 +101,7 @@ function parseArticle(config, data_file) {
     let bodyFile = path.join(dirname, data.file);
     let text = fs.readFileSync(bodyFile, 'utf8');
 
-    md.spellCheck(config, text);
+    spellcheck.spellCheck(config, text);
     data.html = md.markdown(text);
 
     data.scripts = data.scripts.map(resolve.script);
@@ -140,9 +143,11 @@ function parseArticles(config) {
 }
 
 
-function renderArticles(articles, config, pugOptions) {
-    let articleFunc = pug.compileFile(config.paths.templates.article,
-                                      pugOptions);
+function renderArticles(articles, plain, config, pugOptions) {
+    let template = plain ? config.paths.templates.plain
+                         : config.paths.templates.article;
+    let articleFunc = pug.compileFile(template, pugOptions);
+
     // Render each article.
     articles.forEach(article => {
         let options = merge(pugOptions, {
@@ -183,20 +188,15 @@ function renderTemplates(articles, config) {
         templateToPublic(file, html, config);
     });
 
-    renderArticles(articles, config, pugOptions);
+    renderArticles(articles, false, config, pugOptions);
 }
 
-function one() {
-    if (process.argv.length < 3) {
-        console.log('Usage: blogger data.yaml');
-        return 1;
-    }
 
+// Render a single article.
+function one(datafile, plain) {
     let config = loadConfig(CONFIG_PATH);
+    let article = parseArticle(config, datafile);
 
-    let data_file = process.argv[2];
-
-    let article = parseArticle(config, data_file);
 
     let pugOptions = {
         basedir:    config.paths.templates.root,
@@ -205,23 +205,18 @@ function one() {
         year:       moment().format('YYYY')
     };
 
-    renderArticles([article], config, pugOptions);
+    renderArticles([article], plain, config, pugOptions);
 }
 
 
-function main() {
-    if (process.argv.length < 3) {
-        console.log('Usage: blogger {[d]evelopment|[p]roduction}');
-        return 1;
-    }
-
+// Render everything: all articles and projects.
+function all(type) {
     let config = loadConfig(CONFIG_PATH);
 
     // Development vs. production environment is specified on the command line.
-    let environment = process.argv[2].toLowerCase();
-    if ('production'.startsWith(environment)) {
+    if ('production'.startsWith(type)) {
         config.prod = true;
-    } else if ('development'.startsWith(environment)) {
+    } else if ('development'.startsWith(type)) {
         config.prod = false;
     } else {
         console.log('Invalid value passed for environment.');
@@ -234,5 +229,20 @@ function main() {
     console.log(articles.length + ' articles rendered.');
 }
 
-// main();
-one();
+
+function main() {
+    commands
+        .command('one <data.yaml>')
+        .option('-p, --plain', 'Render without header and footer.')
+        .action((datafile, cmd) => {
+            one(datafile, !!cmd.plain);
+        })
+        .command('all <type>')
+        .action(type => {
+            all(type);
+        });
+
+    commands.parse(process.argv);
+}
+
+main();
