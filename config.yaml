@@ -3,7 +3,7 @@ hosts:
   static: 'https://static.adamheins.com'
 paths:
   templates:
-    root: '/home/adam/dev/proj/adamheins.com/templates'
+    root: 'templates'
     article: 'blog/article.pug'
     plain: 'blog/plain.pug'
     projects: 'projects/index.pug'
