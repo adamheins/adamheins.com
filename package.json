@@ -14,12 +14,14 @@
   },
   "scripts": {},
   "dependencies": {
+    "commander": "^2.15.1",
     "glob": "^7.1.2",
     "js-yaml": "^3.8.4",
     "marked": "^0.3.9",
     "merge": "^1.2.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.18.1",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "spellchecker": "^3.4.4"
   }
 }

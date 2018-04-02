@@ -1,0 +1,32 @@
+// Article template without website header and footer.
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Adam Heins")
+    meta(name="description", content= article.description)
+
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic")
+    link(rel="stylesheet", href=staticHost + "/css/layout.css")
+
+    title= article.title
+
+    // Styles.
+    each style in article.styles
+      link(rel="stylesheet", href=style)
+
+  body
+    .container
+      .content
+        article
+          section
+            .article-date= article.prettyDate
+            h1= article.title
+            .article-flavour= article.flavour
+          section!= article.html
+
+    // Scripts.
+    each script in article.scripts
+      script(defer src=script)
