@@ -41,7 +41,9 @@
           name: Source
           url: https://github.com/adamheins/read-my-lips
       description:
-        A neural network architecture designed to perform lip-reading.
+        An LSTM-based neural network architecture designed to perform
+        lip-reading. Achieved an average accuracy of 86.30% when reading the
+        lips of a known speaker.
 -
   name: Toys
   projects:
