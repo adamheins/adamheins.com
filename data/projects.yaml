@@ -24,11 +24,11 @@
           name: Source
           url: https://github.com/adamheins/ramp-bot
       description:
-        A mobile robot capable of navigating the boiler room of a nuclear power
-        plant and autonomously performing pipe thickness measurements and
-        collection of other relevant data. Engineering Capstone project. I
-        focused largely on the software systems, particularly the vision system
-        and interface to the robot arm.
+        A mobile robot that autonomously traverses an obstacle course,
+        including ascending and descending a ramp and locating a variable end
+        point. Developed as part of the MTE 380 design project course at the
+        University of Waterloo. I worked primarily on the robot's software,
+        including the signal processing, movement, and state machine.
     -
       title:
         name: Read My Lips
