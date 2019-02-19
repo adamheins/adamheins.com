@@ -3,6 +3,22 @@
   projects:
     -
       title:
+        name: Safe Robust Learning for Lagrangian Systems
+        url: http://www.dynsyslab.org/wp-content/papercite-data/pdf/helwa-ral19.pdf
+      links:
+        -
+          name: Paper
+          url: http://www.dynsyslab.org/wp-content/papercite-data/pdf/helwa-ral19.pdf
+      description:
+        We present a novel learning control method for Lagrangian systems that
+        combines ideas from robust control with Gaussian process regression
+        (GPR). The main idea is to use GPR to learn an upper bound on the
+        uncertainty in the system online, which is then used in a robust
+        controller. We prove that the learned upper bound is correct with high
+        probability. Further, we verify the approach experimentally on a 6
+        degree-of-freedom UR10 industrial manipulator.
+    -
+      title:
         name: Nuclear Power Plant Inspection Robot
         url: https://adamheins.com/blog/capstone-the-journey-thus-far
       links:
