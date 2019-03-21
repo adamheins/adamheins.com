@@ -13,12 +13,8 @@ block content
           h2= section.name
           for project in section.projects
             .proj
-              .header
-                h2 #[a(href=project.title.url)= project.title.name]
-                .links
-                  for link in project.links.notLast
-                    a(href=link.url)=link.name
-                    span &nbsp; &middot; &nbsp;
-                  if project.links.last
-                    a(href=project.links.last.url)= project.links.last.name
+              h2 #[a(href=project.title.url)= project.title.name]
               p.description!= project.description
+              .links
+                for link in project.links.all
+                  | [#[a(href=link.url)=link.name]] &nbsp;
