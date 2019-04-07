@@ -9,10 +9,10 @@ block content
     section
       h1 Projects
       for section in sections
-        section
-          h2= section.name
+        section.group
+          h2.divider= section.name
           for project in section.projects
-            .proj
+            section.item
               h2 #[a(href=project.title.url)= project.title.name]
               p.description!= project.description
               .links

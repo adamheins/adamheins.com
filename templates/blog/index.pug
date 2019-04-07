@@ -8,9 +8,9 @@ block content
   article
     section
       h1 Blog
-    section
+    section.group
       each article in articles
-        .post
+        section.item
           h2
             a(href= host + "/blog/" + article.link)= article.title
           .date= article.prettyDate
