@@ -98,7 +98,7 @@
         Jump to previously-visited directories by name. If there are multiple
         matches, the user selects the correct absolute path from a list. A
         cousin of <a href="https://github.com/rupa/z">z</a> with a more obvious
-        directory-priority algorithm
+        directory-priority algorithm.
 -
   name: Toys
   projects:
