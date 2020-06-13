@@ -14,4 +14,4 @@ block content
           h3
             a(href= host + "/blog/" + article.link)= article.title
           .date= article.prettyDate
-          p.description= article.description
+          p.description!= article.description
