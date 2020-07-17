@@ -62,9 +62,7 @@ function main() {
     if (cmd === 'one') {
         program.command('one <datafile>')
                .option('-p, --plain', 'Render without header and footer.')
-               .option('-s, --spellcheck', 'Perform spellcheck on article.')
                .action((datafile, cmd) => {
-                   config.spellcheck = !!cmd.spellcheck;
                    one(datafile, !!cmd.plain, config);
                });
         program.parse(args);
