@@ -2,11 +2,12 @@ extends /includes/layout
 
 block header
   title= article.title
-  //- handle older articles that do not have a list of meta tags
-  unless article.meta
+  if article.meta
+    each tag in article.meta
+      != tag
+  else
+    //- handle older articles that do not have a list of meta tags
     meta(name="description", content= article.description)
-  each tag in article.meta
-    != tag
 
 block styles
   each style in article.styles
