@@ -1,5 +1,5 @@
 -
-  name: Robotics and Machine Learning
+  name: Research
   projects:
     -
       title:
@@ -17,6 +17,9 @@
         controller. We prove that the learned upper bound is correct with high
         probability. Further, we verify the approach experimentally on a 6
         degree-of-freedom UR10 industrial manipulator.
+-
+  name: Coursework
+  projects:
     -
       title:
         name: Nuclear Power Plant Inspection Robot
@@ -60,32 +63,10 @@
         An LSTM-based neural network architecture designed to perform
         lip-reading. Achieved an average accuracy of 86.30% when reading the
         lips of a known speaker.
-- name: CLI Tools
+-
+  name: Toys
+  description: Some little side projects that may be useful or fun.
   projects:
-    -
-      title:
-        name: xcp
-        url: https://github.com/adamheins/xcp
-      links:
-        -
-          name: Source
-          url: https://github.com/adamheins/xcp
-      description:
-        A tool to cut, copy, and paste files between directories from the
-        command line.
-    -
-      title:
-        name: t
-        url: https://github.com/adamheins/t
-      links:
-        -
-          name: Source
-          url: https://github.com/adamheins/t
-      description:
-        A replacement for the interactive use of
-        <code class="language-none">rm</code> that backs up deleted files for a
-        certain number of days and prompts the user before deleting multiple
-        items.
     -
       title:
         name: j
@@ -99,9 +80,17 @@
         matches, the user selects the correct absolute path from a list. A
         cousin of <a href="https://github.com/rupa/z">z</a> with a more obvious
         directory-priority algorithm.
--
-  name: Toys
-  projects:
+    -
+      title:
+        name: xcp
+        url: https://github.com/adamheins/xcp
+      links:
+        -
+          name: Source
+          url: https://github.com/adamheins/xcp
+      description:
+        A tool to cut, copy, and paste files between directories from the
+        command line.
     -
       title:
         name: Predator Prey Simulation

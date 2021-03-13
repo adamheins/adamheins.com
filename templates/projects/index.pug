@@ -14,9 +14,10 @@ block content
   article
     section
       h1 Projects
-      for section in sections
+      each section, index in sections
         section.group
           h2= section.name
+          p.description!= section.description
           for project in section.projects
             section.item
               h3 #[a(href=project.title.url)= project.title.name]
@@ -24,3 +25,5 @@ block content
               .links
                 for link in project.links.all
                   | [#[a(href=link.url)=link.name]] &nbsp;
+        if index < sections.length - 1
+          .divider
