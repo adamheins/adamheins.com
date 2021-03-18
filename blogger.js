@@ -12,7 +12,7 @@ const siteManager = require('./lib/site');
 
 
 // Render a single article.
-function one(datafile, plain, config) {
+function build_one_article(datafile, plain, config) {
     let article = articleManager.parseOne(config, datafile);
 
     let pugOptions = {
@@ -27,18 +27,7 @@ function one(datafile, plain, config) {
 
 
 // Render everything: all articles and projects.
-function all(type, config) {
-
-    // Development vs. production environment is specified on the command line.
-    if ('production'.startsWith(type)) {
-        config.prod = true;
-    } else if ('development'.startsWith(type)) {
-        config.prod = false;
-    } else {
-        console.log('Invalid value passed for environment.');
-        return 1;
-    }
-
+function build_site(config) {
     let articles = articleManager.parseAll(config);
     let projectData = projectManager.parse(config);
 
@@ -56,20 +45,27 @@ function main() {
         return 1;
     }
 
-    let config = configManager.load(configManager.CONFIG_PATH);
 
     let cmd = args[2];
     if (cmd === 'one') {
         program.command('one <datafile>')
                .option('-p, --plain', 'Render without header and footer.')
                .action((datafile, cmd) => {
-                   one(datafile, !!cmd.plain, config);
+                   // If we're only rendering a single article, it's assumed
+                   // we're in the dev environment.
+                   let config = configManager.load(configManager.CONFIG_PATH_DEV);
+                   build_one_article(datafile, !!cmd.plain, config);
                });
         program.parse(args);
     } else if (cmd === 'all') {
         program.command('all <type>')
                .action(type => {
-                   all(type, config);
+                   let configPath = configManager.CONFIG_PATH_DEV;
+                   if (type === "production") {
+                       configPath = configManager.CONFIG_PATH_PROD;
+                   }
+                   let config = configManager.load(configPath);
+                   build_site(config);
                });
         program.parse(args);
     } else {
