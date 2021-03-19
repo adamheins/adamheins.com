@@ -15,4 +15,4 @@ paths:
     root: 'public'
     articles: 'blog'
     projects: 'projects'
-
+links-include-extension: true
