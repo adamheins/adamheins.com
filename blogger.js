@@ -9,6 +9,7 @@ const articleManager = require('./lib/articles');
 const configManager = require('./lib/config');
 const projectManager = require('./lib/projects');
 const siteManager = require('./lib/site');
+const rss = require('./lib/rss');
 
 
 // Render a single article.
@@ -32,6 +33,7 @@ function build_site(config) {
     let projectData = projectManager.parse(config);
 
     siteManager.render(articles, projectData, config);
+    rss.write(articles, config);
 
     console.log(articles.length + ' articles rendered.');
     console.log('Projects rendered.');
@@ -44,7 +46,6 @@ function main() {
         console.log('Usage: blogger {one|all} [...]');
         return 1;
     }
-
 
     let cmd = args[2];
     if (cmd === 'one') {
